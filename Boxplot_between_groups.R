@@ -39,8 +39,8 @@ Boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
     for (i in 1:base::length(codons)) {
       table_1 <- get_RSCU_out[get_RSCU_out$codon %in% codons[i],]
       table_1 <- table_1[,c("RSCU", "index2","group")]
-      stat <- kruskal.test(RSCU ~ index2 , data = table_1)
-      post_hoc <- base::as.data.frame(dunn_test(RSCU ~ index2, data = table_1, p.adjust.method = "bonferroni"))
+      stat <- stats::kruskal.test(RSCU ~ index2 , data = table_1)
+      post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ index2, data = table_1, p.adjust.method = "bonferroni"))
       statistical_table <- base::rbind(statistical_table,post_hoc)
       statistical_table <- statistical_table[!base::is.na(statistical_table$group1),]
       post_hoc <- dplyr::arrange(.data = post_hoc, p.adj)
@@ -57,7 +57,7 @@ Boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
                                            "deepskyblue", "orchid2", "chartreuse3", "gold", "slateblue1", "tomato" , "blue", "magenta", "green3",
                                            "yellow", "purple3", "red" ,"darkslategray1", "lightpink1", "lightgreen", "khaki1", "plum3", "salmon")) + 
           ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
-          theme(legend.position = "none") + 
+          ggplot2::theme(legend.position = "none") + 
           ggplot2::ggtitle(base::paste0(codons[i],", Kruskal-Wallis, p=",stat$p.value))
       base::print(p)
       dev.off()
