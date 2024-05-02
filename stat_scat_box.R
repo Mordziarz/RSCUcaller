@@ -5,7 +5,7 @@
 #' @param height height of charts
 #' @param res resolution of charts
 #'
-#' @return A table with statisticc, boxplots and scatter plots. 
+#' @return A table with statistics, boxplots and scatter plots. 
 #' @export
 #'
 
