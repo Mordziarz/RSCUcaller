@@ -30,9 +30,9 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
       for (i in 1:base::length(aminoacids)) {
         table_1 <- get_RSCU_out[get_RSCU_out$AA %in% aminoacids[i],]
         table_1 <- table_1[,c("RSCU", "codon")]
-        stat <- kruskal.test(RSCU ~ codon , data = table_1)
+        stat <- stats::kruskal.test(RSCU ~ codon , data = table_1)
             cat("The differences between codons in the amino acid",aminoacids[i],"are statistically significant with a pvalue of:",stat$p.value,"\n")
-            post_hoc <- base::as.data.frame(dunn_test(RSCU ~ codon, data = table_1, p.adjust.method = "bonferroni"))
+            post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ codon, data = table_1, p.adjust.method = "bonferroni"))
             statistical_table <- base::rbind(statistical_table,post_hoc)
             statistical_table <- statistical_table[!base::is.na(statistical_table$group1),]
             post_hoc <- dplyr::arrange(.data = post_hoc, p.adj)
@@ -42,9 +42,9 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
                                   x="codon",
                                   y="RSCU",
                                   point = "FALSE") + 
-            geom_jitter(aes(color=codon),width = 0.1)+
+            ggplot2::geom_jitter(aes(color=codon),width = 0.1)+
             ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
-            theme(legend.position = "none") + 
+            ggplot2::theme(legend.position = "none") + 
             ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=",stat$p.value))
             base::print(p)
             dev.off()
@@ -57,7 +57,7 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
                                    add = "jitter",
                                    palette = c("dodgerblue3", "maroon2",  "forestgreen", "darkorange1", "blueviolet", "firebrick2")) + 
               ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
-              theme(legend.position = "none") + 
+              ggplot2::theme(legend.position = "none") + 
               ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=",stat$p.value))
             base::print(p)
             dev.off()
