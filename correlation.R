@@ -3,9 +3,6 @@
 #' @param get_RSCU_out the table was created using the get_RSCU function
 #' @param Species_x The name from the get_RSCU table that you want to use to calculate the correlation will be on the x-axis
 #' @param Species_y The name from the get_RSCU table that you want to use to calculate the correlation will be on the y-axis
-#' @param res resolution of charts
-#' @param width width of charts
-#' @param height height of charts
 #' @param xlab x axis title
 #' @param ylab y axis titles
 #'
@@ -13,7 +10,7 @@
 #' @export
 #'
 
-correlation <- function(get_RSCU_out,Species_x,Species_y,width,height,res,xlab,ylab) {
+correlation <- function(get_RSCU_out,Species_x,Species_y,xlab,ylab) {
   
   if (base::missing(get_RSCU_out)) {
     stop("The get_RSCU_out predictions are required. Please provide a valid argument.",
