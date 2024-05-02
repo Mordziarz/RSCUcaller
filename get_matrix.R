@@ -1,4 +1,4 @@
-#' Calculating RSCU for multiple sequences
+#' Converting the table from the get_RSCU function to a matrix
 #'
 #' @param get_RSCU_out the table was created using the get_RSCU function
 #'
