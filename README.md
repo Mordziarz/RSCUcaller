@@ -101,7 +101,7 @@ To utilize this function, you need to prepare a table called grouping_table with
 The function will generate graphics in the "selected_species" folder and table Post_hoc_table_selected_species.csv in the working directory.
 
 ```{r}
-Boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
+boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
 ```
 
 # Statistics between amino acids
