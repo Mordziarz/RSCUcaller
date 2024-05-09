@@ -18,7 +18,13 @@ The package saves tables and generates graphics to folders. It is recommended to
 setwd("path/to/your/directory")
 ```
 
-RSCUcaller requires DNA sequences from NCBI. To start the analysis, the fasta file must be prepared appropriately. The prepare_fasta() function is used for this purpose, which requires a table with 2 columns: sequence_path with the path to the fasta file and sample_name with the fasta name (these will be visible on the visualizations, and needs a number 1_ for example 1_Riccia_fluitans). However, if you downloaded multiple species from NCBI in a single fasta file, you can use the samples_table with the ID and GENBANK_ACCESSION columns, but you must also provide the path argument to the fasta file. In both cases, you must specify the name of the fasta file you prepared, which will be saved in your working directory (file_out="name_of_your_output.fasta").
+DNA sequences from NCBI are required by RSCUcaller. To initiate the analysis, the FASTA file needs to be prepared appropriately. This is achieved using the prepare_fasta() function, which requires a table with two columns:
+    sequence_path: This column specifies the path to the FASTA file.
+    sample_name: This column defines the FASTA name, which will be displayed on visualizations and should start with a number followed by an underscore (e.g., 1_Riccia_fluitans).
+
+However, if you downloaded multiple species from NCBI within a single FASTA file, you can utilize the samples_table with the ID and GENBANK_ACCESSION columns. In this case, you must also provide the path to the FASTA file using the path argument.
+
+Regardless of the method, the name of the prepared FASTA file needs to be specified. This file will be saved in your working directory (using the argument file_out="name_of_your_output.fasta").
 
 ```{r}
 path1 <- "/path/to/your/fasta"
