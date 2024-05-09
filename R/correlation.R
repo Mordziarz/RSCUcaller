@@ -10,25 +10,25 @@
 #' @export
 #'
 
-correlation <- function(get_RSCU_out,Species_x,Species_y,xlab,ylab) {
+correlation <- function(get_RSCU_out,x_name,y_name,xlab,ylab) {
 
   if (base::missing(get_RSCU_out)) {
     stop("The get_RSCU_out predictions are required. Please provide a valid argument.",
          call. = FALSE)
   }
 
-  if (base::missing(Species_x)) {
-    stop("The Species_x predictions are required. Please provide a valid argument.",
+  if (base::missing(x_name)) {
+    stop("The x_name predictions are required. Please provide a valid argument.",
          call. = FALSE)
   }
 
-  if (base::missing(Species_y)) {
-    stop("The Species_y predictions are required. Please provide a valid argument.",
+  if (base::missing(y_name)) {
+    stop("The y_name predictions are required. Please provide a valid argument.",
          call. = FALSE)
   }
 
-  get_RSCU_out_x <- get_RSCU_out[get_RSCU_out$Species %in% Species_x,]
-  get_RSCU_out_y <- get_RSCU_out[get_RSCU_out$Species %in% Species_y,]
+  get_RSCU_out_x <- get_RSCU_out[get_RSCU_out$Species %in% x_name,]
+  get_RSCU_out_y <- get_RSCU_out[get_RSCU_out$Species %in% y_name,]
   correlation_xy <- base::merge(get_RSCU_out_x,get_RSCU_out_y,by="codon")
   res <- stats::cor.test(correlation_xy$RSCU.x, correlation_xy$RSCU.y, method = 'pearson')
 
