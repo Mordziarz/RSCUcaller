@@ -31,7 +31,7 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
       table_1 <- get_RSCU_out[get_RSCU_out$AA %in% aminoacids[i],]
       table_1 <- table_1[,c("RSCU", "codon")]
       stat <- stats::kruskal.test(RSCU ~ codon , data = table_1)
-      cat("The differences between codons in the amino acid",aminoacids[i],"are statistically significant with a pvalue of:",stat$p.value,"\n")
+      cat("The differences between codons in the amino acid",aminoacids[i],"had a pvalue of:",stat$p.value,"\n")
       post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ codon, data = table_1, p.adjust.method = "bonferroni"))
       statistical_table <- base::rbind(statistical_table,post_hoc)
       statistical_table <- statistical_table[!base::is.na(statistical_table$group1),]
