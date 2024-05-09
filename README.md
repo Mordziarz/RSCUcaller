@@ -96,10 +96,12 @@ correlation(get_RSCU_out = get_RSCU_out, x_name = "x name", y_name = "y name", x
 Boxplot_between_groups()
 ```
 
-# Statystyka pomiedzy aminokwasami
+# Statistics between amino acids
+
+The stat_scat_box() function performs statistical analysis and generates visualizations for your data. It utilizes the Kruskal-Wallis test to assess significant differences among groups, followed by Dunn's post-hoc test for pairwise comparisons. The function also generates table (Post_hoc_table_aminoacids.csv) and two folders (boxplots and scatter_plots) within your working directory:
 
 ```{r}
-stat_scat_box()
+stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
 ```
 
 # Citation
