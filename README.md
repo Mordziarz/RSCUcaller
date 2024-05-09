@@ -73,7 +73,7 @@ Our package allows you to draw histograms from the result of the get_RSCU() func
 #histogram_RSCU(get_RSCU_out = test,title = "LUKASZ")
 ```
 
-oraz histogram podwójny
+A double histogram is plotted using the function histogram_RSCU_double(). The function takes two input parameters: get_RSCU_out_left and get_RSCU_out_right. It also takes two optional title parameters: title_left and title_right.
 
 ```{r}
 #histogram_RSCU_double(get_RSCU_out_left = test,get_RSCU_out_right = test,title_left = "LUKASZ",title_right = "MATEUSZ")
