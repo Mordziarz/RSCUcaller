@@ -56,7 +56,7 @@ get_matrix(get_RSCU_out = get_RSCU_out)
 
 # Heatmap
 
-The heatmap_RSCU() function allows you to draw a heatmap and a dendrogram. The heatmap is created from the result of the get_RSCU() function. To call the heatmap, enter "heatmap" in the select argument and choose heatmap_color from: "red_green", "green_red", "blue_green", "green_blue", "blue_red", "red_blue". The names correspond to the colors used to color the heatmap.
+The heatmap_RSCU() function allows you to draw a heatmap and a dendrogram. The heatmap is created from the result of the get_RSCU() function. To call the heatmap, enter "heatmap" in the select argument and choose heatmap_color from: "red_green", "green_red", "blue_green", "green_blue", "blue_red", "red_blue".
 
 ```{r}
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "heatmap", heatmap_color = "red_blue")
@@ -87,7 +87,7 @@ histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get
 The RSCUcaller package allows you to perform Pearson correlation between two species. Specify the names of the Species column in the get_RSCU_out data frame that you want to correlate.
 
 ```{r}
-correlation(get_RSCU_out = get_RSCU_out, Species.x = "Species.x", Species.y = "Species.y", xlab = "title of x lab", ylab = "title of y lab")
+correlation(get_RSCU_out = get_RSCU_out, Species_x = "Species_x", Species_y = "Species_y", xlab = "title of x lab", ylab = "title of y lab")
 ```
 
 # Statistics between groups of individual codons
