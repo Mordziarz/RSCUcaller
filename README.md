@@ -57,7 +57,7 @@ The heatmap_RSCU() function allows you to draw a heatmap and a dendrogram. The h
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "heatmap", heatmap_color = "red_blue")
 ```
 
-To get a dendrogram, you need to provide the result of the get_RSCU() function and enter "dendrogram" in the select argument. You can edit it, for example, in the ggtree package.
+To get a dendrogram, you need to provide the result of the get_RSCU() function and enter "dendrogram" in the select argument. You can edit result, for example, in the ggtree package.
 
 ```{r}
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "dendogram")
