@@ -47,7 +47,7 @@ correlation <- function(get_RSCU_out,Species_x,Species_y,xlab,ylab) {
     ggplot2::theme_bw()+
     ggplot2::xlab(xlab)+
     ggplot2::ylab(ylab)+
-    ggplot2::ggtitle(base::paste0("R=",base::round(p$res$estimate,2)," ",p-value=",base::round(p$res$p.value,3)," ",95% conf.int=",p$res$conf.int)
+    ggplot2::ggtitle(base::paste0("R=",base::round(p$res$estimate,2)," ","p-value=",base::round(p$res$p.value,3)," ",95% conf.int=",p$res$conf.int)
 
   return(list(res=res,plot=p))
 
