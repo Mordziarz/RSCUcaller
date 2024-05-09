@@ -51,7 +51,7 @@ get_RSCU_out <- get_RSCU(merged_sequences = "your_fasta.fasta")
 The get_matrix() function allows the user to create a matrix that the user can use in any way they like. The matrix will not be needed for the next steps. Simply use the result of the get_RSCU() function.
 
 ```{r}
-matrix <- get_matrix(get_RSCU_out)
+get_matrix(get_RSCU_out = get_RSCU_out)
 ```
 
 # Heatmap
