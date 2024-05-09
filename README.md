@@ -38,7 +38,7 @@ prepare_fasta(samples_table = samples_table, path = "/path/to/multiple/sequence/
 The main function in the package is get_RSCU(), which only requires the previously prepared sequences to work.
 
 ```{r}
-get_RSCU(merged_sequences = "your_fasta.fasta")
+get_RSCU_out <- get_RSCU(merged_sequences = "your_fasta.fasta")
 ```
 
 # RSCU matrix
@@ -46,7 +46,7 @@ get_RSCU(merged_sequences = "your_fasta.fasta")
 The get_matrix() function allows the user to create a matrix that the user can use in any way they like. The matrix will not be needed for the next steps. Simply use the result of the get_RSCU() function.
 
 ```{r}
-mat1 <- get_matrix(test)
+matrix <- get_matrix(get_RSCU_out)
 ```
 
 # Heatmap
@@ -54,13 +54,13 @@ mat1 <- get_matrix(test)
 The heatmap_RSCU() function allows you to draw a heatmap and a dendrogram. The heatmap is created from the result of the get_RSCU() function. To call the heatmap, enter "heatmap" in the select argument and choose heatmap_color from: "red_green", "green_red", "blue_green", "green_blue", "blue_red", "red_blue". The names correspond to the colors used to color the heatmap.
 
 ```{r}
-heatmap_RSCU(get_RSCU_out = test,select = "heatmap", heatmap_color = "red_blue")
+heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "heatmap", heatmap_color = "red_blue")
 ```
 
 To get a dendrogram, you need to provide the result of the get_RSCU() function and enter "dendrogram" in the select argument. You can edit it, for example, in the ggtree package.
 
 ```{r}
-heatmap_RSCU(get_RSCU_out = test,select = "dendogram")
+heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "dendogram")
 ```
 
 # Histograms
@@ -68,13 +68,13 @@ heatmap_RSCU(get_RSCU_out = test,select = "dendogram")
 Our package allows you to draw histograms from the result of the get_RSCU() function. You can create a single histogram
 
 ```{r}
-histogram_RSCU(get_RSCU_out = test,title = "LUKASZ")
+histogram_RSCU(get_RSCU_out = get_RSCU_out, title = "graph title")
 ```
 
 A double histogram is plotted using the function histogram_RSCU_double(). The function takes two input parameters: get_RSCU_out_left and get_RSCU_out_right. It also takes two optional title parameters: title_left and title_right.
 
 ```{r}
-histogram_RSCU_double(get_RSCU_out_left = test,get_RSCU_out_right = test,title_left = "LUKASZ",title_right = "MATEUSZ")
+histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get_RSCU_out, title_left = "left title", title_right = "right title")
 ```
 
 # Korelacja
