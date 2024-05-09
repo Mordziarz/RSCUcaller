@@ -84,10 +84,10 @@ histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get
 
 # Correlation
 
-The RSCUcaller package allows you to perform Pearson correlation between two species. Specify the names of the sample column in the get_RSCU_out data frame that you want to correlate.
+The RSCUcaller package allows you to perform Pearson correlation between two species. Specify the names of the Species column in the get_RSCU_out data frame that you want to correlate.
 
 ```{r}
-correlation(get_RSCU_out = get_RSCU_out, x_name = "x name", y_name = "y name", xlab = "title of x lab", ylab = "title of y lab")
+correlation(get_RSCU_out = get_RSCU_out, Species.x = "Species.x", Species.y = "Species.y", xlab = "title of x lab", ylab = "title of y lab")
 ```
 
 # Statistics between groups of individual codons
@@ -95,7 +95,7 @@ correlation(get_RSCU_out = get_RSCU_out, x_name = "x name", y_name = "y name", x
 The boxplot_between_groups() function enables statistical analysis of RSCU values at the codon level. It utilizes the Kruskal-Wallis test to assess significant differences in RSCU values among groups, followed by Dunn's post-hoc test for pairwise comparisons.
 
 To utilize this function, you need to prepare a table called grouping_table with two columns:
-"name"-This column should contain the names of the sequences, corresponding to the name column from the get_RSCU_out() data frame.
+"Species"-This column should contain the names of the sequences, corresponding to the Species column from the get_RSCU_out() data frame.
 "group"-This column should specify the group to which each sequence belongs.
 
 ```{r}
