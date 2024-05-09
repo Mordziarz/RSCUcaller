@@ -30,7 +30,7 @@ prepare_fasta(samples_table = samples_table,file_out = "your_fasta.fasta")
 ```{r}
 samples_table <- data.frame(ID = "fasta_name",
                             GENBANK_ACCESSION = "gene_bank_accession_id")
-prepare_fasta(samples_table = samples_table, path ="/path/to/multiple/sequence/fasta", file_out = "your_fasta.fasta")
+prepare_fasta(samples_table = samples_table, path = "/path/to/multiple/sequence/fasta", file_out = "your_fasta.fasta")
 ```
 
 # Calculating RSCU from multiple sequences
@@ -38,7 +38,7 @@ prepare_fasta(samples_table = samples_table, path ="/path/to/multiple/sequence/f
 The main function in the package is get_RSCU(), which only requires the previously prepared sequences to work.
 
 ```{r}
-test <- get_RSCU(merged_sequences ="merged_sequences_lukasz.fasta")
+get_RSCU(merged_sequences = "your_fasta.fasta")
 ```
 
 # RSCU matrix
