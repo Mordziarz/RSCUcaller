@@ -77,12 +77,12 @@ A double histogram is plotted using the function histogram_RSCU_double(). The fu
 histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get_RSCU_out, title_left = "left title", title_right = "right title")
 ```
 
-# Korelacja
+# Correlation
 
-RSCUcaller umozliwia zrobienie korelacji pomiedzy dwoma gatunkami
+The RSCUcaller package allows you to perform Pearson correlation between two species. Specify the names of the sample column in the get_RSCU_out data frame that you want to correlate.
 
 ```{r}
-p <- correlation(get_RSCU_out = test,Species_x = "Pelia",Species_y = "Apopelia")
+correlation(get_RSCU_out = get_RSCU_out, x_name = "x name", y_name = "y name", xlab = "title of x lab", ylab = "title of y lab")
 ```
 
 # Statystyka pomiedzy grupami poszczególnych codon
