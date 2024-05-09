@@ -90,7 +90,15 @@ The RSCUcaller package allows you to perform Pearson correlation between two spe
 correlation(get_RSCU_out = get_RSCU_out, x_name = "x name", y_name = "y name", xlab = "title of x lab", ylab = "title of y lab")
 ```
 
-# Statystyka pomiedzy grupami poszczególnych codon
+# Statistics between groups of individual codons
+
+The boxplot_between_groups() function enables statistical analysis of RSCU values at the codon level. It utilizes the Kruskal-Wallis test to assess significant differences in RSCU values among groups, followed by Dunn's post-hoc test for pairwise comparisons.
+
+To utilize this function, you need to prepare a table called grouping_table with two columns:
+
+    name: This column should contain the names of the sequences, corresponding to the name column from the get_RSCU_out() data frame.
+
+    group: This column should specify the group to which each sequence belongs.
 
 ```{r}
 Boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
