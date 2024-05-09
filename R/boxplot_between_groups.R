@@ -11,7 +11,7 @@
 #' @export
 #'
 
-Boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,res) {
+boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,res) {
 
   if (base::missing(get_RSCU_out)) {
     stop("The get_RSCU_out predictions are required. Please provide a valid argument.",
