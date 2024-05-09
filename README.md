@@ -28,7 +28,7 @@ prepare_fasta(samples_table = samples_table,file_out = "your_fasta.fasta")
 ```
 
 ```{r}
-samples_table <- data.frame(ID = "fasta_name",
+samples_table <- data.frame(ID = "1_fasta_name",
                             GENBANK_ACCESSION = "gene_bank_accession_id")
 prepare_fasta(samples_table = samples_table, path = "/path/to/multiple/sequence/fasta", file_out = "your_fasta.fasta")
 ```
