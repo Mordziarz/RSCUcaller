@@ -93,7 +93,7 @@ correlation(get_RSCU_out = get_RSCU_out, x_name = "x name", y_name = "y name", x
 # Statystyka pomiedzy grupami poszczególnych codon
 
 ```{r}
-Boxplot_between_groups()
+Boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
 ```
 
 # Statistics between amino acids
