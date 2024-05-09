@@ -5,9 +5,9 @@ The RSCUcaller package is designed to analyze multiple DNA sequences for their R
 # Installation
 
 ```{r}
-#install.packages("devtools")
-#devtools::install_github('Mordziarz/RSCUcaller')
-#library(RSCUcaller)
+install.packages("devtools")
+devtools::install_github('Mordziarz/RSCUcaller')
+library(RSCUcaller)
 ```
 
 # Input data 
