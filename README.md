@@ -111,7 +111,6 @@ stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
 ```
 
 # Citation
-Please cite RSCUcaller as: Mazdziarz M et al., RSCUcaller - R package for RSCU analysis.
 
 # Support
 Any issues connected with the RSCUcaller should be addressed to Mateusz Mazdziarz (mazdziarz.mateusz (at) uwm.edu.pl).
