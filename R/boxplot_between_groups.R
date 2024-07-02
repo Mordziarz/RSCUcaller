@@ -35,7 +35,8 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
                 "taa", "tac", "tag", "tat", "tca", "tcc", "tcg", "tct", "tga", "tgc", "tgt", "tta", "ttc", "ttg", "ttt")
     statistical_table <- base::data.frame(row.names = 1, .y. = NA, group1 = NA, group2 = NA, n1 = NA, n2 = NA, statistic = NA, p=NA, p.adj=NA, p.adj.signif=NA)
     get_RSCU_out <- merge(get_RSCU_out,grouping_table,by="Species")
-
+    get_RSCU_out$index2 <- paste0(get_RSCU_out$group,"_",get_RSCU_out$codon)
+    
     for (i in 1:base::length(codons)) {
       table_1 <- get_RSCU_out[get_RSCU_out$codon %in% codons[i],]
       table_1 <- table_1[,c("RSCU", "index2","group")]
