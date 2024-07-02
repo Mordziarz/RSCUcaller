@@ -10,7 +10,7 @@
 #'
 
 stat_scat_box <-function(get_RSCU_out,width,height,res) {
-
+jk
   if (base::missing(get_RSCU_out)) {
     stop("The get_RSCU_out predictions are required. Please provide a valid argument.",
          call. = FALSE)
