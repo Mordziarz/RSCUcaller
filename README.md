@@ -61,7 +61,7 @@ A heatmap and a dendrogram can be drawn using the heatmap_RSCU() function. The h
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "heatmap", heatmap_color = "red_blue")
 ```
 
-![Heatmap](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/heatmap.png , width=6, height=6)
+<img src=https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/heatmap.png , width=6, height=6>
 
 A dendrogram can be obtained by providing the output of the get_RSCU() function and specifying "dendrogram" in the select argument. The result can be further edited using packages like ggtree. The dendrogram will also be saved as a file in your working directory named dendrogram_from_heatmap.newick by the system.
 
