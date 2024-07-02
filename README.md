@@ -60,9 +60,11 @@ A heatmap and a dendrogram can be drawn using the heatmap_RSCU() function. The h
 ```r
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "heatmap", heatmap_color = "red_blue")
 ```
+
 <div>
 <img src="https://raw.githubusercontent.com/Mordziarz/RSCUcaller/main/graphs/heatmap.png?token=GHSAT0AAAAAACULEGMXUASARNQJ5RK2EB6IZUEEDFA" width=auto height=auto>
 </div>
+
 A dendrogram can be obtained by providing the output of the get_RSCU() function and specifying "dendrogram" in the select argument. The result can be further edited using packages like ggtree. The dendrogram will also be saved as a file in your working directory named dendrogram_from_heatmap.newick by the system.
 
 ```r
@@ -111,8 +113,9 @@ The function will generate graphical outputs in the "selected_species" folder an
 ```r
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
 ```
-
-![Boxplot](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/Ala.png)
+<div>
+("https://raw.githubusercontent.com/Mordziarz/RSCUcaller/main/graphs/Ala.png?token=GHSAT0AAAAAACULEGMXZZO23UKTDSJVBGIYZUEEFQA" width=auto height=auto)
+</div>
 
 # Statistics between amino acids
 
@@ -121,7 +124,9 @@ Statistical analysis and visualizations can be generated for your data using the
 ```r
 stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
 ```
-![Boxplot](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/Ala.png)
+<div>
+("https://raw.githubusercontent.com/Mordziarz/RSCUcaller/main/graphs/Ala.png?token=GHSAT0AAAAAACULEGMXZZO23UKTDSJVBGIYZUEEFQA" width=auto height=auto)
+</div>
 
 # Citation
 
