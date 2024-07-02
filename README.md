@@ -108,6 +108,8 @@ To utilize this function, a table named grouping_table needs to be prepared with
 
 The function will generate graphical outputs in the "selected_species" folder and a table named Post_hoc_table_selected_species.csv in the working directory.
 
+
+The "grouping_table" should look like this: 
 | Species  | group |
 | -------- | ----- |
 | Species1  | CP  |
