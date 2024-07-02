@@ -111,7 +111,7 @@ The function will generate graphical outputs in the "selected_species" folder an
 ```r
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
 ```
-![Boxplots](graphs/Ala.png)
+![Boxplots](graphs/acg.png)
 
 # Statistics between amino acids
 
@@ -124,6 +124,13 @@ stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
 
 # Citation
 
+Paper in preparation
+
 # Support
 Any issues connected with the RSCUcaller should be addressed to Mateusz Mazdziarz (mazdziarz.mateusz (at) uwm.edu.pl).
 
+# Usage in scientific papers
+
+![Paper1](https://doi.org/10.3390/genes15050562)
+
+![Paper2](https://doi.org/10.1038/s41598-023-35269-3)
