@@ -108,6 +108,11 @@ To utilize this function, a table named grouping_table needs to be prepared with
 
 The function will generate graphical outputs in the "selected_species" folder and a table named Post_hoc_table_selected_species.csv in the working directory.
 
+| Species  | group |
+| -------- | ----- |
+| Species1  | CP  |
+| Species2  | MT  |
+
 ```r
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
 ```
