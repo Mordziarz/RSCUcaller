@@ -114,7 +114,7 @@ The function will generate graphical outputs in the "selected_species" folder an
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
 ```
 <div>
-("https://raw.githubusercontent.com/Mordziarz/RSCUcaller/main/graphs/Ala.png?token=GHSAT0AAAAAACULEGMXZZO23UKTDSJVBGIYZUEEFQA" width=auto height=auto)
+<img src="https://raw.githubusercontent.com/Mordziarz/RSCUcaller/main/graphs/Ala.png?token=GHSAT0AAAAAACULEGMXZZO23UKTDSJVBGIYZUEEFQA" width=auto height=auto>
 </div>
 
 # Statistics between amino acids
@@ -125,7 +125,7 @@ Statistical analysis and visualizations can be generated for your data using the
 stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
 ```
 <div>
-("https://raw.githubusercontent.com/Mordziarz/RSCUcaller/main/graphs/Ala.png?token=GHSAT0AAAAAACULEGMXZZO23UKTDSJVBGIYZUEEFQA" width=auto height=auto)
+<img src="https://raw.githubusercontent.com/Mordziarz/RSCUcaller/main/graphs/Ala.png?token=GHSAT0AAAAAACULEGMXZZO23UKTDSJVBGIYZUEEFQA" width=auto height=auto>
 </div>
 
 # Citation
