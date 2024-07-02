@@ -61,14 +61,14 @@ A heatmap and a dendrogram can be drawn using the heatmap_RSCU() function. The h
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "heatmap", heatmap_color = "red_blue")
 ```
 
-![Heatmap](https://github.com/Mordziarz/RSCUcaller/graphs/heatmap.png)
+![Heatmap](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/heatmap.png)
 
 A dendrogram can be obtained by providing the output of the get_RSCU() function and specifying "dendrogram" in the select argument. The result can be further edited using packages like ggtree. The dendrogram will also be saved as a file in your working directory named dendrogram_from_heatmap.newick by the system.
 
 ```r
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "dendogram")
 ```
-![Dendogram](https://github.com/Mordziarz/RSCUcaller/graphs/dendogram.png)
+![Dendogram](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/dendogram.png)
 
 # Histograms
 
@@ -78,7 +78,7 @@ Histograms can be created from the output of the get_RSCU() function using our p
 histogram_RSCU(get_RSCU_out = get_RSCU_out, title = "graph title")
 ```
 
-![Histogram](https://github.com/Mordziarz/RSCUcaller/graphs/histogram.png)
+![Histogram](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/histogram.png)
 
 Double histograms are plotted using the histogram_RSCU_double() function. This function requires two input parameters: get_RSCU_out_left and get_RSCU_out_right. Additionally, two optional title parameters, title_left and title_right, can be provided.
 
@@ -86,7 +86,7 @@ Double histograms are plotted using the histogram_RSCU_double() function. This f
 histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get_RSCU_out, title_left = "left title", title_right = "right title")
 ```
 
-![Histogram double](https://github.com/Mordziarz/RSCUcaller/graphs/histogram_double.png)
+![Histogram double](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/histogram_double.png)
 
 # Correlation
 
@@ -96,7 +96,7 @@ Pearson correlation between two species can be performed using the RSCUcaller pa
 correlation(get_RSCU_out = get_RSCU_out, Species_x = "Species_x", Species_y = "Species_y", xlab = "title of x lab", ylab = "title of y lab")
 ```
 
-![Correlation](https://github.com/Mordziarz/RSCUcaller/graphs/correlation.png)
+![Correlation](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/correlation.png)
 
 # Statistics between groups of individual codons
 
@@ -112,7 +112,7 @@ The function will generate graphical outputs in the "selected_species" folder an
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
 ```
 
-![Boxplot](https://github.com/Mordziarz/RSCUcaller/graphs/Ala.png)
+![Boxplot](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/Ala.png)
 
 # Statistics between amino acids
 
@@ -121,7 +121,7 @@ Statistical analysis and visualizations can be generated for your data using the
 ```r
 stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
 ```
-![Boxplot](https://github.com/Mordziarz/RSCUcaller/graphs/Ala.png)
+![Boxplot](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/Ala.png)
 
 # Citation
 
