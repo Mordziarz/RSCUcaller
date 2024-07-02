@@ -88,7 +88,7 @@ Double histograms are plotted using the histogram_RSCU_double() function. This f
 histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get_RSCU_out, title_left = "left title", title_right = "right title")
 ```
 
-![Histogram double](https://github.com/Mordziarz/RSCUcaller/tree/main/graphs/histogram_double.png)
+![Histogram double](graphs/histogram_double.png)
 
 # Correlation
 
