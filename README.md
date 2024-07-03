@@ -134,7 +134,7 @@ stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
 Paper in preparation
 
 # Support
-Any issues connected with the RSCUcaller should be addressed to Mateusz Mazdziarz (mazdziarz.mateusz (at) uwm.edu.pl).
+Any issues connected with the RSCUcaller should be addressed to Mateusz Mazdziarz (mateusz.mazdziarz@uwm.edu.pl).
 
 # Usage in scientific papers
 
