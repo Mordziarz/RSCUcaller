@@ -48,7 +48,7 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
         ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=",stat$p.value))
       base::print(p)
       dev.off()
-      png(paste0("boxplots/",aminoacids[i],".png"), width=width, height=height, units = "in", res = 300)
+      png(paste0("boxplots/",aminoacids[i],".png"), width=width, height=height, units = "in", res = res)
       p <- ggpubr::ggboxplot(table_1,
                              x="codon",
                              y="RSCU",
