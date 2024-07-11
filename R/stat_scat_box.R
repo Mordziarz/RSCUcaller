@@ -44,7 +44,8 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
                              point = "FALSE") +
         ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
         ggplot2::theme(legend.position = "none") +
-        ggplot2::geom_jitter(aes(color = codon), width = 0.2, height = 0)  +
+        ggplot2::geom_jitter(aes(color = codon), width = 0.2, height = 0) +
+        ggplot2::scale_x_discrete() +
         ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=",stat$p.value))
       base::print(p)
       dev.off()
@@ -58,6 +59,7 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
         ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
         ggplot2::geom_jitter(aes(color = codon), width = 0.2, height = 0) +
         ggplot2::theme(legend.position = "none") +
+        ggplot2::scale_x_discrete() +
         ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=",stat$p.value))
       base::print(p)
       dev.off()
