@@ -106,7 +106,7 @@ To utilize this function, a table named grouping_table needs to be prepared with
 "Species"-This column should contain the names of the sequences, corresponding to the Species column from the get_RSCU_out() data frame.
 "group"-This column should specify the group to which each sequence belongs.
 
-The function will generate graphical outputs in the "selected_species" folder and a table named Post_hoc_table_selected_species.csv in the working directory.
+The function will generate graphical outputs in selected_species and selected_species_barplots folder and a table named Post_hoc_table_selected_species.csv in the working directory.
 
 
 The "grouping_table" should look like this: 
@@ -122,7 +122,7 @@ boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_ta
 
 # Statistics between amino acids
 
-Statistical analysis and visualizations can be generated for your data using the stat_scat_box() function. This function employs the Kruskal-Wallis test to assess significant differences among groups, followed by Dunn's post-hoc test for pairwise comparisons. A table named Post_hoc_table_aminoacids.csv and two folders, boxplots and scatter_plots, will also be created in your working directory.
+Statistical analysis and visualizations can be generated for your data using the stat_scat_box() function. This function employs the Kruskal-Wallis test to assess significant differences among groups, followed by Dunn's post-hoc test for pairwise comparisons. A table named Post_hoc_table_aminoacids.csv and three folders, boxplots, barplots and scatter_plots, will also be created in your working directory.
 
 ```r
 stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
