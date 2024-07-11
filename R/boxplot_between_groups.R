@@ -52,12 +52,12 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
                              y="RSCU",
                              fill = "white",
                              color = "group",
-                             add = "jitter",
                              xlab = xlab,
                              palette = c("dodgerblue3", "maroon2",  "forestgreen", "darkorange1", "blueviolet", "firebrick2",
                                          "deepskyblue", "orchid2", "chartreuse3", "gold", "slateblue1", "tomato" , "blue", "magenta", "green3",
                                          "yellow", "purple3", "red" ,"darkslategray1", "lightpink1", "lightgreen", "khaki1", "plum3", "salmon")) +
         ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
+        ggplot2::geom_jitter(aes(color = group), width = 0.2, height = 0) +
         ggplot2::theme(legend.position = "none") +
         ggplot2::ggtitle(base::paste0(codons[i],", Kruskal-Wallis, p=",stat$p.value))
       base::print(p)
