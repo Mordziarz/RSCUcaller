@@ -59,6 +59,7 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
         ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
         ggplot2::geom_jitter(aes(color = group), width = 0.2, height = 0) +
         ggplot2::theme(legend.position = "none") +
+        ggplot2::scale_x_discrete() +
         ggplot2::ggtitle(base::paste0(codons[i],", Kruskal-Wallis, p=",stat$p.value))
       base::print(p)
       dev.off()
