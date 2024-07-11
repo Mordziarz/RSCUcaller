@@ -5,7 +5,7 @@
 #' @param height height of charts
 #' @param res resolution of charts
 #'
-#' @return A table with statistics, boxplots and scatter plots.
+#' @return A table with statistics, boxplots, barplots and scatter plots.
 #' @export
 #'
 
@@ -16,12 +16,13 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
          call. = FALSE)
   }
 
-  if (!base::file.exists("scatter_plots") & !base::file.exists("boxplots")){
+  if (!base::file.exists("scatter_plots") & !base::file.exists("boxplots") & !base::file.exists("barplots")){
     base::dir.create("scatter_plots")
     base::dir.create("boxplots")
+    base::dir.create("barplots")
   }
 
-  if (base::file.exists("scatter_plots") & base::file.exists("boxplots")) {
+  if (base::file.exists("scatter_plots") & base::file.exists("boxplots") & base::file.exists("barplots")) {
 
     base::message(base::paste0("Calculating statistics and generating plots... "))
     aminoacids <- c("Ala","Arg","Asn","Asp","Cys","Gln","Glu","Gly","His","Ile","Leu","Lys","Phe","Pro","Ser","Stp","Thr","Tyr","Val")
@@ -63,13 +64,27 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
         ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=",stat$p.value))
       base::print(p)
       dev.off()
+      table_1 <- table_1 %>% dplyr::group_by(codon) %>% dplyr::summarize(`RSCU` = mean(RSCU))
+      png(paste0("barplots/", aminoacids[i], ".png"), width = width, height = height, units = "in", res = res)
+      p <- ggpubr::ggbarplot(table_1, 
+                             x = "codon", 
+                             y = "RSCU", 
+                             fill = "codon", 
+                             color = "codon", 
+                             palette = c("dodgerblue3", "maroon2", "forestgreen", "darkorange1", "blueviolet", "firebrick2")) + 
+        ggpubr::stat_pvalue_manual(post_hoc_x_y,label = "p.adj.signif", hide.ns = TRUE) + 
+        ggplot2::theme(legend.position = "none") + 
+        ggplot2::scale_x_discrete() + 
+        ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=", stat$p.value)) + ggplot2::ylab("mean(RSCU)")
+      base::print(p)
+      dev.off()
     }
   }
   else (
-    stop("Try to make directory scatter_plots & boxplots manually and run function again",
+    stop("Try to make directory scatter_plots, barplots & boxplots manually and run function again",
          call. = FALSE)
   )
-  base::message(base::paste0("Done! Check scatter_plots & boxplots dirs !!!"))
+  base::message(base::paste0("Done! Check scatter_plots, barplots & boxplots dirs !!!"))
   write.csv2(statistical_table,"Post_hoc_table_aminoacids.csv",row.names = F)
   return(statistical_table)
 }
