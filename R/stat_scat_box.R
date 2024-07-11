@@ -45,6 +45,7 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
         ggplot2::geom_jitter(aes(color=codon),width = 0.1)+
         ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
         ggplot2::theme(legend.position = "none") +
+        ggplot2::geom_jitter(aes(color = group), width = 0.2, height = 0)  +
         ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=",stat$p.value))
       base::print(p)
       dev.off()
@@ -57,6 +58,7 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
                              add = "jitter",
                              palette = c("dodgerblue3", "maroon2",  "forestgreen", "darkorange1", "blueviolet", "firebrick2")) +
         ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
+        ggplot2::geom_jitter(aes(color = group), width = 0.2, height = 0) +
         ggplot2::theme(legend.position = "none") +
         ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=",stat$p.value))
       base::print(p)
