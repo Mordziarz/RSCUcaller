@@ -23,11 +23,12 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
          call. = FALSE)
   }
 
-  if (!base::file.exists("selected_species")){
+  if (!base::file.exists("selected_species") & !base::file.exists("selected_species_barplots")){
     base::dir.create("selected_species")
+    base::dir.create("selected_species_barplots")
   }
 
-  if (base::file.exists("selected_species")) {
+  if (base::file.exists("selected_species") & base::file.exists("selected_species_barplots")) {
 
     base::message(base::paste0("Calculating statistics and generating plots... "))
     codons <- c("aaa", "aac", "aag", "aat", "aca", "acc", "acg", "act", "aga", "agc", "agg", "agt", "ata", "atc", "att", "caa", "cac", "cag", "cat", "cca", "ccc", "ccg", "cct",
@@ -52,24 +53,43 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
                              y="RSCU",
                              fill = "white",
                              color = "group",
-                             add = "jitter",
                              xlab = xlab,
                              palette = c("dodgerblue3", "maroon2",  "forestgreen", "darkorange1", "blueviolet", "firebrick2",
                                          "deepskyblue", "orchid2", "chartreuse3", "gold", "slateblue1", "tomato" , "blue", "magenta", "green3",
                                          "yellow", "purple3", "red" ,"darkslategray1", "lightpink1", "lightgreen", "khaki1", "plum3", "salmon")) +
         ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
+        ggplot2::geom_jitter(aes(color = group), width = 0.2, height = 0) +
         ggplot2::theme(legend.position = "none") +
+        ggplot2::scale_x_discrete() +
         ggplot2::ggtitle(base::paste0(codons[i],", Kruskal-Wallis, p=",stat$p.value))
       base::print(p)
       dev.off()
-
+      table_1 <- table_1 %>% dplyr::group_by(group) %>% dplyr::summarize(`RSCU` = mean(RSCU))
+      grouping_table <- grouping_table[!duplicated(grouping_table$group),]
+      idx <- base::match(table_1$group,grouping_table$group)
+      table_1 <- table_1[idx,]
+      png(paste0("selected_species_barplots/", codons[i], ".png"), width = width, height = height, units = "in", res = res)
+      p <- ggpubr::ggbarplot(table_1, 
+                             x = "group", 
+                             y = "RSCU", 
+                             fill = "group", 
+                             color = "group", 
+                             palette = c("dodgerblue3", "maroon2",  "forestgreen", "darkorange1", "blueviolet", "firebrick2",
+                                         "deepskyblue", "orchid2", "chartreuse3", "gold", "slateblue1", "tomato" , "blue", "magenta", "green3",
+                                         "yellow", "purple3", "red" ,"darkslategray1", "lightpink1", "lightgreen", "khaki1", "plum3", "salmon")) + 
+        ggpubr::stat_pvalue_manual(post_hoc_x_y,label = "p.adj.signif", hide.ns = TRUE) + 
+        ggplot2::theme(legend.position = "none") + 
+        ggplot2::scale_x_discrete() + 
+        ggplot2::ggtitle(base::paste0(codons[i],", Kruskal-Wallis, p=", stat$p.value)) + ggplot2::ylab("mean(RSCU)")
+      base::print(p)
+      dev.off()
     }
   }
   else (
-    stop("Try to make directory selected_species manually and run function again",
+    stop("Try to make directory selected_species & selected_species_barplots manually and run function again",
          call. = FALSE)
   )
-  base::message(base::paste0("Done! Check selected_species dir !!!"))
+  base::message(base::paste0("Done! Check selected_species & selected_species_barplots dir !!!"))
   write.csv2(statistical_table,"Post_hoc_table_selected_species.csv",row.names = F)
   return(statistical_table)
 }
