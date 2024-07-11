@@ -65,7 +65,7 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
       base::print(p)
       dev.off()
       table_1 <- table_1 %>% dplyr::group_by(group) %>% dplyr::summarize(`RSCU` = mean(RSCU))
-      png(paste0("selected_species_barplots/", aminoacids[i], ".png"), width = width, height = height, units = "in", res = res)
+      png(paste0("selected_species_barplots/", codons[i], ".png"), width = width, height = height, units = "in", res = res)
       p <- ggpubr::ggbarplot(table_1, 
                              x = "group", 
                              y = "RSCU", 
