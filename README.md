@@ -9,6 +9,16 @@ install.packages("devtools")
 devtools::install_github('Mordziarz/RSCUcaller')
 library(RSCUcaller)
 ```
+To use all features of the program, you will need several libraries.
+
+```r
+library(ggplot2)
+library(dplyr)
+library(seqinr)
+library(rstatix)
+library(ggpubr)
+```
+
 
 # Input data 
 
@@ -106,7 +116,7 @@ To utilize this function, a table named grouping_table needs to be prepared with
 "Species"-This column should contain the names of the sequences, corresponding to the Species column from the get_RSCU_out() data frame.
 "group"-This column should specify the group to which each sequence belongs.
 
-The function will generate graphical outputs in selected_species and selected_species_barplots folder and a table named Post_hoc_table_selected_species.csv in the working directory.
+The function will generate graphical outputs. These outputs will be placed in two folders: selected_species and selected_species_barplots. Additionally, a table named Post_hoc_table_selected_species.csv will be created in the working directory.
 
 
 The "grouping_table" should look like this: 
