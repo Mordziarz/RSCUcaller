@@ -42,7 +42,8 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
       p <- ggpubr::ggscatter(table_1,
                              x="codon",
                              y="RSCU",
-                             point = "FALSE") +
+                             point = "FALSE",
+                             palette = c("dodgerblue3", "maroon2",  "forestgreen", "darkorange1", "blueviolet", "firebrick2")) +
         ggpubr::stat_pvalue_manual(post_hoc_x_y, label="p.adj.signif", hide.ns=TRUE) +
         ggplot2::theme(legend.position = "none") +
         ggplot2::geom_jitter(aes(color = codon), width = 0.2, height = 0) +
