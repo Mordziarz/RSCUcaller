@@ -6,6 +6,7 @@ RSCU (relative synonymous codon usage) values of multiple DNA sequences can be a
 
 ```r
 install.packages("devtools")
+library(devtools)
 devtools::install_github('Mordziarz/RSCUcaller')
 library(RSCUcaller)
 ```
