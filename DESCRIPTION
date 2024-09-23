@@ -1,11 +1,10 @@
 Package: RSCUcaller
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Program in R for calculating RSCU.
 Version: 0.1.0
-Author: Who wrote it
+Author: Mateusz Maździarz (Mordziarz)
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Description: RSCU (relative synonymous codon usage) values of multiple DNA sequences can be analyzed using the RSCUcaller package. The package offers functions to retrieve RSCU information, plot the values, and calculate statistical significance.
+License: GNU GENERAL PUBLIC LICENSE
 Encoding: UTF-8
 LazyData: true
