@@ -33,7 +33,7 @@ prepare_fasta <- function(samples_table=samples_table,path="",file_out="") {
     sequence <- seqinr::read.fasta(file = path, set.attributes = T, seqtype = "DNA",as.string = T)
     for (i in 1:nrow(samples_table)) {
       current_accession <- samples_table$GENBANK_ACCESSION[i]
-      positions <- which(names(sequence) %in% current_accession)
+      positions <- base::which(names(sequence) %in% current_accession)
       a <- sequence[positions]
       for (j in 1:length(a)) {
         sequences_list[[i]] <- c(sequences_list[[i]], base::paste0(sequence[[j]]))
