@@ -17,7 +17,7 @@ prepare_fasta <- function(samples_table=samples_table,path="",file_out="") {
 
   base::message(base::paste0("Loading data"))
 
-  sequences_list <- vector("list", nrow(samples_table))
+  sequences_list <- base::vector("list", base::nrow(samples_table))
 
   if (base::all(colnames(samples_table)==c("sequence_path","sample_name"))){
     for (i in 1:nrow(samples_table)) {
