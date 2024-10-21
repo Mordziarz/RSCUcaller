@@ -49,7 +49,7 @@ Alternatively, if multiple species from NCBI were downloaded within a single FAS
 
 ```r
 samples_table <- data.frame(ID = c("1_fasta_name","2_fasta_name"),
-                            GENBANK_ACCESSION = c("gene_bank_accession_id_1",""gene_bank_accession_id_1"))
+                            GENBANK_ACCESSION = c("gene_bank_accession_id_1","gene_bank_accession_id_1"))
 prepare_fasta(samples_table = samples_table, path = "/path/to/multiple/sequence/fasta", file_out = "your_fasta.fasta")
 ```
 The name of the prepared FASTA file needs to be specified regardless of the chosen method. This file will be created and saved in your working directory using the argument file_out="name_of_your_output.fasta".
