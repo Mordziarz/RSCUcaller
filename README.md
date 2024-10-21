@@ -48,8 +48,8 @@ prepare_fasta(samples_table = samples_table,file_out = "your_fasta.fasta")
 Alternatively, if multiple species from NCBI were downloaded within a single FASTA file, the samples_table with the ID and GENBANK_ACCESSION columns can be used. In this scenario, the path to the FASTA file must also be provided using the path argument.
 
 ```r
-samples_table <- data.frame(ID = "1_fasta_name",
-                            GENBANK_ACCESSION = "gene_bank_accession_id")
+samples_table <- data.frame(ID = c("1_fasta_name","2_fasta_name"),
+                            GENBANK_ACCESSION = c("gene_bank_accession_id_1",""gene_bank_accession_id_1"))
 prepare_fasta(samples_table = samples_table, path = "/path/to/multiple/sequence/fasta", file_out = "your_fasta.fasta")
 ```
 The name of the prepared FASTA file needs to be specified regardless of the chosen method. This file will be created and saved in your working directory using the argument file_out="name_of_your_output.fasta".
