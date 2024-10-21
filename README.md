@@ -41,8 +41,8 @@ RSCUcaller requires DNA sequences from NCBI. To begin the analysis, the FASTA fi
 
 ```r
 path1 <- "/path/to/your/fasta"
-samples_table <- data.frame(sequence_path = path1,
-                            sample_name = "1_fasta_name")
+samples_table <- data.frame(sequence_path = c(path1,path2),
+                            sample_name = c("1_fasta_name","2_fasta_name"))
 prepare_fasta(samples_table = samples_table,file_out = "your_fasta.fasta")
 ```
 Alternatively, if multiple species from NCBI were downloaded within a single FASTA file, the samples_table with the ID and GENBANK_ACCESSION columns can be used. In this scenario, the path to the FASTA file must also be provided using the path argument.
