@@ -21,14 +21,12 @@ get_RSCU <- function(merged_sequences = ""){
 
     Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, freq = NA, RSCU = NA, Name = NA, Col = NA, index = NA, Species = NA)
     t <- base::gsub("^\\d+_", "",names(merged_seq))
-    n <- base::gsub("_.*","",names(merged_seq))
 
     for (i in 1:base::length(merged_seq)) {
       a <- merged_seq[[i]]
       cp1 <- seqinr::uco(a, as.data.frame = TRUE)
-      cp1$Name <- n[i]
       cp1$Col <- 1
-      cp1$index <- base::paste(cp1$AA, n[i])
+      cp1$index <- base::paste(cp1$AA, t[i])
       cp1$Species <- t[i]
       Rscu_all <- base::rbind(Rscu_all,cp1)
     }
@@ -46,14 +44,12 @@ get_RSCU <- function(merged_sequences = ""){
 
       Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, freq = NA, RSCU = NA, Name = NA, Col = NA, index = NA, Species = NA)
       t <- base::gsub("^\\d+_", "",names(merged_seq))
-      n <- base::gsub("_.*","",names(merged_seq))
 
       for (i in 1:base::length(merged_seq)) {
         a <- merged_seq[[i]]
         cp1 <- seqinr::uco(a, as.data.frame = TRUE)
-        cp1$Name <- n[i]
         cp1$Col <- 1
-        cp1$index <- base::paste(cp1$AA, n[i])
+        cp1$index <- base::paste(cp1$AA, t[i])
         cp1$Species <- t[i]
         Rscu_all <- base::rbind(Rscu_all,cp1)
       }
