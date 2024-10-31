@@ -19,7 +19,7 @@ get_RSCU <- function(merged_sequences = ""){
 
     merged_seq <- merged_sequences
 
-    Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, freq = NA, RSCU = NA, Name = NA, Col = NA, index = NA, Species = NA)
+    Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, freq = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
     t <- base::gsub("^\\d+_", "",names(merged_seq))
 
     for (i in 1:base::length(merged_seq)) {
@@ -42,7 +42,7 @@ get_RSCU <- function(merged_sequences = ""){
 
       merged_seq <- seqinr::read.fasta(file = merged_sequences ,set.attributes = T, seqtype = "DNA",as.string = F)
 
-      Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, freq = NA, RSCU = NA, Name = NA, Col = NA, index = NA, Species = NA)
+      Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, freq = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
       t <- base::gsub("^\\d+_", "",names(merged_seq))
 
       for (i in 1:base::length(merged_seq)) {
