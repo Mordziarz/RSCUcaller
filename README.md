@@ -37,7 +37,9 @@ setwd("path/to/your/directory")
 ```
 
 RSCUcaller requires DNA sequences from NCBI. To begin the analysis, the FASTA file must be prepared appropriately using the prepare_fasta() function. This function requires a table with two columns:
+
 "sequence_path" - This column specifies the path to the FASTA file.
+
 "sample_name" - This column defines the FASTA name, which will be displayed on visualizations and should start with a number followed by an underscore (e.g., 1_Riccia_fluitans).
 
 The "samples_table" should resemble the following. You can create this using a program other than R, such as a simple text editor.
