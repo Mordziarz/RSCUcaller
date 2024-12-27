@@ -40,6 +40,21 @@ RSCUcaller requires DNA sequences from NCBI. To begin the analysis, the FASTA fi
 "sequence_path" - This column specifies the path to the FASTA file.
 "sample_name" - This column defines the FASTA name, which will be displayed on visualizations and should start with a number followed by an underscore (e.g., 1_Riccia_fluitans).
 
+The "samples_table" should resemble the following. You can create this using a program other than R, such as a simple text editor.
+
+When you have FASTA files in separate files
+
+| sequence_path  | sample_name |
+| ------------------- | ------------- |
+| path/to/your/fasta  | 1_fasta_name  |
+| path/to/your/fasta  | 2_fasta_name  |
+| path/to/your/fasta  | 3_fasta_name  |
+| path/to/your/fasta  | 4_fasta_name  |
+| path/to/your/fasta  | 5_fasta_name  |
+| path/to/your/fasta  | 6_fasta_name  |
+| path/to/your/fasta  | 7_fasta_name  |
+| path/to/your/fasta  | 8_fasta_name  |
+
 ```r
 path1 <- "/path/to/your/fasta"
 samples_table <- data.frame(sequence_path = c(path1,path2),
@@ -48,11 +63,26 @@ prepare_fasta(samples_table = samples_table,file_out = "your_fasta.fasta")
 ```
 Alternatively, if multiple species from NCBI were downloaded within a single FASTA file, the samples_table with the ID and GENBANK_ACCESSION columns can be used. In this scenario, the path to the FASTA file must also be provided using the path argument.
 
+When you have downloaded multiple FASTA files from NCBI into a single file
+
+| ID  | GENBANK_ACCESSION |
+| ------------------- | ------------- |
+| 1_fasta_name  | gene_bank_accession_id_1  |
+| 2_fasta_name  | gene_bank_accession_id_2  |
+| 3_fasta_name  | gene_bank_accession_id_3  |
+| 4_fasta_name  | gene_bank_accession_id_4  |
+| 5_fasta_name  | gene_bank_accession_id_5  |
+| 6_fasta_name  | gene_bank_accession_id_6  |
+| 7_fasta_name  | gene_bank_accession_id_7  |
+| 8_fasta_name  | gene_bank_accession_id_8  |
+
 ```r
 samples_table <- data.frame(ID = c("1_fasta_name","2_fasta_name"),
                             GENBANK_ACCESSION = c("gene_bank_accession_id_1","gene_bank_accession_id_2"))
 prepare_fasta(samples_table = samples_table, path = "/path/to/multiple/sequence/fasta", file_out = "your_fasta.fasta")
 ```
+
+
 The name of the prepared FASTA file needs to be specified regardless of the chosen method. This file will be created and saved in your working directory using the argument file_out="name_of_your_output.fasta".
 
 # Calculating RSCU from multiple sequences
