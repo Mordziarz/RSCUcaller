@@ -155,7 +155,9 @@ correlation(get_RSCU_out = get_RSCU_out, Species_x = "Species_x", Species_y = "S
 Statistical analysis of RSCU values at the codon level can be performed using the boxplot_between_groups() function. This function employs the Kruskal-Wallis test to assess significant differences in RSCU values among groups, followed by Dunn's post-hoc test for pairwise comparisons.
 
 To utilize this function, a table named grouping_table needs to be prepared with the following two columns:
+
 "Species"-This column should contain the names of the sequences, corresponding to the Species column from the get_RSCU_out() data frame.
+
 "group"-This column should specify the group to which each sequence belongs.
 
 The function will generate graphical outputs. These outputs will be placed in two folders: selected_species and selected_species_barplots. Additionally, a table named Post_hoc_table_selected_species.csv will be created in the working directory.
