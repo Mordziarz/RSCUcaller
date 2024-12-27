@@ -42,6 +42,8 @@ RSCUcaller requires DNA sequences from NCBI. To begin the analysis, the FASTA fi
 
 The "samples_table" should resemble the following. You can create this using a program other than R, such as a simple text editor.
 
+Ensure that the column names match the column names in the tutorial.
+
 When you have FASTA files in separate files
 
 | sequence_path  | sample_name |
@@ -158,6 +160,9 @@ The function will generate graphical outputs. These outputs will be placed in tw
 
 
 The "grouping_table" should look like this: 
+
+Ensure that the column names match the column names in the tutorial.
+
 | Species  | group |
 | -------- | ----- |
 | Species1  | group1  |
