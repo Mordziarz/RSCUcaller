@@ -160,8 +160,14 @@ The function will generate graphical outputs. These outputs will be placed in tw
 The "grouping_table" should look like this: 
 | Species  | group |
 | -------- | ----- |
-| Species1  | CP  |
-| Species2  | MT  |
+| Species1  | group1  |
+| Species2  | group2  |
+| Species3  | group3  |
+| Species4  | group4  |
+| Species5  | group1  |
+| Species6  | group1  |
+| Species7  | group2  |
+| Species8  | group3  |
 
 ```r
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
