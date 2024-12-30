@@ -41,6 +41,7 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
     for (i in 1:base::length(codons)) {
       table_1 <- get_RSCU_out[get_RSCU_out$codon %in% codons[i],]
       table_1 <- table_1[,c("RSCU", "index2","group")]
+      table_1$group <- table_1[order(table_1$group),]
       stat <- stats::kruskal.test(RSCU ~ index2 , data = table_1)
       post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ index2, data = table_1, p.adjust.method = "bonferroni"))
       statistical_table <- base::rbind(statistical_table,post_hoc)
