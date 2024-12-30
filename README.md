@@ -46,6 +46,8 @@ The "samples_table" should resemble the following. You can create this using a p
 
 Ensure that the column names match the column names in the tutorial.
 
+Please ensure that the sample names ("sample_name") are unique. The program requires the names to be as detailed as possible. For example, if the user provides the names "A2" and "A2.1", the program will treat them as a single sample. However, in the case of names "A2.1" and "A2.2", the program will function correctly.
+
 When you have FASTA files in separate files
 
 | sequence_path  | sample_name |
