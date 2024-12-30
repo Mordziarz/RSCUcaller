@@ -37,7 +37,7 @@ prepare_fasta <- function(samples_table=samples_table,path="",file_out="") {
                                      ignore.case = TRUE))
       a <- sequence[positions]
       for (j in 1:length(a)) {
-        sequences_list[[i]] <- c(sequences_list[[i]], base::paste0(sequence[[j]]))
+        sequences_list[[i]] <- c(sequences_list[[i]], base::paste0(a[[j]]))
       }
       base::names(sequences_list)[i] <- samples_table$ID[i]
     }
