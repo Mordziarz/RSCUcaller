@@ -109,6 +109,7 @@ heatmap_RSCU <- function(heatmap_color="",get_RSCU_out=get_RSCU_out,select=""){
     heatmap_rscu <- ComplexHeatmap::Heatmap(matrix_RSCU,name = "RSCU",
                                             cluster_rows = T,
                                             cluster_columns = T)
+    draw(heatmap_rscu)
     p <- ComplexHeatmap::row_dend(heatmap_rscu)
     p1 <- ggtree::ggtree(p)
     phylogram::write.dendrogram(p, file = "dendogram_from_heatmap.newick", append = FALSE, edges = TRUE)
