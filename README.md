@@ -2,7 +2,7 @@
 
 RSCU (relative synonymous codon usage) values of multiple DNA sequences can be analyzed using the RSCUcaller package. The package offers functions to retrieve RSCU information, plot the values, and calculate statistical significance.
 
-The "test_data" folder contains sample data in the form of tables and an R script.
+The "test_data" folder contains sample data in the form of tables, FASTA files, and an R script.
 
 # Installation
 
