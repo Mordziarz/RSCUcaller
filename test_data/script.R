@@ -23,7 +23,7 @@ library(stats)
 
 set.seed(123) 
 
-setwd("/dane/Watrobowce_RSCU/")
+setwd("path/to/your/workdir")
 
 ################################################
 ################## Mitogenome ##################
