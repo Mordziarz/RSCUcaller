@@ -128,6 +128,14 @@ grouping_table <- read.csv2("grouping_table.csv",sep = ";") # read grouping tabl
 RSCUcaller::boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, 
                                    width = 6, height = 6, xlab = "Groups", res = 300) # calculate
 
+################################
+########### PCA ################
+################################
+
+png("Ex_PCA.png", width=5, height=5, units = "in", res = 300)
+RSCUcaller::PCA_RSCU(get_matrix_out = matrix,grouping_table = grouping_table)
+dev.off()
+
 #############################################
 ################## Plastid ##################
 #############################################

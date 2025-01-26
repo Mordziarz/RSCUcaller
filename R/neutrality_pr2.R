@@ -3,7 +3,7 @@
 #' @param get_RSCU_out the table was created using the get_RSCU function
 #' @param select the "PR2_plot" or "neutrality_plot" output
 #'
-#' @return A plot object.
+#' @return A plot object and table object.
 #' @export
 #'
 
