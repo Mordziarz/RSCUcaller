@@ -65,7 +65,9 @@ neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select=""){
       GC12 = (GC1 + GC2) / 2,
       sum3AT = sum_A3 + sum_T3,
       A3_AT3 = ifelse(sum3AT == 0, 0, sum_A3 / sum3AT),
-      ) %>% select(-c(sum3ATGC,sum1ATGC,sum2ATGC,sum3AT))
+      sum3GC = sum_G3 + sum_C3,
+      G3_GC3 = ifelse(sum3GC == 0, 0, sum_G3 / sum3GC)
+      ) %>% select(-c(sum3ATGC,sum1ATGC,sum2ATGC,sum3AT,sum3GC))
   
   if (select=="neutrality_plot"){
   
@@ -85,16 +87,16 @@ neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select=""){
   }
   
   if (select=="PR2_plot"){
-  model <- lm(A3_AT3 ~ GC3, data = test) 
+  model <- lm(A3_AT3 ~ G3_GC3, data = get_RSCU_out) 
   r_squared <- summary(model)$r.squared
   equation <- paste("y =", round(coef(model)[2], 2), "x +", round(coef(model)[1], 2))
   r_squared_label <- paste("R² =", round(r_squared, 3))
   
-  PR2_plot <- test %>%
-    ggplot(aes(x = GC3, y = A3_AT3)) +
+  PR2_plot <- get_RSCU_out %>%
+    ggplot(aes(x = G3_GC3, y = A3_AT3)) +
     geom_point() + 
     geom_smooth(method = "lm", se = FALSE) + 
-    labs(x = "GC3", y = "A3/(A3+T3)", title = paste0(r_squared_label,", ",equation)) +
+    labs(x = "G3/(G3+C3)", y = "A3/(A3+T3)", title = paste0(r_squared_label,", ",equation)) +
     theme_bw()
     
   return(list(table = get_RSCU_out, plot = PR2_plot))
