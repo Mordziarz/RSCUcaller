@@ -81,7 +81,7 @@ neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select=""){
     labs(x = "GC3", y = "GC12", title = paste0(r_squared_label,", ",equation)) +
     theme_bw() 
 
-  return(neutrality_plot)
+  return(list(table = get_RSCU_out, plot = neutrality_plot))
   }
   
   if (select=="PR2_plot"){
@@ -97,7 +97,7 @@ neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select=""){
     labs(x = "GC3", y = "A3/(A3+T3)", title = paste0(r_squared_label,", ",equation)) +
     theme_bw()
     
-  return(PR2_plot)
+  return(list(table = get_RSCU_out, plot = PR2_plot))
   }
   base::message(base::paste0("Success"))
 }
