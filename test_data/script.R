@@ -20,6 +20,7 @@ library(ComplexHeatmap)
 library(smplot2)
 library(ggtree)
 library(stats)
+library(stringr)
 
 set.seed(123) 
 
