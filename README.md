@@ -204,10 +204,6 @@ boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_ta
 ```
 ![Boxplots](graphs/agc.png)
 
-# Statistics between amino acids
-
-Statistical analysis and visualizations can be generated for your data using the stat_scat_box() function. This function employs the Kruskal-Wallis test to assess significant differences among groups, followed by Dunn's post-hoc test for pairwise comparisons. A table named Post_hoc_table_aminoacids.csv and three folders, boxplots, barplots and scatter_plots, will also be created in your working directory.
-
 # PCA
 
 ```r
@@ -215,6 +211,10 @@ PCA_RSCU(get_matrix_out = matrix,grouping_table = grouping_table)
 ```
 
 ![PCA](graphs/Ex_PCA.png)
+
+# Statistics between amino acids
+
+Statistical analysis and visualizations can be generated for your data using the stat_scat_box() function. This function employs the Kruskal-Wallis test to assess significant differences among groups, followed by Dunn's post-hoc test for pairwise comparisons. A table named Post_hoc_table_aminoacids.csv and three folders, boxplots, barplots and scatter_plots, will also be created in your working directory.
 
 ```r
 stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
