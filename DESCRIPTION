@@ -23,4 +23,5 @@ Imports:
     ComplexHeatmap (>= 2.20.0),
     smplot2 (>= 0.2.4),
     ggtree (>= 3.12.0),
-    stats (>= 4.4.1)
+    stats (>= 4.4.1),
+    stringr (>= 1.5.1),

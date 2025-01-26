@@ -2,7 +2,7 @@
 #'
 #' @param get_RSCU_out the table was created using the get_RSCU function
 #' @param heatmap_color Selecting colors for the heatmap from among "red_green","green_red","blue_green","green_blue","blue_red","red_blue"
-#' @param Selecting the "heatmap" or "dendrogram" output
+#' @param select the "heatmap" or "dendrogram" output
 #'
 #' @return A plot object.
 #' @export
