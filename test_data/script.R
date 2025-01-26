@@ -47,6 +47,22 @@ RSCUcaller::prepare_fasta(samples_table = samples_table,path = "mitogenome_seque
 
 get_RSCU_out <- RSCUcaller::get_RSCU(merged_sequences = "prepered_fasta.fasta")
 
+#################################
+###### PR2 plot #################
+#################################
+
+png("Ex_PR2.png", width=4, height=4, units = "in", res = 300)
+neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot")
+dev.off()
+
+#################################
+###### Neutrality plot ##########
+#################################
+
+png("Ex_neutrality.png", width=4, height=4, units = "in", res = 300)
+neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot")
+dev.off()
+
 ######################
 ###### matrix ########
 ######################
