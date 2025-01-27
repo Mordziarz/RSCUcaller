@@ -1,4 +1,4 @@
-#' Creating a PCA get_matrix function
+#' Creating a PCA based on the output from get_matrix function
 #'
 #' @param get_matrix_out the table was created using the get_RSCU function
 #' @param grouping_table the table with Species and group column names

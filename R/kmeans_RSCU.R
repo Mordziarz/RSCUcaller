@@ -1,3 +1,11 @@
+#' Creating a k-means clustering based on the table with the get_matrix function
+#'
+#' @param get_matrix_out the table was created using the get_matrix function
+#'
+#' @return A plot object and table object.
+#' @export
+#'
+
 kmeans_RSCU <- function(get_matrix_out=get_matrix_out){
 
   if (base::missing(get_matrix_out)) {
