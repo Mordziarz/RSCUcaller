@@ -215,7 +215,7 @@ boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_ta
 # PCA
 
 ```r
-PCA_RSCU(get_matrix_out = matrix,grouping_table = grouping_table)
+PCA_RSCU(get_matrix_out = get_matrix_out,grouping_table = grouping_table)
 ```
 
 ![PCA](graphs/Ex_PCA.png)

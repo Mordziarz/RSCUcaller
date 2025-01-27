@@ -7,7 +7,7 @@ kmeans_RSCU <- function(get_matrix_out=get_matrix_out){
   
 sd_rscu <- base::apply(get_matrix_out, 2, sd)
 index <- base::which(sd_rscu != 0)
-matrix_0 <- dane[, index]
+matrix_0 <- get_matrix_out[, index]
 
 p <- factoextra::fviz_nbclust(matrix_0, kmeans, method = "silhouette") +
   ggplot2::labs(subtitle = "Silhouette method")
