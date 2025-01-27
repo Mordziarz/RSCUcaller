@@ -160,6 +160,8 @@ png("Ex_tree_k_m.png", width=6, height=6, units = "in", res = 300)
 object$tree
 dev.off()
 
+object$tree + geom_tiplab(fontface="italic") + xlim(NA,6)
+
 #############################################
 ################## Plastid ##################
 #############################################
