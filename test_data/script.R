@@ -137,6 +137,26 @@ png("Ex_PCA.png", width=5, height=5, units = "in", res = 300)
 RSCUcaller::PCA_RSCU(get_matrix_out = matrix,grouping_table = grouping_table)
 dev.off()
 
+###############################################
+########### k-means clustering ################
+###############################################
+
+object <- RSCUcaller::kmeans_RSCU(get_matrix_out = matrix)
+
+object$table
+
+png("Ex_clusters.png", width=6, height=6, units = "in", res = 300)
+object$number_of_clusters
+dev.off()
+
+png("Ex_clusters_plot.png", width=6, height=6, units = "in", res = 300)
+object$clusters
+dev.off()
+
+png("Ex_tree_k_m.png", width=6, height=6, units = "in", res = 300)
+object$tree
+dev.off()
+
 #############################################
 ################## Plastid ##################
 #############################################

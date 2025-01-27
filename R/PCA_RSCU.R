@@ -13,18 +13,18 @@ PCA_RSCU <- function(get_matrix_out=get_matrix_out,grouping_table=grouping_table
          call. = FALSE)
   }
   
-  pca <- prcomp(get_matrix_out, scale. = FALSE)
-  pca_data <- as.data.frame(pca$x)
-  pca_data$names <- rownames(get_matrix_out)
-  pca_data <- merge(pca_data,grouping_table,by.x="names",by.y="Species",all.x = T)
+  pca <- stats::prcomp(get_matrix_out, scale. = FALSE)
+  pca_data <- base::as.data.frame(pca$x)
+  pca_data$names <- base::rownames(get_matrix_out)
+  pca_data <- base::merge(pca_data,grouping_table,by.x="names",by.y="Species",all.x = T)
   
-  PCA_plot <- ggplot(pca_data, aes(x = PC1, y = PC2, label = names,color = group)) +
-    geom_point(size = 3) +
-    xlab(paste0("PC1 (", round(summary(pca)$importance[2,1]*100, 1), "%)")) +
-    ylab(paste0("PC2 (", round(summary(pca)$importance[2,2]*100, 1), "%)")) +
-    ggtitle("PCA") +
-    theme_bw()+
-    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+  PCA_plot <- ggplot2::ggplot(pca_data, aes(x = PC1, y = PC2, label = names,color = group)) +
+    ggplot2::geom_point(size = 3) +
+    ggplot2::xlab(base::paste0("PC1 (", base::round(base::summary(pca)$importance[2,1]*100, 1), "%)")) +
+    ggplot2::ylab(base::paste0("PC2 (", base::round(base::summary(pca)$importance[2,2]*100, 1), "%)")) +
+    ggplot2::ggtitle("PCA") +
+    ggplot2::theme_bw()+
+    ggplot2::theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
   
   return(PCA_plot)
   
