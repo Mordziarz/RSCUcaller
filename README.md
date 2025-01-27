@@ -30,7 +30,11 @@ library(ggtree)
 library(stats)
 library(stringr)
 ```
+# set.seed() for reproducible results
 
+```r
+set.seed(123)
+```
 
 # Input data 
 
