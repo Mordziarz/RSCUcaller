@@ -125,7 +125,7 @@ neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot")
 
 # RSCU matrix
 
-The get_matrix() function allows the user to create a matrix that the user can use in any way they like. The matrix will not be needed for the next steps. Simply use the result of the get_RSCU() function.
+The get_matrix() function allows the user to create a matrix that the user can use in any way they like. Simply use the result of the get_RSCU() function. The user will be able to use the matrices from this function, for example, in generating PCA.
 
 ```r
 get_matrix(get_RSCU_out = get_RSCU_out)
