@@ -31,8 +31,7 @@ clusters <- factoextra::fviz_cluster(kmeans_result,
                                      ggtheme = theme_bw()
 )
 
-matrix_0$cluster <- kmeans_result$cluster
-data_frame_cluster <- base::table(rownames(matrix_0), matrix_0$cluster)
+data_frame_cluster <- base::table(rownames(matrix_0), kmeans_result$cluster)
 distance_matrix <- stats::dist(matrix_0, method = "euclidean")
 hc <- stats::hclust(distance_matrix, method = "ward.D2")
 dend <- ape::as.phylo(hc)
