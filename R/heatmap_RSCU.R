@@ -86,7 +86,7 @@ heatmap_RSCU <- function(heatmap_color="",get_RSCU_out=get_RSCU_out,select=""){
 
 
     matrix_RSCU <- base::as.matrix(matrix_RSCU)
-    heatmap_rscu <- ComplexHeatmap::Heatmap(matrix_RSCU,name = "RSCU"),
+    heatmap_rscu <- ComplexHeatmap::Heatmap(matrix_RSCU,name = "RSCU",
                                             col = colors,
                                             column_dend_height = unit(3, "cm"),
                                             row_dend_width = unit(3, "cm"),
