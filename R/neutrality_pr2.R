@@ -7,7 +7,7 @@
 #' @export
 #'
 
-neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select=""){
+neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select="",grouping_table=grouping_table){
   
   if (base::missing(get_RSCU_out)) {
     stop("The get_RSCU_out predictions are required. Please provide a valid argument.",
