@@ -110,22 +110,6 @@ The main function of the package, get_RSCU(), can be used to calculate RSCU valu
 get_RSCU_out <- get_RSCU(merged_sequences = "your_fasta.fasta")
 ```
 
-# PR2 plot
-
-```r
-neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot")
-```
-
-![PR2_plot](graphs/Ex_PR2.png)
-
-# Neutrality plot
-
-```r
-neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot")
-```
-
-![neutrality_plot](graphs/Ex_neutrality.png)
-
 # RSCU matrix
 
 The get_matrix() function allows the user to create a matrix that the user can use in any way they like. Simply use the result of the get_RSCU() function. The user will be able to use the matrices from this function, for example, in generating PCA.
@@ -211,6 +195,23 @@ Ensure that the column names match the column names in the tutorial.
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300)
 ```
 ![Boxplots](graphs/agc.png)
+
+# PR2 plot
+
+```r
+neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot",grouping_table = grouping_table)
+```
+
+![PR2_plot](graphs/Ex_PR2.png)
+
+# Neutrality plot
+
+```r
+neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_table = grouping_table)
+```
+
+![neutrality_plot](graphs/Ex_neutrality.png)
+
 
 # PCA
 
