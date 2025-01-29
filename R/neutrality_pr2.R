@@ -79,8 +79,8 @@ neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select="",grouping_table=gr
   r_squared_label <- base::paste("R² =", base::round(r_squared, 3))
   
   neutrality_plot <- get_RSCU_out %>%
-     ggplot2::ggplot(aes(x = GC3, y = GC12,fill = group)) +
-     ggplot2::geom_point() + 
+     ggplot2::ggplot(aes(x = GC3, y = GC12)) +
+     ggplot2::geom_point(fill = group) + 
      ggplot2::geom_smooth(method = "lm", se = FALSE) +
      ggplot2::labs(x = "GC3", y = "GC12", title = base::paste0(r_squared_label,", ",equation)) +
      ggplot2::theme_bw() 
@@ -95,8 +95,8 @@ neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select="",grouping_table=gr
   r_squared_label <- base::paste("R² =", base::round(r_squared, 3))
   
   PR2_plot <- get_RSCU_out %>%
-    ggplot2::ggplot(aes(x = G3_GC3, y = A3_AT3, fill = group)) +
-    ggplot2::geom_point() + 
+    ggplot2::ggplot(aes(x = G3_GC3, y = A3_AT3)) +
+    ggplot2::geom_point(fill = group) + 
     ggplot2::geom_smooth(method = "lm", se = FALSE) + 
     ggplot2::labs(x = "G3/(G3+C3)", y = "A3/(A3+T3)", title = base::paste0(r_squared_label,", ",equation)) +
     ggplot2::theme_bw()
