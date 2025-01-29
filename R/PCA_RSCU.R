@@ -17,7 +17,7 @@ sd_rscu <- base::apply(get_matrix_out, 2, sd)
 index <- base::which(sd_rscu != 0)
 matrix_0 <- get_matrix_out[, index]
 
-  pca <- stats::prcomp(matrix_0, scale. = FALSE)
+  pca <- stats::prcomp(matrix_0, scale. = TRUE)
   pca_data <- base::as.data.frame(pca$x)
   pca_data$names <- base::rownames(matrix_0)
   pca_data <- base::merge(pca_data,grouping_table,by.x="names",by.y="Species",all.x = T)
