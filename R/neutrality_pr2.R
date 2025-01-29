@@ -2,7 +2,8 @@
 #'
 #' @param get_RSCU_out the table was created using the get_RSCU function
 #' @param select the "PR2_plot" or "neutrality_plot" output
-#'
+#' @param grouping_table the table with Species and group column names
+
 #' @return A plot object and table object.
 #' @export
 #'
