@@ -69,6 +69,8 @@ neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select=""){
       G3_GC3 = base::ifelse(sum3GC == 0, 0, sum_G3 / sum3GC)
       ) %>% dplyr::select(-c(sum3ATGC,sum1ATGC,sum2ATGC,sum3AT,sum3GC))
   
+   get_RSCU_out <- base::merge(get_RSCU_out,grouping_table,by="Species",all.x = T)
+
   if (select=="neutrality_plot"){
   
   model <- stats::lm(GC12 ~ GC3, data = get_RSCU_out)
