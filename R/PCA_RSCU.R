@@ -13,9 +13,13 @@ PCA_RSCU <- function(get_matrix_out=get_matrix_out,grouping_table=grouping_table
          call. = FALSE)
   }
   
-  pca <- stats::prcomp(get_matrix_out, scale. = FALSE)
+sd_rscu <- base::apply(get_matrix_out, 2, sd)
+index <- base::which(sd_rscu != 0)
+matrix_0 <- get_matrix_out[, index]
+
+  pca <- stats::prcomp(matrix_0, scale. = FALSE)
   pca_data <- base::as.data.frame(pca$x)
-  pca_data$names <- base::rownames(get_matrix_out)
+  pca_data$names <- base::rownames(matrix_0)
   pca_data <- base::merge(pca_data,grouping_table,by.x="names",by.y="Species",all.x = T)
   
   PCA_plot <- ggplot2::ggplot(pca_data, aes(x = PC1, y = PC2, label = names,color = group)) +
