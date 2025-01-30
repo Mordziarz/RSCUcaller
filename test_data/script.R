@@ -56,7 +56,7 @@ get_RSCU_out <- RSCUcaller::get_RSCU(merged_sequences = "prepered_fasta.fasta")
 #################################
 
 png("Ex_PR2.png", width=4, height=4, units = "in", res = 300)
-RSCUcaller::neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot")
+RSCUcaller::neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot",grouping_table = grouping_table)
 dev.off()
 
 #################################
@@ -64,7 +64,7 @@ dev.off()
 #################################
 
 png("Ex_neutrality.png", width=4, height=4, units = "in", res = 300)
-RSCUcaller::neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot")
+RSCUcaller::neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_table = grouping_table)
 dev.off()
 
 ######################
