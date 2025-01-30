@@ -106,8 +106,6 @@ heatmap_RSCU <- function(heatmap_color="",get_RSCU_out=get_RSCU_out,select=""){
   if (select=="dendogram") {
     matrix_RSCU <- base::as.matrix(matrix_RSCU)
     heatmap_rscu <- ComplexHeatmap::Heatmap(matrix_RSCU,name = "RSCU",
-                                            column_dend_height = unit(3, "cm"),
-                                            row_dend_width = unit(3, "cm"),
                                             cluster_rows = T,
                                             cluster_columns = T)
     heatmap_rscu <- ComplexHeatmap::draw(heatmap_rscu)
