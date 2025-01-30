@@ -51,22 +51,6 @@ RSCUcaller::prepare_fasta(samples_table = samples_table,path = "mitogenome_seque
 
 get_RSCU_out <- RSCUcaller::get_RSCU(merged_sequences = "prepered_fasta.fasta")
 
-#################################
-###### PR2 plot #################
-#################################
-
-png("Ex_PR2.png", width=4, height=4, units = "in", res = 300)
-RSCUcaller::neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot",grouping_table = grouping_table)
-dev.off()
-
-#################################
-###### Neutrality plot ##########
-#################################
-
-png("Ex_neutrality.png", width=4, height=4, units = "in", res = 300)
-RSCUcaller::neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_table = grouping_table)
-dev.off()
-
 ######################
 ###### matrix ########
 ######################
@@ -131,6 +115,22 @@ grouping_table <- read.csv2("grouping_table.csv",sep = ";") # read grouping tabl
 
 RSCUcaller::boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, 
                                    width = 6, height = 6, xlab = "Groups", res = 300) # calculate
+
+#################################
+###### PR2 plot #################
+#################################
+
+png("Ex_PR2.png", width=4, height=4, units = "in", res = 300)
+RSCUcaller::neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot",grouping_table = grouping_table)
+dev.off()
+
+#################################
+###### Neutrality plot ##########
+#################################
+
+png("Ex_neutrality.png", width=4, height=4, units = "in", res = 300)
+RSCUcaller::neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_table = grouping_table)
+dev.off()
 
 ################################
 ########### PCA ################

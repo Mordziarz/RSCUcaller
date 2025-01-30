@@ -99,7 +99,7 @@ heatmap_RSCU <- function(heatmap_color="",get_RSCU_out=get_RSCU_out,select=""){
     heatmap_row <- ComplexHeatmap::rowAnnotation(italic_text = ComplexHeatmap::anno_text(rownames(matrix_RSCU),
                                                                                          gp = grid::gpar(fontface="italic")))
     heatmap_rscu <- heatmap_rscu + heatmap_row
-    heatmap_rscu <- draw(heatmap_rscu)
+    heatmap_rscu <- ComplexHeatmap::draw(heatmap_rscu)
     base::message(base::paste0("Success"))
     return(heatmap_rscu)
 
@@ -116,7 +116,7 @@ heatmap_RSCU <- function(heatmap_color="",get_RSCU_out=get_RSCU_out,select=""){
                                             cluster_columns = T)
     heatmap_rscu <- draw(heatmap_rscu)
     p <- ComplexHeatmap::row_dend(heatmap_rscu)
-    p1 <- ggtree::ggtree(p)
+    p1 <- ComplexHeatmap::ggtree::ggtree(p)
     phylogram::write.dendrogram(p, file = "dendogram_from_heatmap.newick", append = FALSE, edges = TRUE)
     base::message(base::paste0("Success"))
     return(p1)
