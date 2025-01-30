@@ -25,6 +25,3 @@ Imports:
     ggtree (>= 3.12.0),
     stats (>= 4.4.1),
     stringr (>= 1.5.1),
-    ape (>= 5.8-1),
-    factoextra (>= 1.0.7.999),
-    cluster (>= 2.1.8),

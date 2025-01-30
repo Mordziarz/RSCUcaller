@@ -12,10 +12,6 @@ PCA_RSCU <- function(get_matrix_out=get_matrix_out,grouping_table=grouping_table
     stop("The get_matrix_out predictions are required. Please provide a valid argument.",
          call. = FALSE)
   }
-  
-sd_rscu <- base::apply(get_matrix_out, 2, sd)
-index <- base::which(sd_rscu != 0)
-matrix_0 <- get_matrix_out[, index]
 
   pca <- stats::prcomp(matrix_0, scale. = TRUE)
   pca_data <- base::as.data.frame(pca$x)
