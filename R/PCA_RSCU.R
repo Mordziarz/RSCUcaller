@@ -13,7 +13,7 @@ PCA_RSCU <- function(get_matrix_out=get_matrix_out,grouping_table=grouping_table
          call. = FALSE)
   }
 
-  pca <- stats::prcomp(matrix_0, scale. = TRUE)
+  pca <- stats::prcomp(matrix_0, scale. = FALSE)
   pca_data <- base::as.data.frame(pca$x)
   pca_data$names <- base::rownames(matrix_0)
   pca_data <- base::merge(pca_data,grouping_table,by.x="names",by.y="Species",all.x = T)
