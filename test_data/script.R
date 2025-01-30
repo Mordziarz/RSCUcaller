@@ -21,9 +21,6 @@ library(smplot2)
 library(ggtree)
 library(stats)
 library(stringr)
-library(cluster)
-library(factoextra)
-library(ape)
 
 set.seed(123) 
 
