@@ -230,43 +230,6 @@ stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
 ```
 ![Boxplots](graphs/Ala.png)
 
-# K-means clustering
-
-The user can perform clustering based on RSCU values using the k-means method. A phylogenetic tree will be saved as k_means.newick in the working directory.
-
-```r
-object <- kmeans_RSCU(get_matrix_out=get_matrix_out)
-```
-
-## Cluster table
-
-```r
-object$table
-```
-## Optimal number of clusters
-
-```r
-object$number_of_clusters
-```
-
-![clusters](graphs/Ex_clusters.png)
-
-## Cluster plot
-
-```r
-object$clusters
-```
-
-![Boxplots](graphs/Ex_clusters_plot.png)
-
-## Tree
-
-```r
-object$tree
-```
-
-![Boxplots](graphs/Ex_tree_k_m.png)
-
 # Citation
 
 Paper in preparation
