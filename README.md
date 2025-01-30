@@ -50,7 +50,7 @@ RSCUcaller requires DNA sequences from NCBI. To begin the analysis, the FASTA fi
 
 "sample_name" - This column defines the FASTA name, which will be displayed on visualizations and should start with a number followed by an underscore (e.g., 1_Riccia_fluitans).
 
-The "samples_table" should resemble the following. You can create this using a program other than R, such as a simple text editor and then use the write.csv2() function in R.
+The "samples_table" should resemble the following. You can create this using a program other than R, such as a simple text editor and then use the read.csv2() function in R.
 
 Ensure that the column names match the column names in the tutorial.
 
