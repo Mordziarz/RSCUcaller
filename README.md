@@ -209,7 +209,6 @@ neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_t
 
 ![neutrality_plot](graphs/Ex_neutrality.png)
 
-
 # PCA
 
 ```r
