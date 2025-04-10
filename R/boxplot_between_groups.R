@@ -32,6 +32,12 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
   if (base::file.exists("selected_species") & base::file.exists("selected_species_barplots")) {
     
     base::message(base::paste0("Calculating statistics and generating plots... "))
+
+    make_tukey_test <- function (data,variable,grouping_variable){
+  data %>% 
+    rstatix::tukey_hsd(reformulate(grouping_variable, variable)) %>%
+    rstatix::add_xy_position(x = grouping_variable)
+}
     
     levene_warning_codons <- base::character()
     normality_warning_codons <- base::character()
@@ -178,10 +184,4 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
   base::message(base::paste0("Done! Check selected_species & selected_species_barplots dir !!!"))
   write.csv2(statistical_table,"Post_hoc_table_selected_species.csv",row.names = F)
   return(statistical_table)
-}
-
-make_tukey_test <- function (data,variable,grouping_variable){
-  data %>% 
-    rstatix::tukey_hsd(reformulate(grouping_variable, variable)) %>%
-    rstatix::add_xy_position(x = grouping_variable)
 }
