@@ -245,6 +245,6 @@ https://doi.org/10.1038/s41598-023-35269-3
 - Please ensure that the sample names ("sample_name") and "GENBANK_ACCESSION" are unique. The program requires the names to be as detailed as possible. For example, if the user provides the names "1_A2" and "2_A2.1", the program will treat them as a single sample. However, in the case of names "1_A2.1" and "2_A2.2", the program will function correctly.
 - Nucleotides other than ATCG, such as U or IUPAC, will be skipped by the program and will skew the results.
 
-# Future challanges
+# Future challenges
 - Program reading of nucleotides other than ATCG
 - Ability to perform RSCU analysis on RNA by adding expression as an additional dimension
