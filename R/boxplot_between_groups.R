@@ -97,6 +97,8 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
              post_hoc_x_y <- rstatix::add_xy_position(post_hoc, x=post_hoc[2])
              
              post_hoc_x_y$test <- "Welch_ANOVA/Pairwise_t_test"
+
+             levene_warning_codons <- c(levene_warning_codons, codons[i])
         }
       } else {
         
