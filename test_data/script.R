@@ -102,7 +102,7 @@ dev.off()
 ### statistc between codons ###
 ################################
 
-RSCUcaller::stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
+RSCUcaller::stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300,p.adjust.method = "bonferroni")
 
 ################################
 ### statistc between groups ###
@@ -111,7 +111,7 @@ RSCUcaller::stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, re
 grouping_table <- read.csv2("grouping_table.csv",sep = ";") # read grouping table
 
 RSCUcaller::boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, 
-                                   width = 6, height = 6, xlab = "Groups", res = 300) # calculate
+                                   width = 6, height = 6, xlab = "Groups", res = 300,p.adjust.method = "bonferroni") # calculate
 
 #################################
 ###### PR2 plot #################
