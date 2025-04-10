@@ -162,7 +162,7 @@ correlation(get_RSCU_out = get_RSCU_out, Species_x = "Species_x", Species_y = "S
 
 # Statistics between groups of individual codons
 
-Statistical analysis of RSCU values at the codon level can be performed using the boxplot_between_groups() function. This function employs the Kruskal-Wallis test to assess significant differences in RSCU values among groups, followed by Dunn's post-hoc test for pairwise comparisons.
+Statistical analysis of RSCU values at the codon level can be performed using the boxplot_between_groups() function. This function utilizes the Kruskal-Wallis test, Welch ANOVA, and ANOVA to assess significant differences in RSCU values between groups, and subsequently the Dunn's post-hoc test, Pairwise t-test, and TukeyHSD for pairwise comparisons.
 
 To utilize this function, a table named grouping_table needs to be prepared with the following two columns:
 
@@ -219,7 +219,7 @@ PCA_RSCU(get_matrix_out = get_matrix_out,grouping_table = grouping_table)
 
 # Statistics between amino acids
 
-Statistical analysis and visualizations can be generated for your data using the stat_scat_box() function. This function employs the Kruskal-Wallis test to assess significant differences among groups, followed by Dunn's post-hoc test for pairwise comparisons. A table named Post_hoc_table_aminoacids.csv and three folders, boxplots, barplots and scatter_plots, will also be created in your working directory.
+Statistical analysis and visualizations can be generated for your data using the stat_scat_box() function. This function utilizes the Kruskal-Wallis test, Welch ANOVA, and ANOVA to assess significant differences in RSCU values between groups, and subsequently the Dunn's post-hoc test, Pairwise t-test, and TukeyHSD for pairwise comparisons. A table named Post_hoc_table_aminoacids.csv and three folders, boxplots, barplots and scatter_plots, will also be created in your working directory.
 
 ```r
 stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300)
