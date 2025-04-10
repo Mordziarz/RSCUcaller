@@ -246,5 +246,5 @@ https://doi.org/10.1038/s41598-023-35269-3
 - Nucleotides other than ATCG, such as U or IUPAC, will be skipped by the program and will skew the results.
 
 # Future Challenges
-- Program reading of codons other than ATCG
+- Program reading of nucleotides other than ATCG
 - Ability to perform RSCU analysis on RNA by adding expression as an additional dimension
