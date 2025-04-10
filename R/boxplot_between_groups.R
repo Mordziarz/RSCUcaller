@@ -6,35 +6,40 @@
 #' @param width width of charts
 #' @param height height of charts
 #' @param res resolution of charts
+#' @param p.adjust.method the selection of a p-value correction method: "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr"
 #'
 #' @return A plot and csv objects.
 #' @export
 #'
 
 boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,res,p.adjust.method = "bonferroni") {
-
+  
   if (base::missing(get_RSCU_out)) {
     stop("The get_RSCU_out predictions are required. Please provide a valid argument.",
          call. = FALSE)
   }
-
+  
   if (base::all(colnames(grouping_table)!=c("Species","group"))) {
     stop("Check the colnames of the grouping_table",
          call. = FALSE)
   }
-
+  
   if (!base::file.exists("selected_species") & !base::file.exists("selected_species_barplots")){
     base::dir.create("selected_species")
     base::dir.create("selected_species_barplots")
   }
-
+  
   if (base::file.exists("selected_species") & base::file.exists("selected_species_barplots")) {
-
+    
     base::message(base::paste0("Calculating statistics and generating plots... "))
+    
+    levene_warning_codons <- base::character()
+    normality_warning_codons <- base::character()
+    
     codons <- c("aaa", "aac", "aag", "aat", "aca", "acc", "acg", "act", "aga", "agc", "agg", "agt", "ata", "atc", "att", "caa", "cac", "cag", "cat", "cca", "ccc", "ccg", "cct",
                 "cga", "cgc", "cgg", "cgt", "cta", "ctc", "ctg", "ctt", "gaa", "gac", "gag", "gat", "gca", "gcc", "gcg", "gct", "gga", "ggc", "ggg", "ggt", "gta", "gtc", "gtg", "gtt",
                 "taa", "tac", "tag", "tat", "tca", "tcc", "tcg", "tct", "tga", "tgc", "tgt", "tta", "ttc", "ttg", "ttt")
-    statistical_table <- base::data.frame(row.names = 1, .y. = NA, group1 = NA, group2 = NA, n1 = NA, n2 = NA, statistic = NA, p=NA, p.adj=NA, p.adj.signif=NA)
+    statistical_table <- base::data.frame(row.names = 1, group1 = NA, group2 = NA, p.adj=NA, p.adj.signif=NA,test=NA)
     get_RSCU_out <- merge(get_RSCU_out,grouping_table,by="Species")
     get_RSCU_out$index2 <- paste0(get_RSCU_out$group,"_",get_RSCU_out$codon)
     get_RSCU_out <- get_RSCU_out[order(get_RSCU_out$group),]
@@ -42,12 +47,77 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
     for (i in 1:base::length(codons)) {
       table_1 <- get_RSCU_out[get_RSCU_out$codon %in% codons[i],]
       table_1 <- table_1[,c("RSCU", "index2","group")]
-      stat <- stats::kruskal.test(RSCU ~ index2 , data = table_1)
-      post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ index2, data = table_1, p.adjust.method = p.adjust.method))
-      statistical_table <- base::rbind(statistical_table,post_hoc)
+      
+      test_used <- "Kruskal-Wallis"
+      stat_p <- NA
+      post_hoc <- NULL
+
+      shapiro_test <- try(stats::shapiro.test(table_1$RSCU), silent = TRUE)
+      
+      if (!inherits(shapiro_test, "try-error") && shapiro_test$p.value >= 0.05) {
+        
+        levene_test <- rstatix::levene_test(RSCU ~ as.factor(index2), data = table_1)
+        
+        levene_p <- levene_test$p
+        
+        if (!is.na(levene_p) && levene_p >= 0.05) {
+          
+          aov_result <- stats::aov(RSCU ~ index2, data = table_1)
+          
+          stat_p <- base::summary(aov_result)[[1]]$`Pr(>F)`[1]
+          
+          test_used <- "ANOVA"
+          
+          post_hoc <- base::as.data.frame(make_tukey_test(data=table_1, variable = "RSCU ",grouping_variable = "index2"))
+          
+          post_hoc <- dplyr::arrange(.data = post_hoc, p.adj)
+          
+          post_hoc$test <- "ANOVA/TukeyHSD"
+          
+          post_hoc_x_y <- post_hoc
+          
+           } else {
+          
+             welch_result <- stats::oneway.test(RSCU ~ index2, data = table_1, var.equal = FALSE)
+          
+             stat_p <- welch_result$p.value
+          
+             test_used <- "Welch ANOVA"
+        
+             post_hoc <- as.data.frame(rstatix::pairwise_t_test(RSCU ~ index2, data = table_1, p.adjust.method = p.adjust.method))
+             
+             post_hoc <- dplyr::arrange(.data = post_hoc, p.adj)
+             
+             post_hoc_x_y <- rstatix::add_xy_position(post_hoc, x=post_hoc[2])
+             
+             post_hoc_x_y$test <- "Welch_ANOVA/Pairwise_t_test"
+        }
+      } else {
+        
+        normality_warning_codons <- c(normality_warning_codons, codons[i])
+      }
+      
+      if (test_used == "Kruskal-Wallis") {
+      
+        stat <- stats::kruskal.test(RSCU ~ index2 , data = table_1)
+      
+        stat_p <- stat$p.value
+      
+        post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ index2, data = table_1, p.adjust.method = p.adjust.method))
+        
+        post_hoc <- dplyr::arrange(.data = post_hoc, p.adj)
+        
+        post_hoc_x_y <- rstatix::add_xy_position(post_hoc, x=post_hoc[2])
+        
+        post_hoc_x_y$test <- "Kruskal-Wallis/Dunn"
+      
+        }
+
+      post_hoc_stats <- post_hoc_x_y[,c("group1","group2","p.adj","p.adj.signif","test")]
+      statistical_table <- base::rbind(statistical_table,post_hoc_stats)
       statistical_table <- statistical_table[!base::is.na(statistical_table$group1),]
-      post_hoc <- dplyr::arrange(.data = post_hoc, p.adj)
-      post_hoc_x_y <- rstatix::add_xy_position(post_hoc, x=post_hoc[2])
+      post_hoc_x_y <- post_hoc_x_y[,c("group1","group2","p.adj","p.adj.signif","y.position","groups","xmin","xmax","test")]
+      plot_title <- paste0(codons[i], ", ", test_used, ", p=", format(stat_p, digits = 3))
       png(paste0("selected_species/",codons[i],".png"), width=width, height=height, units = "in", res=res)
       p <- ggpubr::ggboxplot(table_1,
                              x="group",
@@ -62,7 +132,7 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
         ggplot2::geom_jitter(aes(color = group), width = 0.2, height = 0) +
         ggplot2::theme(legend.position = "none") +
         ggplot2::scale_x_discrete() +
-        ggplot2::ggtitle(base::paste0(codons[i],", Kruskal-Wallis, p=",stat$p.value))
+        ggplot2::ggtitle(base::paste0(plot_title))
       base::print(p)
       dev.off()
       table_1 <- table_1 %>% dplyr::group_by(group) %>% dplyr::summarize(`RSCU` = mean(RSCU))
@@ -82,16 +152,36 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
         ggpubr::stat_pvalue_manual(post_hoc_x_y,label = "p.adj.signif", hide.ns = TRUE) + 
         ggplot2::theme(legend.position = "none") + 
         ggplot2::scale_x_discrete() + 
-        ggplot2::ggtitle(base::paste0(codons[i],", Kruskal-Wallis, p=", stat$p.value)) + ggplot2::ylab("mean(RSCU)")
+        ggplot2::ggtitle(base::paste0(plot_title)) + 
+                           ggplot2::ylab("mean(RSCU)")
       base::print(p)
       dev.off()
+    }
+    if (length(levene_warning_codons) > 0) {
+      message("\n⚠️ Significant variance heterogeneity detected in:\n",
+              paste(levene_warning_codons, collapse = ", "), 
+              "\nUsed Welch ANOVA for these cases.")
+    }
+    
+    if (length(normality_warning_codons) > 0) {
+      message("\n⚠️ Non-normal distributions detected in:\n",
+              paste(normality_warning_codons, collapse = ", "), 
+              "\nUsed Kruskal-Wallis test for these cases.")
     }
   }
   else (
     stop("Try to make directory selected_species & selected_species_barplots manually and run function again",
          call. = FALSE)
   )
+  
+  
   base::message(base::paste0("Done! Check selected_species & selected_species_barplots dir !!!"))
   write.csv2(statistical_table,"Post_hoc_table_selected_species.csv",row.names = F)
   return(statistical_table)
+}
+
+make_tukey_test <- function (data,variable,grouping_variable){
+  data %>% 
+    rstatix::tukey_hsd(reformulate(grouping_variable, variable)) %>%
+    rstatix::add_xy_position(x = grouping_variable)
 }
