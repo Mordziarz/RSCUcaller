@@ -11,7 +11,7 @@
 #' @export
 #'
 
-boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,res) {
+boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,res,p.adjust.method = "bonferroni") {
 
   if (base::missing(get_RSCU_out)) {
     stop("The get_RSCU_out predictions are required. Please provide a valid argument.",
@@ -43,7 +43,7 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
       table_1 <- get_RSCU_out[get_RSCU_out$codon %in% codons[i],]
       table_1 <- table_1[,c("RSCU", "index2","group")]
       stat <- stats::kruskal.test(RSCU ~ index2 , data = table_1)
-      post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ index2, data = table_1, p.adjust.method = "bonferroni"))
+      post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ index2, data = table_1, p.adjust.method = p.adjust.method))
       statistical_table <- base::rbind(statistical_table,post_hoc)
       statistical_table <- statistical_table[!base::is.na(statistical_table$group1),]
       post_hoc <- dplyr::arrange(.data = post_hoc, p.adj)

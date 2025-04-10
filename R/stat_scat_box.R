@@ -9,7 +9,7 @@
 #' @export
 #'
 
-stat_scat_box <-function(get_RSCU_out,width,height,res) {
+stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonferroni") {
 
   if (base::missing(get_RSCU_out)) {
     stop("The get_RSCU_out predictions are required. Please provide a valid argument.",
@@ -33,7 +33,7 @@ stat_scat_box <-function(get_RSCU_out,width,height,res) {
       table_1 <- table_1[,c("RSCU", "codon")]
       stat <- stats::kruskal.test(RSCU ~ codon , data = table_1)
       cat("The differences between codons in the amino acid",aminoacids[i],"had a pvalue of:",stat$p.value,"\n")
-      post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ codon, data = table_1, p.adjust.method = "bonferroni"))
+      post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ codon, data = table_1, p.adjust.method = p.adjust.method))
       statistical_table <- base::rbind(statistical_table,post_hoc)
       statistical_table <- statistical_table[!base::is.na(statistical_table$group1),]
       post_hoc <- dplyr::arrange(.data = post_hoc, p.adj)
