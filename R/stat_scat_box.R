@@ -4,40 +4,107 @@
 #' @param width width of charts
 #' @param height height of charts
 #' @param res resolution of charts
+#' @param p.adjust.method the selection of a p-value correction method: "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr"
 #'
 #' @return A table with statistics, boxplots, barplots and scatter plots.
 #' @export
 #'
 
 stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonferroni") {
-
+  
   if (base::missing(get_RSCU_out)) {
     stop("The get_RSCU_out predictions are required. Please provide a valid argument.",
          call. = FALSE)
   }
-
+  
   if (!base::file.exists("scatter_plots") & !base::file.exists("boxplots") & !base::file.exists("barplots")){
     base::dir.create("scatter_plots")
     base::dir.create("boxplots")
     base::dir.create("barplots")
   }
-
+  
   if (base::file.exists("scatter_plots") & base::file.exists("boxplots") & base::file.exists("barplots")) {
-
+    
+    make_tukey_test <- function (data,variable,grouping_variable){
+      data %>% 
+        rstatix::tukey_hsd(reformulate(grouping_variable, variable)) %>%
+        rstatix::add_xy_position(x = grouping_variable)
+    }
+    
     base::message(base::paste0("Calculating statistics and generating plots... "))
     aminoacids <- c("Ala","Arg","Asn","Asp","Cys","Gln","Glu","Gly","His","Ile","Leu","Lys","Phe","Pro","Ser","Stp","Thr","Tyr","Val")
-    statistical_table <- base::data.frame(row.names = 1, .y. = NA, group1 = NA, group2 = NA, n1 = NA, n2 = NA, statistic = NA, p = NA, p.adj = NA, p.adj.signif = NA)
-
+    statistical_table <- base::data.frame(row.names = 1, group1 = NA, group2 = NA, p.adj=NA, p.adj.signif=NA,test=NA)
+    
     for (i in 1:base::length(aminoacids)) {
       table_1 <- get_RSCU_out[get_RSCU_out$AA %in% aminoacids[i],]
       table_1 <- table_1[,c("RSCU", "codon")]
-      stat <- stats::kruskal.test(RSCU ~ codon , data = table_1)
+
+      test_used <- "Kruskal-Wallis"
+      stat_p <- NA
+      post_hoc <- NULL
+      shapiro_test <- try(stats::shapiro.test(table_1$RSCU), 
+                          silent = TRUE)
+      if (!inherits(shapiro_test, "try-error") && shapiro_test$p.value >= 
+          0.05) {
+        levene_test <- rstatix::levene_test(RSCU ~ as.factor(codon), 
+                                            data = table_1)
+        levene_p <- levene_test$p
+        if (!is.na(levene_p) && levene_p >= 0.05) {
+          aov_result <- stats::aov(RSCU ~ codon, data = table_1)
+          stat_p <- base::summary(aov_result)[[1]]$`Pr(>F)`[1]
+          test_used <- "ANOVA"
+          post_hoc <- base::as.data.frame(make_tukey_test(data = table_1, 
+                                                          variable = "RSCU ", grouping_variable = "codon"))
+          post_hoc <- dplyr::arrange(.data = post_hoc, 
+                                     p.adj)
+          post_hoc$test <- "ANOVA/TukeyHSD"
+          post_hoc_x_y <- post_hoc
+        }
+        else {
+          welch_result <- stats::oneway.test(RSCU ~ 
+                                               codon, data = table_1, var.equal = FALSE)
+          stat_p <- welch_result$p.value
+          test_used <- "Welch ANOVA"
+          post_hoc <- as.data.frame(rstatix::pairwise_t_test(RSCU ~ 
+                                                               codon, data = table_1, p.adjust.method = p.adjust.method))
+          post_hoc <- dplyr::arrange(.data = post_hoc, 
+                                     p.adj)
+          post_hoc_x_y <- rstatix::add_xy_position(post_hoc, 
+                                                   x = post_hoc[2])
+          post_hoc_x_y$test <- "Welch_ANOVA/Pairwise_t_test"
+          levene_warning_codons <- c(levene_warning_codons, 
+                                     codons[i])
+        }
+      }
+      else {
+        normality_warning_codons <- c(normality_warning_codons, 
+                                      codons[i])
+      }
+      if (test_used == "Kruskal-Wallis") {
+        stat <- stats::kruskal.test(RSCU ~ codon, data = table_1)
+        stat_p <- stat$p.value
+        post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ 
+                                                             codon, data = table_1, p.adjust.method = p.adjust.method))
+        post_hoc <- dplyr::arrange(.data = post_hoc, 
+                                   p.adj)
+        post_hoc_x_y <- rstatix::add_xy_position(post_hoc, 
+                                                 x = post_hoc[2])
+        post_hoc_x_y$test <- "Kruskal-Wallis/Dunn"
+      }
+      post_hoc_stats <- post_hoc_x_y[, c("group1", "group2", 
+                                         "p.adj", "p.adj.signif", "test")]
+      statistical_table <- base::rbind(statistical_table, 
+                                       post_hoc_stats)
+      statistical_table <- statistical_table[!base::is.na(statistical_table$group1), 
+      ]
+      post_hoc_x_y <- post_hoc_x_y[, c("group1", "group2", 
+                                       "p.adj", "p.adj.signif", "y.position", "groups", 
+                                       "xmin", "xmax", "test")]
+      plot_title <- paste0(codons[i], ", ", test_used, 
+                           ", p=", format(stat_p, digits = 3))
+      
       cat("The differences between codons in the amino acid",aminoacids[i],"had a pvalue of:",stat$p.value,"\n")
-      post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ codon, data = table_1, p.adjust.method = p.adjust.method))
-      statistical_table <- base::rbind(statistical_table,post_hoc)
-      statistical_table <- statistical_table[!base::is.na(statistical_table$group1),]
-      post_hoc <- dplyr::arrange(.data = post_hoc, p.adj)
-      post_hoc_x_y <- rstatix::add_xy_position(post_hoc, x=post_hoc[2])
+      
       png(paste0("scatter_plots/",aminoacids[i],".png"), width=width, height=height, units = "in", res=res)
       p <- ggpubr::ggscatter(table_1,
                              x="codon",
@@ -48,7 +115,7 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
         ggplot2::theme(legend.position = "none") +
         ggplot2::geom_jitter(aes(color = codon), width = 0.2, height = 0) +
         ggplot2::scale_x_discrete() +
-        ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=",stat$p.value))
+        ggplot2::ggtitle(base::paste0(plot_title))
       base::print(p)
       dev.off()
       png(paste0("boxplots/",aminoacids[i],".png"), width=width, height=height, units = "in", res = res)
@@ -62,7 +129,7 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
         ggplot2::geom_jitter(aes(color = codon), width = 0.2, height = 0) +
         ggplot2::theme(legend.position = "none") +
         ggplot2::scale_x_discrete() +
-        ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=",stat$p.value))
+        ggplot2::ggtitle(base::paste0(plot_title))
       base::print(p)
       dev.off()
       table_1 <- table_1 %>% dplyr::group_by(codon) %>% dplyr::summarize(`RSCU` = mean(RSCU))
@@ -76,9 +143,20 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
         ggpubr::stat_pvalue_manual(post_hoc_x_y,label = "p.adj.signif", hide.ns = TRUE) + 
         ggplot2::theme(legend.position = "none") + 
         ggplot2::scale_x_discrete() + 
-        ggplot2::ggtitle(base::paste0(aminoacids[i],", Kruskal-Wallis, p=", stat$p.value)) + ggplot2::ylab("mean(RSCU)")
+        ggplot2::ggtitle(base::paste0(plot_title)) + ggplot2::ylab("mean(RSCU)")
       base::print(p)
       dev.off()
+    }
+    if (length(levene_warning_codons) > 0) {
+      message("\n⚠️ Significant variance heterogeneity detected in:\n",
+              paste(levene_warning_codons, collapse = ", "), 
+              "\nUsed Welch ANOVA for these cases.")
+    }
+    
+    if (length(normality_warning_codons) > 0) {
+      message("\n⚠️ Non-normal distributions detected in:\n",
+              paste(normality_warning_codons, collapse = ", "), 
+              "\nUsed Kruskal-Wallis test for these cases.")
     }
   }
   else (
