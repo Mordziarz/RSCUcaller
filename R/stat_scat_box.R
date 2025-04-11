@@ -36,6 +36,8 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
     }
     
     base::message(base::paste0("Calculating statistics and generating plots... "))
+    levene_warning_codons <- base::character()
+    normality_warning_codons <- base::character()
     aminoacids <- c("Ala","Arg","Asn","Asp","Cys","Gln","Glu","Gly","His","Ile","Leu","Lys","Phe","Pro","Ser","Stp","Thr","Tyr","Val")
     statistical_table <- base::data.frame(row.names = 1, group1 = NA, group2 = NA, p.adj=NA, p.adj.signif=NA,test=NA)
     
