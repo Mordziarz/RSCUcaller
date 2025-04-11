@@ -14,7 +14,7 @@ library(RSCUcaller)
 ```
 
 Install RSCUcaller from Bioconductor:
-```{r eval=FALSE}
+```r
 if (!requireNamespace("BiocManager", quietly=TRUE))
     install.packages("BiocManager")
 BiocManager::install("RSCUcaller")
