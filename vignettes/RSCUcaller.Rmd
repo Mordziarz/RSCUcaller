@@ -23,6 +23,13 @@ library(devtools)
 devtools::install_github('Mordziarz/RSCUcaller')
 library(RSCUcaller)
 ```
+Install RSCUcaller from Bioconductor:
+```{r eval=FALSE}
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("RSCUcaller")
+```
+
 To use all features of the program, you will need several libraries.
 
 ```r
