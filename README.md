@@ -141,7 +141,7 @@ The program implements a function that performs RSCU analysis for alternative ge
 | 25             | Candidate Division SR1 and Gracilibacteria                                                |
 | 26             | Pachysolen tannophilus Nuclear                                                            |
 
-Użytkownik może sprawdzić jakie kodony kodują jaki aminokwas w danym codon_table_id używając funkcji get_codon_table()
+The user can check which codons encode a specific amino acid in a given codon_table_id by using the get_codon_table() function.
 
 ```r
 get_codon_table(codon_table_id = 1)
