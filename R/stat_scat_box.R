@@ -79,12 +79,12 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
                                                    x = post_hoc[2])
           post_hoc_x_y$test <- "Welch_ANOVA/Pairwise_t_test"
           levene_warning_codons <- c(levene_warning_codons, 
-                                     codons[i])
+                                     aminoacids[i])
         }
       }
       else {
         normality_warning_codons <- c(normality_warning_codons, 
-                                      codons[i])
+                                      aminoacids[i])
       }
       if (test_used == "Kruskal-Wallis") {
         stat <- stats::kruskal.test(RSCU ~ codon, data = table_1)
@@ -106,7 +106,7 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
       post_hoc_x_y <- post_hoc_x_y[, c("group1", "group2", 
                                        "p.adj", "p.adj.signif", "y.position", "groups", 
                                        "xmin", "xmax", "test")]
-      plot_title <- paste0(codons[i], ", ", test_used, 
+      plot_title <- paste0(aminoacids[i], ", ", test_used, 
                            ", p=", format(stat_p, digits = 3))
       
       cat("The differences between codons in the amino acid",aminoacids[i],"had a pvalue of:",stat$p.value,"\n")
