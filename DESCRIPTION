@@ -2,14 +2,18 @@ Package: RSCUcaller
 Type: Package
 Title: Program in R for calculating RSCU.
 Version: 0.1.0
-Author: Mateusz Maździarz (Mordziarz)
-Maintainer: <mateusz.mazdziarz@uwm.edu.pl>
-Description: RSCU (relative synonymous codon usage) values of multiple DNA sequences can be analyzed using the RSCUcaller package. The package offers functions to retrieve RSCU information, plot the values, and calculate statistical significance.
+Authors@R: 
+    c(person(given = "Mateusz",
+             family = "Maździarz",
+             role = c("cre", "aut"),
+             email = "mateusz.mazdziarz@uwm.edu.pl"))
+Description: The RSCUcaller package offers a comprehensive toolkit for analyzing relative synonymous codon usage (RSCU) values across multiple DNA sequences. Specifically, this package allows users to retrieve RSCU information by efficiently extracting and organizing RSCU data from input DNA sequences, providing a structured format for further analysis. For visualizing RSCU values, the package offers plotting functions to generate graphical representations of RSCU values, enabling researchers to visually identify patterns and trends in codon usage. For calculating statistical significance, RSCUcaller includes statistical methods to determine the significance of observed codon usage biases, facilitating rigorous data interpretation.
 License: GNU GENERAL PUBLIC LICENSE
 Encoding: UTF-8
-LazyData: true
+LazyData: false
+biocViews: Software, Genetics, Sequencing, Codon, CodonUsage, RSCU
 Depends: 
-    R (>= 3.5)
+    R (>= 3.5.0)
 Imports:
     ggplot2 (>= 3.5.1),
     dplyr (>= 1.1.4),
@@ -24,4 +28,8 @@ Imports:
     smplot2 (>= 0.2.4),
     ggtree (>= 3.12.0),
     stats (>= 4.4.1),
-    stringr (>= 1.5.1),
+    stringr (>= 1.5.1)
+VignetteBuilder: knitr
+Suggests: knitr, rmarkdown
+URL: https://github.com/Mordziarz/RSCUcaller
+BugReports: https://github.com/Mordziarz/RSCUcaller/issues
