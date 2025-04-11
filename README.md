@@ -114,6 +114,34 @@ The main function of the package, get_RSCU(), can be used to calculate RSCU valu
 get_RSCU_out <- get_RSCU(merged_sequences = "your_fasta.fasta")
 ```
 
+# Other genetic codes
+
+The program implements a function that performs RSCU analysis for alternative genetic codes by modifying the encoding of certain amino acids. A table is available containing codon identifiers (codon_table_id) that are required to use the get_RSCU_other() function.
+
+| codon_table_id | Genetic Code Description                                                                 |
+|----------------|-------------------------------------------------------------------------------------------|
+| 1              | Standard                                                                                  |
+| 2              | Vertebrate Mitochondrial                                                                  |
+| 3              | Yeast Mitochondrial                                                                       |
+| 4              | Mold Mitochondrial; Protozoan Mitochondrial; Coelenterate Mitochondrial; Mycoplasma; Spiroplasma |
+| 5              | Invertebrate Mitochondrial                                                                |
+| 6              | Ciliate Nuclear; Dasycladacean Nuclear; Hexamita Nuclear                                  |
+| 9              | Echinoderm Mitochondrial; Flatworm Mitochondrial                                          |
+| 10             | Euplotid Nuclear                                                                          |
+| 11             | Bacterial, Archaeal and Plant Plastid                                                     |
+| 12             | Alternative Yeast Nuclear                                                                 |
+| 13             | Ascidian Mitochondrial                                                                    |
+| 14             | Alternative Flatworm Mitochondrial                                                        |
+| 15             | Blepharisma Macronuclear                                                                  |
+| 16             | Chlorophycean Mitochondrial                                                               |
+| 21             | Trematode Mitochondrial                                                                   |
+| 22             | Scenedesmus obliquus Mitochondrial                                                        |
+| 23             | Thraustochytrium Mitochondrial                                                            |
+| 24             | Pterobranchia Mitochondrial                                                               |
+| 25             | Candidate Division SR1 and Gracilibacteria                                                |
+| 26             | Pachysolen tannophilus Nuclear                                                            |
+
+
 # RSCU matrix
 
 The get_matrix() function allows the user to create a matrix that the user can use in any way they like. Simply use the result of the get_RSCU() function. The user will be able to use the matrices from this function, for example, in generating PCA.
