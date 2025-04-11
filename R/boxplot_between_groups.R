@@ -23,6 +23,10 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
     stop("Check the colnames of the grouping_table",
          call. = FALSE)
   }
+
+  if (!(p.adjust.method %in% c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr"))) {
+    stop('Invalid p.adjust.method  argument. Please choose from "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr" valid options.')
+  }
   
   if (!base::file.exists("selected_species") & !base::file.exists("selected_species_barplots")){
     base::dir.create("selected_species")

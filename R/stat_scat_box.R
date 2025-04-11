@@ -23,6 +23,10 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
     base::dir.create("barplots")
   }
   
+  if (!(p.adjust.method %in% c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr"))) {
+    stop('Invalid p.adjust.method  argument. Please choose from "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr" valid options.')
+  }
+
   if (base::file.exists("scatter_plots") & base::file.exists("boxplots") & base::file.exists("barplots")) {
     
     make_tukey_test <- function (data,variable,grouping_variable){
