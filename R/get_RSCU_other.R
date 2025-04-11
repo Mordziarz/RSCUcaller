@@ -27,7 +27,7 @@ get_RSCU_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,
   
   for (i in 1:nrow(data_sequence)) {
     
-    rscu_data <- RSCUcaller::calculate_rscu(data_sequence[i,], codon_table_id = codon_table_id, pseudo_count = pseudo_count)
+    rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequence[i], codon_table_id = codon_table_id, pseudo_count = pseudo_count)
     rscu_data$Col <- 1
     rscu_data$index <- base::paste(rscu_data$AA, t[i])
     rscu_data$Species <- t[i]
