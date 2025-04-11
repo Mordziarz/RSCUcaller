@@ -23,13 +23,13 @@ library(devtools)
 devtools::install_github('Mordziarz/RSCUcaller')
 library(RSCUcaller)
 ```
+
 Install RSCUcaller from Bioconductor:
 ```r
 if (!requireNamespace("BiocManager", quietly=TRUE))
     install.packages("BiocManager")
 BiocManager::install("RSCUcaller")
 ```
-
 To use all features of the program, you will need several libraries.
 
 ```r
@@ -141,14 +141,14 @@ A heatmap and a dendrogram can be drawn using the heatmap_RSCU() function. The h
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "heatmap", heatmap_color = "red_blue")
 ```
 
-![Heatmap](file="https://github.com/Mordziarz/RSCUcaller/blob/main/graphs/Ex_heatmap.png")
+![Heatmap](graphs/Ex_heatmap.png)
 
 A dendrogram can be obtained by providing the output of the get_RSCU() function and specifying "dendrogram" in the select argument. The result can be further edited using packages like ggtree. The dendrogram will also be saved as a file in your working directory named dendrogram_from_heatmap.newick by the system.
 
 ```r
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "dendogram")
 ```
-![Dendogram](file="https://github.com/Mordziarz/RSCUcaller/blob/main/graphs/Ex_tree.png")
+![Dendogram](graphs/Ex_tree.png)
 
 # Histograms
 
@@ -158,7 +158,7 @@ Histograms can be created from the output of the get_RSCU() function using our p
 histogram_RSCU(get_RSCU_out = get_RSCU_out, title = "graph title")
 ```
 
-![Histogram](file="https://github.com/Mordziarz/RSCUcaller/blob/main/graphs/Ex_histogram.png")
+![Histogram](graphs/Ex_histogram.png)
 
 Double histograms are plotted using the histogram_RSCU_double() function. This function requires two input parameters: get_RSCU_out_left and get_RSCU_out_right. Additionally, two optional title parameters, title_left and title_right, can be provided.
 
@@ -166,7 +166,7 @@ Double histograms are plotted using the histogram_RSCU_double() function. This f
 histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get_RSCU_out, title_left = "left title", title_right = "right title")
 ```
 
-![Histogram double](file="https://github.com/Mordziarz/RSCUcaller/blob/main/graphs/Ex_double_histogram.png")
+![Histogram double](graphs/Ex_double_histogram.png)
 
 # Correlation
 
@@ -176,7 +176,7 @@ Pearson correlation between two species can be performed using the RSCUcaller pa
 correlation(get_RSCU_out = get_RSCU_out, Species_x = "Species_x", Species_y = "Species_y", xlab = "title of x lab", ylab = "title of y lab")
 ```
 
-![Correlation](file="https://github.com/Mordziarz/RSCUcaller/blob/main/graphs/Ex_correlation.png")
+![Correlation](graphs/Ex_correlation.png)
 
 # Statistics between groups of individual codons
 
@@ -209,7 +209,7 @@ Ensure that the column names match the column names in the tutorial.
 ```r
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300,p.adjust.method = "bonferroni")
 ```
-![Boxplots](file="https://github.com/Mordziarz/RSCUcaller/blob/main/graphs/aaa.png")
+![Boxplots](graphs/aaa.png)
 
 # PR2 plot
 
@@ -217,7 +217,7 @@ boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_ta
 neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot",grouping_table = grouping_table)
 ```
 
-![PR2_plot](file="https://github.com/Mordziarz/RSCUcaller/blob/main/graphs/Ex_PR2.png")
+![PR2_plot](graphs/Ex_PR2.png)
 
 # Neutrality plot
 
@@ -225,7 +225,7 @@ neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot",grouping_table = 
 neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_table = grouping_table)
 ```
 
-![neutrality_plot](file="https://github.com/Mordziarz/RSCUcaller/blob/main/graphs/Ex_neutrality.png")
+![neutrality_plot](graphs/Ex_neutrality.png)
 
 # PCA
 
@@ -233,7 +233,7 @@ neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_t
 PCA_RSCU(get_matrix_out = get_matrix_out,grouping_table = grouping_table)
 ```
 
-![PCA](file="https://github.com/Mordziarz/RSCUcaller/blob/main/graphs/Ex_PCA.png")
+![PCA](graphs/Ex_PCA.png)
 
 # Statistics between amino acids
 
@@ -242,14 +242,14 @@ Statistical analysis and visualizations can be generated for your data using the
 ```r
 stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300,p.adjust.method = "bonferroni")
 ```
-![Boxplots](file="https://github.com/Mordziarz/RSCUcaller/blob/main/graphs/Ala.png")
+![Boxplots](graphs/Ala.png)
 
 # Citation
 
 Paper in preparation
 
 # Support
-Any issues connected with the RSCUcaller should be addressed to Mateusz Mazdziarz (mazdziarzm@gmail.com).
+Any issues connected with the RSCUcaller should be addressed to Mateusz Mazdziarz (mateusz.mazdziarz@uwm.edu.pl).
 
 # Usage in scientific papers
 
