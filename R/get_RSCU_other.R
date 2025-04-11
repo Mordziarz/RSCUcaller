@@ -1,4 +1,4 @@
-get_RSC_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,pseudo_count=1){
+get_RSCU_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,pseudo_count=1){
   
   if (base::missing(merged_sequences)) {
     stop("The merged_sequences predictions are required. Please provide a valid argument.",
