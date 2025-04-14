@@ -21,23 +21,25 @@ get_RSCU_other2 <- function(merged_sequences="your_fasta.fasta",pseudo_count=1,s
          call. = FALSE)
   }
   
+  samples_table$codon_table_id <- base::as.numeric(samples_table$codon_table_id)
+
   if (base::is.list(merged_sequences)){
     
     merged_seq <- merged_sequences
     
     data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
     
-    if ("sample_name" %in% colnames(samples_table)) {
-      data_sequence <- merge(data_sequence, samples_table, by.x = "names", by.y = "sample_name")
-    } else if ("ID" %in% colnames(samples_table)) {
-      data_sequence <- merge(data_sequence, samples_table, by.x = "names", by.y = "ID")
+    if ("sample_name" %in% base::colnames(samples_table)) {
+      data_sequence <- base::merge(data_sequence, samples_table, by.x = "names", by.y = "sample_name")
+    } else if ("ID" %in% base::colnames(samples_table)) {
+      data_sequence <- base::merge(data_sequence, samples_table, by.x = "names", by.y = "ID")
     } else {
       stop("Column 'sample_name' or 'ID' not found in samples_table.")
     }
     
     Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
     
-    for (i in 1:nrow(data_sequence)) {
+    for (i in 1:base::nrow(data_sequence)) {
       
       rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequences[i], codon_table_id = data_sequence$codon_table_id, pseudo_count = pseudo_count)
       rscu_data$Col <- 1
@@ -116,7 +118,7 @@ get_RSCU_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,
     
     Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
     
-    for (i in 1:nrow(data_sequence)) {
+    for (i in 1:base::nrow(data_sequence)) {
       
       rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequences[i], codon_table_id = codon_table_id, pseudo_count = pseudo_count)
       rscu_data$Col <- 1
@@ -149,7 +151,7 @@ get_RSCU_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,
 
   Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
   
-  for (i in 1:nrow(data_sequence)) {
+  for (i in 1:base::nrow(data_sequence)) {
     
     rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequences[i], codon_table_id = codon_table_id, pseudo_count = pseudo_count)
     rscu_data$Col <- 1
@@ -186,23 +188,23 @@ seq_to_data_frame <- function(merged_sequences = "your_fasta.fasta"){
   
   merged_seq <- seqinr::read.fasta(merged_sequences,seqtype ="DNA" ,as.string = T)
   
-  for (i in seq_along(merged_seq)) {
-    attr(merged_seq[[i]], "name") <- names(merged_seq[i])
-    attr(merged_seq[[i]], "seq") <- merged_seq[[i]][1]
+  for (i in base::seq_along(merged_seq)) {
+    base::attr(merged_seq[[i]], "name") <- base::names(merged_seq[i])
+    base::attr(merged_seq[[i]], "seq") <- merged_seq[[i]][1]
   }
   
-  attr(merged_seq, "name") <- lapply(merged_seq, function(x) attr(x, "name", exact = FALSE))
-  attr(merged_seq, "seq") <- lapply(merged_seq, function(x) attr(x, "seq", exact = FALSE))
+  base::attr(merged_seq, "name") <- base::lapply(merged_seq, function(x) base::attr(x, "name", exact = FALSE))
+  base::attr(merged_seq, "seq") <- base::lapply(merged_seq, function(x) base::attr(x, "seq", exact = FALSE))
   
-  merged_seq <-as.data.frame(merged_seq)
-  merged_seq <- t(merged_seq)
-  merged_seq <- as.data.frame(merged_seq)
+  merged_seq <- base::as.data.frame(merged_seq)
+  merged_seq <- base::t(merged_seq)
+  merged_seq <- base::as.data.frame(merged_seq)
   merged_seq <- merged_seq %>% dplyr::filter(V1 != "none")
-  merged_seq$names <- rownames(merged_seq)
+  merged_seq$names <- base::rownames(merged_seq)
   merged_seq$sequences <- merged_seq$V1
   merged_seq <- merged_seq[,c("names","sequences")]
-  merged_seq$names <- gsub("^X", "", merged_seq$names)
-  rownames(merged_seq) <- 1:nrow(merged_seq)
+  merged_seq$names <- base::gsub("^X", "", merged_seq$names)
+  base::rownames(merged_seq) <- 1:base::nrow(merged_seq)
   
   return(merged_seq)
 }
@@ -225,9 +227,9 @@ calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 
   }
   
   nucleotide_string <- nucleotide_input
-  nucleotide_string <- tolower(nucleotide_string)
-  nucleotide_string <- tolower(gsub("[^acgt]", "", nucleotide_string))
-  if (nchar(nucleotide_string) == 0) stop("The sequence does not contain valid nucleotides.")
+  nucleotide_string <- base::tolower(nucleotide_string)
+  nucleotide_string <- base::tolower(gsub("[^acgt]", "", nucleotide_string))
+  if (base::nchar(nucleotide_string) == 0) stop("The sequence does not contain valid nucleotides.")
   
   seq_chars <- seqinr::s2c(nucleotide_string)
   codon_counts <- seqinr::uco(seq_chars, frame = 0)
@@ -235,24 +237,24 @@ calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 
   codon_table <- get_codon_table(codon_table_id)
   genetic_code <- codon_table$genetic_code
   
-  rscu_values <- setNames(rep(NA, length(codon_counts)), names(codon_counts))
+  rscu_values <- stats::setNames(base::rep(NA, base::length(codon_counts)), base::names(codon_counts))
   
-  for (aa in unique(genetic_code)) {
+  for (aa in base::unique(genetic_code)) {
     
-    aa_codons <- names(genetic_code)[genetic_code == aa]
-    n_i <- length(aa_codons)
+    aa_codons <- base::names(genetic_code)[genetic_code == aa]
+    n_i <- base::length(aa_codons)
     
-    aa_counts <- sapply(aa_codons, function(codon) {
-      ifelse(codon %in% names(codon_counts), codon_counts[codon], 0)
+    aa_counts <- base::sapply(aa_codons, function(codon) {
+      ifelse(codon %in% base::names(codon_counts), codon_counts[codon], 0)
     })
-    total <- sum(aa_counts) + pseudo_count * n_i
+    total <- base::sum(aa_counts) + pseudo_count * n_i
     rscu_values[aa_codons] <- (n_i * (aa_counts + pseudo_count)) / total
   }
   
-  result_df <- data.frame(
-    AA = genetic_code[names(codon_counts)],
-    codon = names(codon_counts),
-    eff = as.vector(codon_counts),
+  result_df <- base::data.frame(
+    AA = genetic_code[base::names(codon_counts)],
+    codon = base::names(codon_counts),
+    eff = base::as.vector(codon_counts),
     RSCU = rscu_values,
     stringsAsFactors = FALSE
   )
