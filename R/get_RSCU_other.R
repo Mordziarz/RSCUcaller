@@ -104,11 +104,6 @@ calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 
   nucleotide_string <- tolower(gsub("[^acgt]", "", nucleotide_string))
   if (nchar(nucleotide_string) == 0) stop("The sequence does not contain valid nucleotides.")
   
-  if (nchar(nucleotide_string) %% 3 != 0) {
-    warning("The sequence length is not divisible by 3. Truncating...")
-    nucleotide_string <- substr(nucleotide_string, 1, floor(nchar(nucleotide_string)/3)*3)
-  }
-  
   seq_chars <- seqinr::s2c(nucleotide_string)
   codon_counts <- seqinr::uco(seq_chars, frame = 0)
   
