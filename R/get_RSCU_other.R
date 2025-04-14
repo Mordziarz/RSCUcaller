@@ -146,14 +146,16 @@ get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1
     
   }
       if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
-       
+        
+        merged_seq_t <- seqinr::read.fasta(merged_sequences,seqtype ="DNA" ,as.string = T)
+
+         t <- base::gsub("^\\d+_", "",names(merged_seq_t))
+  
   base::message(base::paste0("Loading data from ", merged_sequences))
 
   merged_seq <- merged_sequences
-  
-  data_sequence <- RSCUcaller::seq_to_data_frame(merged_seq)
 
-     t <- base::gsub("^\\d+_", "",data_sequence$names)
+  data_sequence <- RSCUcaller::seq_to_data_frame(merged_seq)
 
   Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
   
