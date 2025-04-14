@@ -9,7 +9,7 @@
 #' @return A data frame with columns: codon, amino acid, eff, RSCU.
 #' 
 
-get_RSCU_other2 <- function(merged_sequences="",pseudo_count=1,samples_table=samples_table){
+get_RSCU_other2 <- function(merged_sequences,pseudo_count=1,samples_table=samples_table){
   
   if (base::missing(merged_sequences)) {
     stop("The merged_sequences predictions are required. Please provide a valid argument.",
@@ -109,7 +109,7 @@ get_RSCU_other2 <- function(merged_sequences="",pseudo_count=1,samples_table=sam
 #'
 #' @return A data frame with columns: codon, amino acid, eff, RSCU.
 #' 
-get_RSCU_other <- function(merged_sequences="",codon_table_id=1,pseudo_count=1){
+get_RSCU_other <- function(merged_sequences,codon_table_id=1,pseudo_count=1){
   
   if (base::missing(merged_sequences)) {
     stop("The merged_sequences predictions are required. Please provide a valid argument.",
