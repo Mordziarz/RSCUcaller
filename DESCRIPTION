@@ -11,7 +11,7 @@ Description: The RSCUcaller package offers a comprehensive toolkit for analyzing
 License: GNU GENERAL PUBLIC LICENSE
 Encoding: UTF-8
 LazyData: false
-biocViews: Software, Genetics, Sequencing, Codon, CodonUsage, RSCU
+biocViews: Software, BiologicalQuestion, GenomicVariation
 Depends: 
     R (>= 3.5.0)
 Imports:
