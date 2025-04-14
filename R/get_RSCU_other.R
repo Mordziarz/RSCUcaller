@@ -271,7 +271,7 @@ calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 
   nucleotide_string <- base::tolower(gsub("[^acgt]", "", nucleotide_string))
   if (base::nchar(nucleotide_string) == 0) stop("The sequence does not contain valid nucleotides.")
 
-for (i in base::length(merged_seq)) {
+for (i in 1:base::length(merged_seq)) {
   
   if (nchar(merged_seq[i]) %% 3 != 0) {
        base::message(base::paste0("Sequence ", i, "does not have an appropriate number of nucleotides. Not divisible by 3."))
