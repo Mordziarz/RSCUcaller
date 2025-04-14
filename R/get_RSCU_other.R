@@ -1,3 +1,98 @@
+#' Calculating Relative Synonymous Codon Usage (RSCU) based on table
+#'
+#' This function calculates RSCU values for codons in a given nucleotide sequence.
+#'
+#' @param nucleotide_string A path to sequences.
+#' @param samples_table table with sequence descriptions and codon_table_id - an integer specifying the codon table (1-6,9-16,21-26).
+#' @param pseudo_count A value added to codon counts to avoid division by zero.
+#'
+#' @return A data frame with columns: codon, amino acid, eff, RSCU.
+#' 
+
+get_RSCU_other2 <- function(merged_sequences="your_fasta.fasta",pseudo_count=1,samples_table=samples_table){
+  
+  if (base::missing(merged_sequences)) {
+    stop("The merged_sequences predictions are required. Please provide a valid argument.",
+         call. = FALSE)
+  }
+  
+  if (base::missing(samples_table)) {
+    stop("The samples_table predictions are required. Please provide a valid argument.",
+         call. = FALSE)
+  }
+  
+  if (base::is.list(merged_sequences)){
+    
+    merged_seq <- merged_sequences
+    
+    data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
+    
+    Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
+    
+    for (i in 1:nrow(data_sequence)) {
+      
+      rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequences[i], codon_table_id = codon_table_id, pseudo_count = pseudo_count)
+      rscu_data$Col <- 1
+      rscu_data$index <- base::paste(rscu_data$AA, t[i])
+      rscu_data$Species <- t[i]
+      Rscu_all <- base::rbind(Rscu_all,rscu_data)
+    }
+    
+    Rscu_all <- Rscu_all %>% dplyr::filter(AA != "NA") %>%
+      dplyr::group_by(index) %>%
+      dplyr::mutate(Col= stats::lag(base::cumsum(Col), default = 0)) %>%
+      dplyr::mutate(Col=base::as.factor(Col))
+    
+    base::message(base::paste0("Success"))
+    return(Rscu_all)
+    
+    t <- base::gsub("^\\d+_", "",names(merged_seq))
+  }
+  else {
+    if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
+      
+      merged_seq <- seqinr::read.fasta(file = "prepered_fasta.fasta" ,set.attributes = T, seqtype = "DNA",as.string = F)
+      
+      t <- base::gsub("^\\d+_", "",names(merged_seq))
+    }}
+  
+  base::message(base::paste0("Loading data from ", merged_sequences))
+  
+  data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
+  
+  Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
+  
+  for (i in 1:nrow(data_sequence)) {
+    
+    rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequences[i], codon_table_id = codon_table_id, pseudo_count = pseudo_count)
+    rscu_data$Col <- 1
+    rscu_data$index <- base::paste(rscu_data$AA, t[i])
+    rscu_data$Species <- t[i]
+    Rscu_all <- base::rbind(Rscu_all,rscu_data)
+  }
+  
+  Rscu_all <- Rscu_all %>% dplyr::filter(AA != "NA") %>%
+    dplyr::group_by(index) %>%
+    dplyr::mutate(Col= stats::lag(base::cumsum(Col), default = 0)) %>%
+    dplyr::mutate(Col=base::as.factor(Col))
+  
+  base::message(base::paste0("Success"))
+  return(Rscu_all)
+  
+}
+
+
+
+#' Calculating Relative Synonymous Codon Usage (RSCU)
+#'
+#' This function calculates RSCU values for codons in a given nucleotide sequence.
+#'
+#' @param nucleotide_string A path to sequences.
+#' @param codon_table_id An integer specifying the codon table (1-6,9-16,21-26).
+#' @param pseudo_count A value added to codon counts to avoid division by zero.
+#'
+#' @return A data frame with columns: codon, amino acid, eff, RSCU.
+#' 
 get_RSCU_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,pseudo_count=1){
   
   if (base::missing(merged_sequences)) {
@@ -8,6 +103,27 @@ get_RSCU_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,
   if (base::is.list(merged_sequences)){
     
     merged_seq <- merged_sequences
+    
+    data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
+    
+    Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
+    
+    for (i in 1:nrow(data_sequence)) {
+      
+      rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequences[i], codon_table_id = codon_table_id, pseudo_count = pseudo_count)
+      rscu_data$Col <- 1
+      rscu_data$index <- base::paste(rscu_data$AA, t[i])
+      rscu_data$Species <- t[i]
+      Rscu_all <- base::rbind(Rscu_all,rscu_data)
+    }
+    
+    Rscu_all <- Rscu_all %>% dplyr::filter(AA != "NA") %>%
+      dplyr::group_by(index) %>%
+      dplyr::mutate(Col= stats::lag(base::cumsum(Col), default = 0)) %>%
+      dplyr::mutate(Col=base::as.factor(Col))
+    
+    base::message(base::paste0("Success"))
+    return(Rscu_all)
     
     t <- base::gsub("^\\d+_", "",names(merged_seq))
   }
@@ -77,8 +193,9 @@ seq_to_data_frame <- function(merged_sequences = "your_fasta.fasta"){
   merged_seq$names <- rownames(merged_seq)
   merged_seq$sequences <- merged_seq$V1
   merged_seq <- merged_seq[,c("names","sequences")]
+  merged_seq$names <- gsub("^X", "", merged_seq$names)
+  ronwames(merged_seq) <- 1:nrow(merged_seq)
   
-  base::message(base::paste0("Success"))
   return(merged_seq)
 }
 
@@ -90,7 +207,7 @@ seq_to_data_frame <- function(merged_sequences = "your_fasta.fasta"){
 #' @param codon_table_id An integer specifying the codon table (1-6,9-16,21-26).
 #' @param pseudo_count A value added to codon counts to avoid division by zero.
 #'
-#' @return A data frame with columns: codon, amino acid, count, RSCU.
+#' @return A data frame with columns: codon, amino acid, eff, RSCU.
 
 calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 1) {
   
