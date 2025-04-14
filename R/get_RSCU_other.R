@@ -27,11 +27,19 @@ get_RSCU_other2 <- function(merged_sequences="your_fasta.fasta",pseudo_count=1,s
     
     data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
     
+    if ("sample_name" %in% colnames(samples_table)) {
+      data_sequence <- merge(data_sequence, samples_table, by.x = "names", by.y = "sample_name")
+    } else if ("ID" %in% colnames(samples_table)) {
+      data_sequence <- merge(data_sequence, samples_table, by.x = "names", by.y = "ID")
+    } else {
+      stop("Column 'sample_name' or 'ID' not found in samples_table.")
+    }
+    
     Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
     
     for (i in 1:nrow(data_sequence)) {
       
-      rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequences[i], codon_table_id = codon_table_id, pseudo_count = pseudo_count)
+      rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequences[i], codon_table_id = data_sequence$codon_table_id, pseudo_count = pseudo_count)
       rscu_data$Col <- 1
       rscu_data$index <- base::paste(rscu_data$AA, t[i])
       rscu_data$Species <- t[i]
@@ -64,7 +72,7 @@ get_RSCU_other2 <- function(merged_sequences="your_fasta.fasta",pseudo_count=1,s
   
   for (i in 1:nrow(data_sequence)) {
     
-    rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequences[i], codon_table_id = codon_table_id, pseudo_count = pseudo_count)
+    rscu_data <- RSCUcaller::calculate_rscu(data_sequence$sequences[i], codon_table_id = data_sequence$codon_table_id, pseudo_count = pseudo_count)
     rscu_data$Col <- 1
     rscu_data$index <- base::paste(rscu_data$AA, t[i])
     rscu_data$Species <- t[i]
