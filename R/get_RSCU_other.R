@@ -119,8 +119,10 @@ get_RSCU_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,
   if (base::is.list(merged_sequences)){
     
     merged_seq <- merged_sequences
+
+    t <- base::gsub("^\\d+_", "",names(merged_seq))
     
-    data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
+    data_sequence <- RSCUcaller::seq_to_data_frame(merged_seq)
     
     Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
     
@@ -141,7 +143,6 @@ get_RSCU_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,
     base::message(base::paste0("Success"))
     return(Rscu_all)
     
-    t <- base::gsub("^\\d+_", "",names(merged_seq))
   }
     else {
       if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
@@ -152,8 +153,10 @@ get_RSCU_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,
       }}
   
   base::message(base::paste0("Loading data from ", merged_sequences))
+
+  merged_seq <- merged_sequences
   
-  data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
+  data_sequence <- RSCUcaller::seq_to_data_frame(merged_seq)
 
   Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
   
@@ -236,11 +239,19 @@ calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 
   nucleotide_string <- base::tolower(nucleotide_string)
   nucleotide_string <- base::tolower(gsub("[^acgt]", "", nucleotide_string))
   if (base::nchar(nucleotide_string) == 0) stop("The sequence does not contain valid nucleotides.")
+
+for (i in base::length(merged_seq)) {
+  
+  if (nchar(merged_seq[i]) %% 3 != 0) {
+       base::message(base::paste0("Sequence ", i, "does not have an appropriate number of nucleotides. Not divisible by 3."))
+    
+  }
+}
   
   seq_chars <- seqinr::s2c(nucleotide_string)
   codon_counts <- seqinr::uco(seq_chars, frame = 0)
   
-  codon_table <- get_codon_table(codon_table_id)
+  codon_table <- RSCUcaller::get_codon_table(codon_table_id)
   genetic_code <- codon_table$genetic_code
   
   rscu_values <- stats::setNames(base::rep(NA, base::length(codon_counts)), base::names(codon_counts))
