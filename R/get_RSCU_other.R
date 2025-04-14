@@ -26,6 +26,8 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
   if (base::is.list(merged_sequences)){
     
     merged_seq <- merged_sequences
+
+        t <- base::gsub("^\\d+_", "",names(merged_seq))
     
     data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
     
@@ -55,8 +57,7 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
     
     base::message(base::paste0("Success"))
     return(Rscu_all)
-    
-    t <- base::gsub("^\\d+_", "",names(merged_seq))
+
   }
   else {
     if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
@@ -93,10 +94,10 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
     dplyr::group_by(index) %>%
     dplyr::mutate(Col= stats::lag(base::cumsum(Col), default = 0)) %>%
     dplyr::mutate(Col=base::as.factor(Col))
-  }
 
   base::message(base::paste0("Success"))
   return(Rscu_all)
+  }
 }
 
 #' Calculating Relative Synonymous Codon Usage (RSCU)
@@ -173,10 +174,10 @@ get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1
     dplyr::group_by(index) %>%
     dplyr::mutate(Col= stats::lag(base::cumsum(Col), default = 0)) %>%
     dplyr::mutate(Col=base::as.factor(Col))
-    }
-    
+
   base::message(base::paste0("Success"))
   return(Rscu_all)
+    }
 }
 
 
