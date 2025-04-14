@@ -69,6 +69,14 @@ get_RSCU_other2 <- function(merged_sequences="your_fasta.fasta",pseudo_count=1,s
   base::message(base::paste0("Loading data from ", merged_sequences))
   
   data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
+
+      if ("sample_name" %in% base::colnames(samples_table)) {
+      data_sequence <- base::merge(data_sequence, samples_table, by.x = "names", by.y = "sample_name")
+    } else if ("ID" %in% base::colnames(samples_table)) {
+      data_sequence <- base::merge(data_sequence, samples_table, by.x = "names", by.y = "ID")
+    } else {
+      stop("Column 'sample_name' or 'ID' not found in samples_table.")
+    }
   
   Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
   
@@ -90,8 +98,6 @@ get_RSCU_other2 <- function(merged_sequences="your_fasta.fasta",pseudo_count=1,s
   return(Rscu_all)
   
 }
-
-
 
 #' Calculating Relative Synonymous Codon Usage (RSCU)
 #'
