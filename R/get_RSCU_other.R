@@ -358,6 +358,9 @@ get_codon_table <- function(codon_table_id) {
   else if (codon_table_id == 26) {  # Pachysolen tannophilus Nuclear
     genetic_code["ctg"] <- "Ala"
   }
+    else if (codon_table_id == 1) {  # Standard
+    genetic_code <- genetic_code
+  }
   
   return(list(genetic_code = genetic_code))
 }
