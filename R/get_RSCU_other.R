@@ -194,7 +194,7 @@ seq_to_data_frame <- function(merged_sequences = "your_fasta.fasta"){
   merged_seq$sequences <- merged_seq$V1
   merged_seq <- merged_seq[,c("names","sequences")]
   merged_seq$names <- gsub("^X", "", merged_seq$names)
-  ronwames(merged_seq) <- 1:nrow(merged_seq)
+  rownames(merged_seq) <- 1:nrow(merged_seq)
   
   return(merged_seq)
 }
