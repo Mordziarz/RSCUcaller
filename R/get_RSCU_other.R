@@ -24,20 +24,20 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
   samples_table$codon_table_id <- base::as.numeric(samples_table$codon_table_id)
 
   if (base::is.list(merged_sequences)){
-    
-    merged_seq <- merged_sequences
 
-        t <- base::gsub("^\\d+_", "",names(merged_seq))
-    
-    data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
-    
-    if ("sample_name" %in% base::colnames(samples_table)) {
+        if ("sample_name" %in% base::colnames(samples_table)) {
       data_sequence <- base::merge(data_sequence, samples_table, by.x = "names", by.y = "sample_name")
     } else if ("ID" %in% base::colnames(samples_table)) {
       data_sequence <- base::merge(data_sequence, samples_table, by.x = "names", by.y = "ID")
     } else {
       stop("Column 'sample_name' or 'ID' not found in samples_table.")
     }
+    
+    merged_seq <- merged_sequences
+
+        t <- base::gsub("^\\d+_", "",names(merged_seq))
+    
+    data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
     
     Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
     
@@ -59,25 +59,21 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
     return(Rscu_all)
 
   }
-  else {
     if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
-      
-      merged_seq <- seqinr::read.fasta(file = "prepered_fasta.fasta" ,set.attributes = T, seqtype = "DNA",as.string = F)
-      
-      t <- base::gsub("^\\d+_", "",names(merged_seq))
-    }
-  
-  base::message(base::paste0("Loading data from ", merged_sequences))
-  
-  data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
 
-      if ("sample_name" %in% base::colnames(samples_table)) {
+            if ("sample_name" %in% base::colnames(samples_table)) {
       data_sequence <- base::merge(data_sequence, samples_table, by.x = "names", by.y = "sample_name")
     } else if ("ID" %in% base::colnames(samples_table)) {
       data_sequence <- base::merge(data_sequence, samples_table, by.x = "names", by.y = "ID")
     } else {
       stop("Column 'sample_name' or 'ID' not found in samples_table.")
     }
+    
+  base::message(base::paste0("Loading data from ", merged_sequences))
+  
+  data_sequence <- RSCUcaller::seq_to_data_frame(merged_sequences)
+
+           t <- base::gsub("^\\d+_", "",data_sequence$names)
   
   Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
   
@@ -146,16 +142,14 @@ get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1
     
   }
       if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
-        
-        merged_seq_t <- seqinr::read.fasta(merged_sequences,seqtype ="DNA" ,as.string = T)
-
-         t <- base::gsub("^\\d+_", "",names(merged_seq_t))
   
   base::message(base::paste0("Loading data from ", merged_sequences))
 
   merged_seq <- merged_sequences
 
   data_sequence <- RSCUcaller::seq_to_data_frame(merged_seq)
+
+  t <- base::gsub("^\\d+_", "",data_sequence$names)
 
   Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
   
