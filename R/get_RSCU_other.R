@@ -14,7 +14,7 @@ get_RSCU_other <- function(merged_sequences="your_fasta.fasta",codon_table_id=1,
     else {
       if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
         
-        merged_seq <- seqinr::read.fasta(file = merged_sequences ,set.attributes = T, seqtype = "DNA",as.string = F)
+        merged_seq <- seqinr::read.fasta(file = "prepered_fasta.fasta" ,set.attributes = T, seqtype = "DNA",as.string = F)
        
          t <- base::gsub("^\\d+_", "",names(merged_seq))
       }}
@@ -94,18 +94,12 @@ seq_to_data_frame <- function(merged_sequences = "your_fasta.fasta"){
 
 calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 1) {
   
-  if (is.list(nucleotide_input)) {
-    return(lapply(nucleotide_input, calculate_rscu, 
-                  codon_table_id = codon_table_id, 
-                  pseudo_count = pseudo_count))
+  if (base::missing(nucleotide_input)) {
+    stop("The nucleotide_input predictions are required. Please provide a valid argument.", 
+         call. = FALSE)
   }
   
-  if (is.vector(nucleotide_input) && !is.character(nucleotide_input)) {
-    nucleotide_string <- paste(nucleotide_input, collapse = "")
-  } else {
-    nucleotide_string <- nucleotide_input
-  }
-  
+  nucleotide_string <- nucleotide_input
   nucleotide_string <- tolower(nucleotide_string)
   nucleotide_string <- tolower(gsub("[^acgt]", "", nucleotide_string))
   if (nchar(nucleotide_string) == 0) stop("The sequence does not contain valid nucleotides.")
