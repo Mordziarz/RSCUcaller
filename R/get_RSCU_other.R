@@ -9,7 +9,7 @@
 #' @return A data frame with columns: codon, amino acid, eff, RSCU.
 #' 
 
-get_RSCU_other2 <- function(merged_sequences,pseudo_count=1,samples_table=samples_table){
+get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=samples_table){
   
   if (base::missing(merged_sequences)) {
     stop("The merged_sequences predictions are required. Please provide a valid argument.",
@@ -109,7 +109,7 @@ get_RSCU_other2 <- function(merged_sequences,pseudo_count=1,samples_table=sample
 #'
 #' @return A data frame with columns: codon, amino acid, eff, RSCU.
 #' 
-get_RSCU_other <- function(merged_sequences,codon_table_id=1,pseudo_count=1){
+get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1){
   
   if (base::missing(merged_sequences)) {
     stop("The merged_sequences predictions are required. Please provide a valid argument.",
@@ -188,18 +188,42 @@ get_RSCU_other <- function(merged_sequences,codon_table_id=1,pseudo_count=1){
 #'
 #' @return A data frame with columns: names, sequence
 #' 
-seq_to_data_frame <- function(merged_sequences = "your_fasta.fasta"){
+seq_to_data_frame <- function(merged_sequences = ""){
   
   if (base::missing(merged_sequences)) {
     stop("The merged_sequences predictions are required. Please provide a valid argument.", 
          call. = FALSE)
   }
   
+   if (base::is.list(merged_sequences)){
+
+  merged_seq <- merged_sequences
+
+  for (i in base::seq_along(merged_seq)) {
+    base::attr(merged_seq[[i]], "name") <- base::names(merged_seq[i])
+    base::attr(merged_seq[[i]], "seq") <- merged_seq[[i]][1]
+  }
+  
+  base::attr(merged_seq, "name") <- base::lapply(merged_seq, function(x) base::attr(x, "name", exact = FALSE))
+  base::attr(merged_seq, "seq") <- base::lapply(merged_seq, function(x) base::attr(x, "seq", exact = FALSE))
+  
+  merged_seq <- base::as.data.frame(merged_seq)
+  merged_seq <- base::t(merged_seq)
+  merged_seq <- base::as.data.frame(merged_seq)
+  merged_seq <- merged_seq %>% dplyr::filter(V1 != "none")
+  merged_seq$names <- base::rownames(merged_seq)
+  merged_seq$sequences <- merged_seq$V1
+  merged_seq <- merged_seq[,c("names","sequences")]
+  merged_seq$names <- base::gsub("^X", "", merged_seq$names)
+  base::rownames(merged_seq) <- 1:base::nrow(merged_seq)
+
+  return(merged_seq)
+}
+
+
   if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
         
           merged_seq <- seqinr::read.fasta(merged_sequences,seqtype ="DNA" ,as.string = T)
-
-      }
 
   
   for (i in base::seq_along(merged_seq)) {
@@ -221,6 +245,7 @@ seq_to_data_frame <- function(merged_sequences = "your_fasta.fasta"){
   base::rownames(merged_seq) <- 1:base::nrow(merged_seq)
   
   return(merged_seq)
+  }
 }
 
 #' Calculating Relative Synonymous Codon Usage (RSCU)
