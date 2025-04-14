@@ -125,6 +125,79 @@ The main function of the package, get_RSCU(), can be used to calculate RSCU valu
 get_RSCU_out <- get_RSCU(merged_sequences = "your_fasta.fasta")
 ```
 
+# Other genetic codes
+
+The program implements a function that performs RSCU analysis for alternative genetic codes by modifying the encoding of certain amino acids. A table is available containing codon identifiers (codon_table_id) that are required to use the get_RSCU_other() function.
+
+| codon_table_id | Genetic Code Description                                                                 |
+|----------------|-------------------------------------------------------------------------------------------|
+| 1              | Standard                                                                                  |
+| 2              | Vertebrate Mitochondrial                                                                  |
+| 3              | Yeast Mitochondrial                                                                       |
+| 4              | Mold Mitochondrial; Protozoan Mitochondrial; Coelenterate Mitochondrial; Mycoplasma; Spiroplasma |
+| 5              | Invertebrate Mitochondrial                                                                |
+| 6              | Ciliate Nuclear; Dasycladacean Nuclear; Hexamita Nuclear                                  |
+| 9              | Echinoderm Mitochondrial; Flatworm Mitochondrial                                          |
+| 10             | Euplotid Nuclear                                                                          |
+| 11             | Bacterial, Archaeal and Plant Plastid                                                     |
+| 12             | Alternative Yeast Nuclear                                                                 |
+| 13             | Ascidian Mitochondrial                                                                    |
+| 14             | Alternative Flatworm Mitochondrial                                                        |
+| 15             | Blepharisma Macronuclear                                                                  |
+| 16             | Chlorophycean Mitochondrial                                                               |
+| 21             | Trematode Mitochondrial                                                                   |
+| 22             | Scenedesmus obliquus Mitochondrial                                                        |
+| 23             | Thraustochytrium Mitochondrial                                                            |
+| 24             | Pterobranchia Mitochondrial                                                               |
+| 25             | Candidate Division SR1 and Gracilibacteria                                                |
+| 26             | Pachysolen tannophilus Nuclear                                                            |
+
+The user can check which codons encode a specific amino acid in a given codon_table_id by using the get_codon_table() function.
+
+```r
+get_codon_table(codon_table_id = 1)
+```
+
+Two functions have been created to facilitate codon analysis with other genetic codes.
+
+If you are only analyzing Vertebrate mitochondrial genomes, you can simply use the get_RSCU_other function.
+
+```r
+get_RSCU_other(merged_sequences = "prepered_fasta.fasta",codon_table_id = 2,pseudo_count = 0)
+```
+
+However, if you want to compare different genetic codes, just add a column named codon_table_id to your samples_table and use the get_RSCU_other2 function.
+
+
+| sequence_path  | sample_name | codon_table_id |
+| ------------------- | ------------- | ------------- |
+| path/to/your/fasta  | 1_fasta_name  | 2 |
+| path/to/your/fasta  | 2_fasta_name  | 2 |
+| path/to/your/fasta  | 3_fasta_name  | 3 |
+| path/to/your/fasta  | 4_fasta_name  | 4 |
+| path/to/your/fasta  | 5_fasta_name  | 5 |
+| path/to/your/fasta  | 6_fasta_name  | 6 |
+| path/to/your/fasta  | 7_fasta_name  | 2 |
+| path/to/your/fasta  | 8_fasta_name  | 2 |
+
+or
+
+| ID  | GENBANK_ACCESSION | codon_table_id |
+| ------------------- | ------------- | ------------- |
+| 1_fasta_name  | gene_bank_accession_id_1  | 2 |
+| 2_fasta_name  | gene_bank_accession_id_2  | 3 |
+| 3_fasta_name  | gene_bank_accession_id_3  | 2 |
+| 4_fasta_name  | gene_bank_accession_id_4  | 4 |
+| 5_fasta_name  | gene_bank_accession_id_5  | 2 |
+| 6_fasta_name  | gene_bank_accession_id_6  | 2 |
+| 7_fasta_name  | gene_bank_accession_id_7  | 2 |
+| 8_fasta_name  | gene_bank_accession_id_8  | 2 |
+
+
+```r
+get_RSCU_other2(merged_sequences = "prepered_fasta.fasta",samples_table=samples_table,pseudo_count = 0)
+```
+
 # RSCU matrix
 
 The get_matrix() function allows the user to create a matrix that the user can use in any way they like. Simply use the result of the get_RSCU() function. The user will be able to use the matrices from this function, for example, in generating PCA.
