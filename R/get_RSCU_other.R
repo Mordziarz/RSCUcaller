@@ -260,7 +260,6 @@ calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 
   
   nucleotide_string <- nucleotide_input
   nucleotide_string <- base::tolower(nucleotide_string)
-  nucleotide_string <- base::tolower(gsub("[^acgt]", "", nucleotide_string))
   if (base::nchar(nucleotide_string) == 0) stop("The sequence does not contain valid nucleotides.")
   
   seq_chars <- seqinr::s2c(nucleotide_string)
