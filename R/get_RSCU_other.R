@@ -2,7 +2,7 @@
 #'
 #' This function calculates RSCU values for codons in a given nucleotide sequence.
 #'
-#' @param nucleotide_string A path to sequences.
+#' @param merged_sequences A path to sequences or a list of sequences.
 #' @param samples_table table with sequence descriptions and codon_table_id - an integer specifying the codon table (1-6,9-16,21-26).
 #' @param pseudo_count A value added to codon counts to avoid division by zero.
 #'
@@ -103,7 +103,7 @@ get_RSCU_other2 <- function(merged_sequences,pseudo_count=1,samples_table=sample
 #'
 #' This function calculates RSCU values for codons in a given nucleotide sequence.
 #'
-#' @param nucleotide_string A path to sequences.
+#' @param merged_sequences A path to sequences or a list of sequences.
 #' @param codon_table_id An integer specifying the codon table (1-6,9-16,21-26).
 #' @param pseudo_count A value added to codon counts to avoid division by zero.
 #'
@@ -195,7 +195,12 @@ seq_to_data_frame <- function(merged_sequences = "your_fasta.fasta"){
          call. = FALSE)
   }
   
-  merged_seq <- seqinr::read.fasta(merged_sequences,seqtype ="DNA" ,as.string = T)
+  if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
+        
+          merged_seq <- seqinr::read.fasta(merged_sequences,seqtype ="DNA" ,as.string = T)
+
+      }
+
   
   for (i in base::seq_along(merged_seq)) {
     base::attr(merged_seq[[i]], "name") <- base::names(merged_seq[i])
