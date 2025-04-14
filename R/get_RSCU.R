@@ -13,7 +13,7 @@ get_RSCU <- function(merged_sequences = ""){
          call. = FALSE)
   }
 
-  base::message(base::paste0("Loading data from ", merged_sequences))
+  base::message(base::paste0("Loading data from "))
 
   if (base::is.list(merged_sequences)){
 
