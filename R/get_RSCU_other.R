@@ -64,7 +64,7 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
       merged_seq <- seqinr::read.fasta(file = "prepered_fasta.fasta" ,set.attributes = T, seqtype = "DNA",as.string = F)
       
       t <- base::gsub("^\\d+_", "",names(merged_seq))
-    }}
+    }
   
   base::message(base::paste0("Loading data from ", merged_sequences))
   
@@ -93,10 +93,10 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
     dplyr::group_by(index) %>%
     dplyr::mutate(Col= stats::lag(base::cumsum(Col), default = 0)) %>%
     dplyr::mutate(Col=base::as.factor(Col))
-  
+  }
+
   base::message(base::paste0("Success"))
   return(Rscu_all)
-  
 }
 
 #' Calculating Relative Synonymous Codon Usage (RSCU)
@@ -150,7 +150,7 @@ get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1
         merged_seq <- seqinr::read.fasta(file = "prepered_fasta.fasta" ,set.attributes = T, seqtype = "DNA",as.string = F)
        
          t <- base::gsub("^\\d+_", "",names(merged_seq))
-      }}
+      }
   
   base::message(base::paste0("Loading data from ", merged_sequences))
 
@@ -173,10 +173,10 @@ get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1
     dplyr::group_by(index) %>%
     dplyr::mutate(Col= stats::lag(base::cumsum(Col), default = 0)) %>%
     dplyr::mutate(Col=base::as.factor(Col))
-  
+    }
+    
   base::message(base::paste0("Success"))
   return(Rscu_all)
-  
 }
 
 
