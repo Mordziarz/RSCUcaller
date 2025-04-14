@@ -147,6 +147,46 @@ The user can check which codons encode a specific amino acid in a given codon_ta
 get_codon_table(codon_table_id = 1)
 ```
 
+Two functions have been created to facilitate codon analysis with other genetic codes.
+
+If you are only analyzing Vertebrate mitochondrial genomes, you can simply use the get_RSCU_other function.
+
+```r
+get_RSCU_other(merged_sequences = "prepered_fasta.fasta",codon_table_id = 2,pseudo_count = 0)
+```
+
+However, if you want to compare different genetic codes, just add a column named codon_table_id to your samples_table and use the get_RSCU_other2 function.
+
+
+| sequence_path  | sample_name | codon_table_id |
+| ------------------- | ------------- | ------------- |
+| path/to/your/fasta  | 1_fasta_name  | 2 |
+| path/to/your/fasta  | 2_fasta_name  | 2 |
+| path/to/your/fasta  | 3_fasta_name  | 3 |
+| path/to/your/fasta  | 4_fasta_name  | 4 |
+| path/to/your/fasta  | 5_fasta_name  | 5 |
+| path/to/your/fasta  | 6_fasta_name  | 6 |
+| path/to/your/fasta  | 7_fasta_name  | 2 |
+| path/to/your/fasta  | 8_fasta_name  | 2 |
+
+or
+
+| ID  | GENBANK_ACCESSION | codon_table_id |
+| ------------------- | ------------- | ------------- |
+| 1_fasta_name  | gene_bank_accession_id_1  | 2 |
+| 2_fasta_name  | gene_bank_accession_id_2  | 3 |
+| 3_fasta_name  | gene_bank_accession_id_3  | 2 |
+| 4_fasta_name  | gene_bank_accession_id_4  | 4 |
+| 5_fasta_name  | gene_bank_accession_id_5  | 2 |
+| 6_fasta_name  | gene_bank_accession_id_6  | 2 |
+| 7_fasta_name  | gene_bank_accession_id_7  | 2 |
+| 8_fasta_name  | gene_bank_accession_id_8  | 2 |
+
+
+```r
+get_RSCU_other2(merged_sequences = "prepered_fasta.fasta",samples_table=samples_table,pseudo_count = 0)
+```
+
 # RSCU matrix
 
 The get_matrix() function allows the user to create a matrix that the user can use in any way they like. Simply use the result of the get_RSCU() function. The user will be able to use the matrices from this function, for example, in generating PCA.
