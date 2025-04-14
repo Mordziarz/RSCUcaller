@@ -148,7 +148,7 @@ get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1
     else {
       if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
         
-        merged_seq <- seqinr::read.fasta(file = "prepered_fasta.fasta" ,set.attributes = T, seqtype = "DNA",as.string = F)
+        merged_seq <- seqinr::read.fasta("prepered_fasta.fasta",seqtype ="DNA" ,as.string = T)
        
          t <- base::gsub("^\\d+_", "",names(merged_seq))
       }
