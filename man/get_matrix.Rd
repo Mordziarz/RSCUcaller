@@ -40,9 +40,6 @@ data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
 matrix_result <- get_matrix(rscu_data)
 
-# Access matrix components
-heatmap_matrix <- matrix_result$matrix
-df_for_analysis <- matrix_result$df_matrix
 
 }
 \seealso{

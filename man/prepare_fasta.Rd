@@ -35,20 +35,29 @@ the provided GenBank accessions. Sample IDs must be unique and follow numeric pr
 format (e.g., "1_Human", "2_Chimp").
 }
 \examples{
+path1 <- system.file("extdata/OL654070.fasta", package = "RSCUcaller")
+path2 <- system.file("extdata/OQ280817.txt", package = "RSCUcaller")
+path3 <- system.file("extdata/OQ280829.txt", package = "RSCUcaller")
+path4 <- system.file("extdata/OQ280824.txt", package = "RSCUcaller")
+samples_table_cp <- data.frame(sequence_path = c(path1,
+                                             path2,
+                                             path3,
+                                             path4),
+                           sample_name = c("1_Apopellia_endiviifolia_A1",
+                                           "2_Apopellia_endiviifolia_C1",
+                                           "3_Pellia_neesiana_1",
+                                           "4_Pellia_epiphylla_S1")) 
+
+
 # Mode 1: Multiple FASTA files
-samples_table <- data.frame(
-  sequence_path = c("file1.fasta", "file2.fasta"),
-  sample_name = c("1_Human", "2_Chimp")
-)
-prepare_fasta(samples_table, file_out = "processed.fasta")
+prepare_fasta(samples_table_cp, file_out = "processed.fasta")
 
 # Mode 2: Single FASTA with GenBank accessions
-samples_table <- data.frame(
-  ID = c("1_Human", "2_Chimp"),
-  GENBANK_ACCESSION = c("NC_012345", "NC_054321")
-)
+mit_fasta <- system.file("extdata/mitogenome_sequence.txt", package = "RSCUcaller")
+samples_path <- system.file("extdata/samples_table.csv", package = "RSCUcaller")
+samples_table <- read.csv2(samples_path,sep = ";")
 prepare_fasta(samples_table, 
-              path = "ncbi_sequences.fasta",
+              path = mit_fasta,
               file_out = "processed.fasta")
 
 }

@@ -28,14 +28,12 @@ This function is useful for RSCU analysis of genomes using non-standard genetic 
 such as mitochondrial or alternative nuclear codes.
 }
 \examples{
-\donttest{
-data("prepared_fasta", package = "RSCUcaller")
+prepared_fasta <- system.file("extdata/prepared_fasta.fasta", package = "RSCUcaller")
 rscu_df <- get_RSCU_other(
   merged_sequences = prepared_fasta,
   codon_table_id = 2,
   pseudo_count = 0.5
 )
-}
 
 }
 \seealso{

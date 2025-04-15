@@ -43,14 +43,14 @@ The plot includes:
 data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
 
-# Compare first two samples
-sample_names <- unique(rscu_data$Species)[1:2]
+# Compare two samples
+
 cor_result <- correlation(
   get_RSCU_out = rscu_data,
-  Species_x = sample_names[1],
-  Species_y = sample_names[2],
-  xlab = "Human",
-  ylab = "Chimpanzee"
+  Species_x = "Apopellia_endiviifolia_B1",
+  Species_y = "Apopellia_endiviifolia_A1",
+  xlab = "B1",
+  ylab = "A1"
 )
 
 # Access results

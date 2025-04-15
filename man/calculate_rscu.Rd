@@ -22,10 +22,8 @@ Calculates Relative Synonymous Codon Usage (RSCU) values for a single DNA sequen
 using a specified genetic code (codon table).
 }
 \examples{
-\donttest{
 seq <- "ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG"
 rscu_df <- calculate_rscu(seq, codon_table_id = 1, pseudo_count = 1)
-}
 
 }
 \seealso{

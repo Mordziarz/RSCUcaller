@@ -18,10 +18,8 @@ Converts a set of DNA sequences (from a FASTA file or list) into a data frame
 with sequence names and sequence strings.
 }
 \examples{
-\donttest{
-data("prepared_fasta", package = "RSCUcaller")
+prepared_fasta <- system.file("extdata/prepared_fasta.fasta", package = "RSCUcaller")
 seq_df <- seq_to_data_frame(prepared_fasta)
-}
 
 }
 \seealso{

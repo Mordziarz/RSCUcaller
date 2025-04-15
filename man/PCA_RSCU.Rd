@@ -42,14 +42,10 @@ data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
 matrix_data <- get_matrix(rscu_data)
 
-# Create grouping table
-groups <- data.frame(
-  Species = rownames(matrix_data$matrix),
-  group = rep(c("Group1", "Group2"), length.out = nrow(matrix_data$matrix))
-)
+data("grouping_table", package = "RSCUcaller")
 
 # Generate PCA plot
-pca_plot <- PCA_RSCU(matrix_data, groups)
+pca_plot <- PCA_RSCU(matrix_data, grouping_table)
 print(pca_plot)
 
 }
