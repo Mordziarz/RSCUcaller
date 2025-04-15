@@ -14,3 +14,4 @@
 #' @examples
 #' data(mitogenome_sequence)
 #' print(mitogenome_sequence)
+"mitogenome_sequence"

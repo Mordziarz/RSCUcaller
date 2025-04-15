@@ -17,3 +17,4 @@
 #' @examples
 #' data(grouping_table)
 #' print(grouping_table)
+"grouping_table"

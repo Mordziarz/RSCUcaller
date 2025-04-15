@@ -16,3 +16,4 @@
 #' @examples
 #' data(samples_table)
 #' print(samples_table)
+"samples_table"
