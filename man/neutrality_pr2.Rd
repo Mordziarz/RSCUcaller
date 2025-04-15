@@ -54,7 +54,6 @@ This function implements two established codon usage analysis methods:
 - Deviation from (0.5,0.5) indicates compositional constraints
 }
 \examples{
-\donttest{
 data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
 grouping_table <- data.frame(
@@ -75,7 +74,6 @@ neutrality_result <- neutrality_pr2(
   select = "neutrality_plot",
   grouping_table = grouping_table
 )
-}
 
 }
 \references{

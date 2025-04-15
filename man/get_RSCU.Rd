@@ -37,14 +37,12 @@ The function calculates RSCU values for each codon in each sample. Input can be 
 The sample names should follow the convention "number_name" (e.g., "1_Human").
 }
 \examples{
-\donttest{
 # Using a prepared FASTA file
 data("prepared_fasta", package = "RSCUcaller")
 rscu_df <- get_RSCU(merged_sequences = prepared_fasta)
 
 # Using a file path
 # rscu_df <- get_RSCU(merged_sequences = "your_prepared_sequences.fasta")
-}
 
 }
 \references{

@@ -47,7 +47,6 @@ Key features:
 The function requires synchronized factor levels in both input datasets for proper alignment.
 }
 \examples{
-\donttest{
 data("prepared_fasta", package = "RSCUcaller")
 rscu_control <- get_RSCU(prepared_fasta)
 rscu_treatment <- get_RSCU(prepared_fasta)
@@ -58,7 +57,6 @@ histogram_RSCU_double(
   title_left = "Control Group",
   title_right = "Treatment Group"
 )
-}
 
 }
 \seealso{

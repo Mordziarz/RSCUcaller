@@ -35,7 +35,6 @@ of Relative Synonymous Codon Usage (RSCU) values across amino acids. The functio
 Results are visualized and saved as PNG files, and a summary table is exported as CSV.
 }
 \examples{
-\donttest{
 data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
 stat_scat_box(
@@ -45,7 +44,6 @@ stat_scat_box(
   res = 300,
   p.adjust.method = "bonferroni"
 )
-}
 
 }
 \seealso{

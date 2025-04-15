@@ -35,7 +35,6 @@ the provided GenBank accessions. Sample IDs must be unique and follow numeric pr
 format (e.g., "1_Human", "2_Chimp").
 }
 \examples{
-\donttest{
 # Mode 1: Multiple FASTA files
 samples_table <- data.frame(
   sequence_path = c("file1.fasta", "file2.fasta"),
@@ -51,7 +50,6 @@ samples_table <- data.frame(
 prepare_fasta(samples_table, 
               path = "ncbi_sequences.fasta",
               file_out = "processed.fasta")
-}
 
 }
 \references{

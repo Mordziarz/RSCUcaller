@@ -41,7 +41,6 @@ The plot is particularly useful for identifying:
 }
 }
 \examples{
-\donttest{
 # Using built-in data
 data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
@@ -54,7 +53,6 @@ hist_plot <- histogram_RSCU(rscu_data, title = "Codon Usage Distribution")
 
 # Display plot
 print(hist_plot)
-}
 
 }
 \seealso{

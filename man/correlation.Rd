@@ -40,7 +40,6 @@ The plot includes:
 }
 }
 \examples{
-\donttest{
 data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
 
@@ -57,7 +56,6 @@ cor_result <- correlation(
 # Access results
 print(cor_result$res)
 print(cor_result$plot)
-}
 
 }
 \references{

@@ -38,7 +38,6 @@ Key features:
 }
 }
 \examples{
-\donttest{
 data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
 matrix_data <- get_matrix(rscu_data)
@@ -52,7 +51,6 @@ groups <- data.frame(
 # Generate PCA plot
 pca_plot <- PCA_RSCU(matrix_data, groups)
 print(pca_plot)
-}
 
 }
 \references{

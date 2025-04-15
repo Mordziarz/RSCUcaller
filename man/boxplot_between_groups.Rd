@@ -56,7 +56,6 @@ For each codon, the function:
 The function automatically creates the required output directories if they do not exist.
 }
 \examples{
-\donttest{
 data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
 grouping_table <- data.frame(
@@ -72,7 +71,6 @@ boxplot_between_groups(
   res = 300,
   p.adjust.method = "bonferroni"
 )
-}
 
 }
 \seealso{
