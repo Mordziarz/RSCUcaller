@@ -334,6 +334,7 @@ Ensure that the column names match the column names in the tutorial.
 
 ```{r}
 grouping_table <- system.file("extdata/grouping_table.csv", package = "RSCUcaller")
+grouping_table <- read.csv2(grouping_table,sep = ";")
 
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300,p.adjust.method = "bonferroni")
 ```
