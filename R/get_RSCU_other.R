@@ -19,12 +19,10 @@
 #' the genetic code for each sample using the \code{codon_table_id} column.
 #'
 #' @examples
-#' data("prepared_fasta", package = "RSCUcaller")
-#' samples_table <- data.frame(
-#'   ID = c("1_SampleA", "2_SampleB"),
-#'   GENBANK_ACCESSION = c("NC_000001", "NC_000002"),
-#'   codon_table_id = c(1, 2)
-#' )
+#' prepared_fasta <- system.file("extdata/prepared_fasta.fasta", package = "RSCUcaller")
+#' samples_path <- system.file("extdata/samples_table.csv", package = "RSCUcaller")
+#' samples_table <- read.csv2(samples_path,sep = ";")
+#' samples_table$codon_table_id <- 2
 #' rscu_df <- get_RSCU_other2(
 #'   merged_sequences = prepared_fasta,
 #'   samples_table = samples_table,
@@ -145,7 +143,7 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
 #'
 #' @examples
 #' \donttest{
-#' data("prepared_fasta", package = "RSCUcaller")
+#' prepared_fasta <- system.file("extdata/prepared_fasta.fasta", package = "RSCUcaller")
 #' rscu_df <- get_RSCU_other(
 #'   merged_sequences = prepared_fasta,
 #'   codon_table_id = 2,
