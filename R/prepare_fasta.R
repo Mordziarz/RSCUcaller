@@ -46,7 +46,7 @@
 #' samples_path <- system.file("extdata/samples_table.csv", package = "RSCUcaller")
 #' samples_table <- read.csv2(samples_path,sep = ";")
 #' prepare_fasta(samples_table, 
-#'               path = "mit_fasta",
+#'               path = mit_fasta,
 #'               file_out = "processed.fasta")
 #'
 #' @references
