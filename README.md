@@ -149,13 +149,13 @@ get_codon_table(codon_table_id = 1)
 
 Two functions have been created to facilitate codon analysis with other genetic codes.
 
-If you are only analyzing Vertebrate mitochondrial genomes, you can simply use the get_RSCU_other function.
+If you are only analyzing Vertebrate mitochondrial genomes, you can simply use the get_RSCU_other() function.
 
 ```r
 get_RSCU_other(merged_sequences = "prepered_fasta.fasta",codon_table_id = 2,pseudo_count = 0)
 ```
 
-However, if you want to compare different genetic codes, just add a column named codon_table_id to your samples_table and use the get_RSCU_other2 function.
+However, if you want to compare different genetic codes, just add a column named codon_table_id to your samples_table and use the get_RSCU_other2() function.
 
 
 | sequence_path  | sample_name | codon_table_id |
