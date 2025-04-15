@@ -73,6 +73,7 @@ lapply(c("ComplexHeatmap","ggtree"),
 To use all features of the program, you will need several libraries.
 
 ```{r}
+library(RSCUcaller)
 library(ggplot2)
 library(dplyr)
 library(seqinr)
