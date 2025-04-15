@@ -35,10 +35,7 @@
 #' @examples
 #' data("prepared_fasta", package = "RSCUcaller")
 #' rscu_data <- get_RSCU(prepared_fasta)
-#' grouping_table <- data.frame(
-#'   Species = unique(rscu_data$Species),
-#'   group = rep(c("Group1", "Group2"), length.out = length(unique(rscu_data$Species)))
-#' )
+#' data("grouping_table", package = "RSCUcaller")
 #' boxplot_between_groups(
 #'   get_RSCU_out = rscu_data,
 #'   grouping_table = grouping_table,
