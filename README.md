@@ -19,6 +19,46 @@ if (!requireNamespace("BiocManager", quietly=TRUE))
     install.packages("BiocManager")
 BiocManager::install("RSCUcaller")
 ```
+
+Install missing CRAN packages
+
+```r
+install.packages(setdiff(c("stats", "dplyr", "ggplot2", 
+                           "ggpubr", "seqinr","rstatix",
+                           "patchwork", "forcats", "phylogram",
+                           "circlize", "smplot2", "stringr"), 
+                         installed.packages()[,"Package"]))
+```
+
+Load CRAN packages
+
+```r
+lapply(c("stats", "dplyr", "ggplot2", 
+         "ggpubr", "seqinr","rstatix",
+         "patchwork", "forcats", "phylogram",
+         "circlize", "smplot2", "stringr"), library, character.only = TRUE)
+```
+
+Install BiocManager if not installed
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+```
+Install missing Bioconductor packages
+
+```r
+BiocManager::install(setdiff(c("ComplexHeatmap","ggtree"), 
+                             installed.packages()[,"Package"]))
+```
+
+Load Bioconductor packages
+
+```r
+lapply(c("ComplexHeatmap","ggtree"), 
+       library, character.only = TRUE)
+```
+
+
 To use all features of the program, you will need several libraries.
 
 ```r
