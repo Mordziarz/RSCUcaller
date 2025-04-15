@@ -212,13 +212,13 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
       dev.off()
     }
     if (length(levene_warning_codons) > 0) {
-      message("\n⚠️ Significant variance heterogeneity detected in:\n",
+      message("\n Significant variance heterogeneity detected in:\n",
               paste(levene_warning_codons, collapse = ", "), 
               "\nUsed Welch ANOVA for these cases.")
     }
     
     if (length(normality_warning_codons) > 0) {
-      message("\n⚠️ Non-normal distributions detected in:\n",
+      message("\n Non-normal distributions detected in:\n",
               paste(normality_warning_codons, collapse = ", "), 
               "\nUsed Kruskal-Wallis test for these cases.")
     }

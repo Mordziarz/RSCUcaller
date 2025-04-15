@@ -29,6 +29,9 @@ Imports:
     ggtree (>= 3.12.0),
     stats (>= 4.4.1),
     stringr (>= 1.5.1)
+Suggests: 
+    BiocStyle,
+    testthat
 VignetteBuilder: knitr
 Suggests: knitr, rmarkdown
 URL: https://github.com/Mordziarz/RSCUcaller
