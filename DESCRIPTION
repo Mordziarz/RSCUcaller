@@ -31,8 +31,9 @@ Imports:
     stringr (>= 1.5.1)
 Suggests: 
     BiocStyle,
-    testthat
+    testthat,
+    rmarkdown,
+    knitr
 VignetteBuilder: knitr
-Suggests: knitr, rmarkdown
 URL: https://github.com/Mordziarz/RSCUcaller
 BugReports: https://github.com/Mordziarz/RSCUcaller/issues
