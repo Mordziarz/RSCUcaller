@@ -37,3 +37,4 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://github.com/Mordziarz/RSCUcaller
 BugReports: https://github.com/Mordziarz/RSCUcaller/issues
+RoxygenNote: 7.3.2
