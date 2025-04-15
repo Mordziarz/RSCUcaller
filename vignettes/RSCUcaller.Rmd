@@ -256,7 +256,7 @@ get_RSCU_other2(merged_sequences = prepared_fasta,samples_table=samples_table,ps
 The get_matrix() function allows the user to create a matrix that the user can use in any way they like. Simply use the result of the get_RSCU() function. The user will be able to use the matrices from this function, for example, in generating PCA.
 
 ```{r}
-get_matrix(get_RSCU_out = get_RSCU_out)
+get_matrix_out <- get_matrix(get_RSCU_out = get_RSCU_out)
 ```
 
 # Heatmap
