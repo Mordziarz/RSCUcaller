@@ -9,6 +9,8 @@
 #'   \item{GENBANK_ACCESSION}{GenBank accession number (character).}
 #' }
 #'
+#' @return A samples_table with ID and GENBANK_ACCESSION column.
+#'
 #' @usage data(samples_table)
 #'
 #' @source Internal dataset for microbiome analysis.

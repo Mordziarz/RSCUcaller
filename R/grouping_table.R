@@ -10,6 +10,8 @@
 #'   \item{group}{Group assignments (character).}
 #' }
 #'
+#' @return A grouping_table with Species and group column.
+#'
 #' @usage data(grouping_table)
 #'
 #' @source Internal dataset for microbiome analysis.

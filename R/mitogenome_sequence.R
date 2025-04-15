@@ -7,6 +7,8 @@
 #' @format
 #' A set of FASTA files.
 #'
+#' @return A fasta list.
+#'
 #' @usage data(mitogenome_sequence)
 #'
 #' @source Internal dataset for microbiome analysis.
