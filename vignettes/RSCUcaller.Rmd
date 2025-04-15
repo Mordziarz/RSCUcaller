@@ -98,7 +98,7 @@ set.seed(123)
 
 Tables and graphics are saved to folders by the RSCUcaller package. To specify the desired output directory, it is recommended to use the setwd() function.
 
-```{r}
+```r
 setwd("path/to/your/directory")
 ```
 
