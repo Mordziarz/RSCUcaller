@@ -188,6 +188,6 @@ boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,
   
   
   base::message(base::paste0("Done! Check selected_species & selected_species_barplots dir !!!"))
-  write.csv2(statistical_table,"Post_hoc_table_selected_species.csv",row.names = F)
+  write.csv2(statistical_table,"Post_hoc_table_selected_species.csv",row.names = FALSE)
   return(statistical_table)
 }

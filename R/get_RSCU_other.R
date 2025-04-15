@@ -216,7 +216,7 @@ seq_to_data_frame <- function(merged_sequences = ""){
 
   if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
         
-          merged_seq <- seqinr::read.fasta(merged_sequences,seqtype ="DNA" ,as.string = T)
+          merged_seq <- seqinr::read.fasta(merged_sequences,seqtype ="DNA" ,as.string = TRUE)
 
   
   for (i in base::seq_along(merged_seq)) {
