@@ -17,7 +17,7 @@ The "test_data" folder contains sample data in the form of tables, FASTA files, 
 
 # Installation
 
-```{r}
+```r
 install.packages("devtools")
 library(devtools)
 devtools::install_github('Mordziarz/RSCUcaller')
@@ -25,7 +25,7 @@ library(RSCUcaller)
 ```
 
 Install RSCUcaller from Bioconductor:
-```{r}
+```r
 if (!requireNamespace("BiocManager", quietly=TRUE))
     install.packages("BiocManager")
 BiocManager::install("RSCUcaller")
@@ -33,7 +33,7 @@ BiocManager::install("RSCUcaller")
 
 Install missing CRAN packages
 
-```{r}
+```r
 install.packages(setdiff(c("stats", "dplyr", "ggplot2", 
                            "ggpubr", "seqinr","rstatix",
                            "patchwork", "forcats", "phylogram",
@@ -43,7 +43,7 @@ install.packages(setdiff(c("stats", "dplyr", "ggplot2",
 
 Load CRAN packages
 
-```{r}
+```r
 lapply(c("stats", "dplyr", "ggplot2", 
          "ggpubr", "seqinr","rstatix",
          "patchwork", "forcats", "phylogram",
@@ -52,19 +52,19 @@ lapply(c("stats", "dplyr", "ggplot2",
 
 Install BiocManager if not installed
 
-```{r}
+```r
 if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 ```
 Install missing Bioconductor packages
 
-```{r}
+```r
 BiocManager::install(setdiff(c("ComplexHeatmap","ggtree"), 
                              installed.packages()[,"Package"]))
 ```
 
 Load Bioconductor packages
 
-```{r}
+```r
 lapply(c("ComplexHeatmap","ggtree"), 
        library, character.only = TRUE)
 ```
