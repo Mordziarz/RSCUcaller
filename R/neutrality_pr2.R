@@ -141,7 +141,7 @@ neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select="",grouping_table=gr
   model <- stats::lm(GC12 ~ GC3, data = get_RSCU_out)
   r_squared <- base::summary(model)$r.squared
   equation <- base::paste("y =", base::round(stats::coef(model)[2], 2), "x +", base::round(stats::coef(model)[1], 2))
-  r_squared_label <- base::paste("R² =", base::round(r_squared, 3))
+  r_squared_label <- base::paste("R\u00B2 =", base::round(r_squared, 3))
   
   neutrality_plot <- get_RSCU_out %>%
      ggplot2::ggplot(aes(x = GC3, y = GC12)) +
@@ -157,7 +157,7 @@ neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select="",grouping_table=gr
   model <- stats::lm(A3_AT3 ~ G3_GC3, data = get_RSCU_out) 
   r_squared <- base::summary(model)$r.squared
   equation <- base::paste("y =", base::round(stats::coef(model)[2], 2), "x +", base::round(stats::coef(model)[1], 2))
-  r_squared_label <- base::paste("R² =", base::round(r_squared, 3))
+  r_squared_label <- base::paste("R\u00B2 =", base::round(r_squared, 3))
   
   PR2_plot <- get_RSCU_out %>%
     ggplot2::ggplot(aes(x = G3_GC3, y = A3_AT3)) +
