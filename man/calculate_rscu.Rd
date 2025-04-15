@@ -2,20 +2,32 @@
 % Please edit documentation in R/get_RSCU_other.R
 \name{calculate_rscu}
 \alias{calculate_rscu}
-\title{Calculating Relative Synonymous Codon Usage (RSCU)}
+\title{Calculate RSCU for a Single Sequence}
 \usage{
 calculate_rscu(nucleotide_input, codon_table_id = 1, pseudo_count = 1)
 }
 \arguments{
-\item{codon_table_id}{An integer specifying the codon table (1-6,9-16,21-26).}
+\item{nucleotide_input}{A character string representing the nucleotide sequence.}
 
-\item{pseudo_count}{A value added to codon counts to avoid division by zero.}
+\item{codon_table_id}{An integer specifying the codon table to use (see \code{\link{get_codon_table}}).}
 
-\item{nucleotide_string}{A character string representing the nucleotide sequence.}
+\item{pseudo_count}{A numeric value added to codon counts to avoid division by zero (default: 1).}
 }
 \value{
-A data frame with columns: codon, amino acid, eff, RSCU.
+A \code{data.frame} with columns: \code{AA} (amino acid), \code{codon}, \code{eff} (codon count),
+  \code{RSCU} (Relative Synonymous Codon Usage).
 }
 \description{
-This function calculates RSCU values for codons in a given nucleotide sequence.
+Calculates Relative Synonymous Codon Usage (RSCU) values for a single DNA sequence
+using a specified genetic code (codon table).
+}
+\examples{
+\donttest{
+seq <- "ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG"
+rscu_df <- calculate_rscu(seq, codon_table_id = 1, pseudo_count = 1)
+}
+
+}
+\seealso{
+\code{\link{get_codon_table}}
 }

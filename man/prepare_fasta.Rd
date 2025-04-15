@@ -2,20 +2,60 @@
 % Please edit documentation in R/prepare_fasta.R
 \name{prepare_fasta}
 \alias{prepare_fasta}
-\title{Preparing fasta files for further processing}
+\title{Prepare FASTA files for RSCU analysis}
 \usage{
 prepare_fasta(samples_table = samples_table, path = "", file_out = "")
 }
 \arguments{
-\item{samples_table}{table with sequence descriptions}
+\item{samples_table}{A data frame specifying input sequences. Two formats are supported:
+- Mode 1: Contains columns "sequence_path" (paths to individual FASTA files) 
+  and "sample_name" (unique identifiers starting with numbers)
+- Mode 2: Contains columns "ID" (unique sample IDs) and "GENBANK_ACCESSION" 
+  (NCBI accession numbers) when using `path` parameter}
 
-\item{path}{path to the original sequence file}
+\item{path}{Path to master FASTA file (required for Mode 2 when using GenBank accessions)}
 
-\item{file_out}{path to the file with processed sequences}
+\item{file_out}{Output file path with .fasta extension}
 }
 \value{
-None (invisible)
+Invisibly returns NULL. Writes processed FASTA file to disk.
 }
 \description{
-Preparing fasta files for further processing
+Processes input sequences from multiple sources into standardized FASTA format
+required for downstream analysis. Handles two input modes: multiple FASTA files
+or a single FASTA file with GenBank accessions.
+}
+\details{
+This function handles two common input scenarios:
+1. Multiple individual FASTA files: Requires "sequence_path" and "sample_name" columns
+2. Single FASTA with multiple accessions: Requires "ID" and "GENBANK_ACCESSION" columns
+
+For Mode 2, the function will extract sequences from the master FASTA file using
+the provided GenBank accessions. Sample IDs must be unique and follow numeric prefix
+format (e.g., "1_Human", "2_Chimp").
+}
+\examples{
+\donttest{
+# Mode 1: Multiple FASTA files
+samples_table <- data.frame(
+  sequence_path = c("file1.fasta", "file2.fasta"),
+  sample_name = c("1_Human", "2_Chimp")
+)
+prepare_fasta(samples_table, file_out = "processed.fasta")
+
+# Mode 2: Single FASTA with GenBank accessions
+samples_table <- data.frame(
+  ID = c("1_Human", "2_Chimp"),
+  GENBANK_ACCESSION = c("NC_012345", "NC_054321")
+)
+prepare_fasta(samples_table, 
+              path = "ncbi_sequences.fasta",
+              file_out = "processed.fasta")
+}
+
+}
+\references{
+For FASTA format specifications:
+- NCBI FASTA format: \url{https://blast.ncbi.nlm.nih.gov/doc/fasta.html}
+- Seqinr documentation: \url{https://seqinr.r-forge.r-project.org}
 }

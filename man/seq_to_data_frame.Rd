@@ -2,16 +2,28 @@
 % Please edit documentation in R/get_RSCU_other.R
 \name{seq_to_data_frame}
 \alias{seq_to_data_frame}
-\title{Convert FASTA sequence to a data frame}
+\title{Convert FASTA Sequences to a Data Frame}
 \usage{
 seq_to_data_frame(merged_sequences = "")
 }
 \arguments{
-\item{merged_sequences}{path to the file with prepared sequences via the prepare_fasta() function}
+\item{merged_sequences}{Either a character string specifying the path to a FASTA file
+(prepared using \code{\link{prepare_fasta}}), or a list of DNA sequences.}
 }
 \value{
-A data frame with columns: names, sequence
+A \code{data.frame} with columns: \code{names} (sequence names), \code{sequences} (DNA strings).
 }
 \description{
-This function converts a FASTA sequence into a data frame.
+Converts a set of DNA sequences (from a FASTA file or list) into a data frame
+with sequence names and sequence strings.
+}
+\examples{
+\donttest{
+data("prepared_fasta", package = "RSCUcaller")
+seq_df <- seq_to_data_frame(prepared_fasta)
+}
+
+}
+\seealso{
+\code{\link{prepare_fasta}}
 }

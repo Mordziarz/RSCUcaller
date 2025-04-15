@@ -3,29 +3,41 @@
 \docType{data}
 \name{grouping_table}
 \alias{grouping_table}
-\title{Example grouping_table}
+\title{Sample Grouping Metadata}
 \format{
-A data frame object with 8 rows and 2 columns:
+A data frame with 8 observations and 2 variables:
 \describe{
-  \item{Species}{Species names (character).}
-  \item{group}{Group assignments (character).}
+  \item{Species}{Character vector matching sample names from \code{get_RSCU} output.
+                Must follow "number_Species" format (e.g. "1_Homo_sapiens")}
+  \item{group}{Character vector specifying experimental groups or categories}
 }
 }
 \source{
-Internal dataset for microbiome analysis.
+Synthetic data created for demonstration purposes. Not from actual research data.
 }
 \usage{
 data(grouping_table)
 }
-\value{
-A grouping_table with Species and group column.
-}
 \description{
-This dataset provides an example grouping_table for demonstrating package functionality.
-It maps species to groups.
+Demonstration dataset showing required structure for group comparisons in RSCU analysis.
+Used with functions like \code{\link{boxplot_between_groups}} and \code{\link{PCA_RSCU}}.
 }
 \examples{
+# Load dataset
 data(grouping_table)
-print(grouping_table)
+
+# View structure
+str(grouping_table)
+
+# Typical usage with analysis functions
+\dontrun{
+boxplot_between_groups(get_RSCU_out = rscu_data,
+                       grouping_table = grouping_table)
+}
+
+}
+\seealso{
+Related functions:
+\code{\link{boxplot_between_groups}}, \code{\link{PCA_RSCU}}, \code{\link{neutrality_pr2}}
 }
 \keyword{datasets}

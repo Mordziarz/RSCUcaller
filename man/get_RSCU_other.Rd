@@ -2,20 +2,42 @@
 % Please edit documentation in R/get_RSCU_other.R
 \name{get_RSCU_other}
 \alias{get_RSCU_other}
-\title{Calculating Relative Synonymous Codon Usage (RSCU)}
+\title{Calculate RSCU for Multiple Sequences with a Custom Genetic Code}
 \usage{
 get_RSCU_other(merged_sequences = "", codon_table_id = 1, pseudo_count = 1)
 }
 \arguments{
-\item{merged_sequences}{A path to sequences or a list of sequences.}
+\item{merged_sequences}{Either a character string specifying the path to a FASTA file
+containing prepared sequences (see \code{\link{prepare_fasta}}), or a list of DNA sequences.}
 
-\item{codon_table_id}{An integer specifying the codon table (1-6,9-16,21-26).}
+\item{codon_table_id}{An integer specifying the codon table to use (see \code{\link{get_codon_table}}).
+Common values: 1 = Standard, 2 = Vertebrate Mitochondrial, etc.}
 
-\item{pseudo_count}{A value added to codon counts to avoid division by zero.}
+\item{pseudo_count}{A numeric value added to codon counts to avoid division by zero (default: 1).}
 }
 \value{
-A data frame with columns: codon, amino acid, eff, RSCU.
+A \code{data.frame} with columns: \code{AA} (amino acid), \code{codon}, \code{eff} (codon count),
+  \code{RSCU} (Relative Synonymous Codon Usage), and sample/grouping columns.
 }
 \description{
-This function calculates RSCU values for codons in a given nucleotide sequence.
+Computes Relative Synonymous Codon Usage (RSCU) values for a set of DNA sequences
+using a specified genetic code (codon table).
+}
+\details{
+This function is useful for RSCU analysis of genomes using non-standard genetic codes,
+such as mitochondrial or alternative nuclear codes.
+}
+\examples{
+\donttest{
+data("prepared_fasta", package = "RSCUcaller")
+rscu_df <- get_RSCU_other(
+  merged_sequences = prepared_fasta,
+  codon_table_id = 2,
+  pseudo_count = 0.5
+)
+}
+
+}
+\seealso{
+\code{\link{get_RSCU}}, \code{\link{get_RSCU_other2}}, \code{\link{get_codon_table}}
 }

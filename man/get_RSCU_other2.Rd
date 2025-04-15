@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_RSCU_other.R
 \name{get_RSCU_other2}
 \alias{get_RSCU_other2}
-\title{Calculating Relative Synonymous Codon Usage (RSCU) based on table}
+\title{Calculate RSCU for Multiple Sequences with Custom Genetic Codes}
 \usage{
 get_RSCU_other2(
   merged_sequences = "",
@@ -11,15 +11,44 @@ get_RSCU_other2(
 )
 }
 \arguments{
-\item{merged_sequences}{A path to sequences or a list of sequences.}
+\item{merged_sequences}{Either a character string specifying the path to a FASTA file
+containing prepared sequences (see \code{\link{prepare_fasta}}), or a list of DNA sequences.}
 
-\item{pseudo_count}{A value added to codon counts to avoid division by zero.}
+\item{pseudo_count}{A numeric value added to codon counts to avoid division by zero (default: 1).}
 
-\item{samples_table}{table with sequence descriptions and codon_table_id - an integer specifying the codon table (1-6,9-16,21-26).}
+\item{samples_table}{A data frame describing the samples. Must contain either columns
+\code{sample_name} or \code{ID} (matching sequence names), and a \code{codon_table_id}
+column specifying the genetic code for each sample (see \code{\link{get_codon_table}}).}
 }
 \value{
-A data frame with columns: codon, amino acid, eff, RSCU.
+A \code{data.frame} with columns: \code{AA} (amino acid), \code{codon}, \code{eff} (codon count),
+  \code{RSCU} (Relative Synonymous Codon Usage), and sample/grouping columns.
 }
 \description{
-This function calculates RSCU values for codons in a given nucleotide sequence.
+Computes Relative Synonymous Codon Usage (RSCU) values for a set of DNA sequences,
+allowing each sample to use a different genetic code (codon table).
+}
+\details{
+This function enables RSCU calculation for datasets where each sample may use a different
+genetic code (e.g., mitochondrial vs. nuclear). The \code{samples_table} must specify
+the genetic code for each sample using the \code{codon_table_id} column.
+}
+\examples{
+\donttest{
+data("prepared_fasta", package = "RSCUcaller")
+samples_table <- data.frame(
+  ID = c("1_SampleA", "2_SampleB"),
+  GENBANK_ACCESSION = c("NC_000001", "NC_000002"),
+  codon_table_id = c(1, 2)
+)
+rscu_df <- get_RSCU_other2(
+  merged_sequences = prepared_fasta,
+  samples_table = samples_table,
+  pseudo_count = 1
+)
+}
+
+}
+\seealso{
+\code{\link{get_RSCU}}, \code{\link{get_RSCU_other}}, \code{\link{get_codon_table}}
 }

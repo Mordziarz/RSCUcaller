@@ -2,16 +2,54 @@
 % Please edit documentation in R/get_RSCU.R
 \name{get_RSCU}
 \alias{get_RSCU}
-\title{Calculating RSCU for multiple sequences}
+\title{Calculate Relative Synonymous Codon Usage (RSCU) for multiple sequences}
 \usage{
 get_RSCU(merged_sequences = "")
 }
 \arguments{
-\item{merged_sequences}{path to the file with prepared sequences via the prepare_fasta() function}
+\item{merged_sequences}{Either a character string specifying the path to a FASTA file
+containing prepared sequences (see \code{\link{prepare_fasta}}), or a list of DNA sequences.}
 }
 \value{
-A `data.frame` object containing Rscu_all.
+A \code{data.frame} containing RSCU values for all codons and all samples.
+  The columns include:
+  \describe{
+    \item{AA}{Amino acid}
+    \item{codon}{Codon sequence}
+    \item{eff}{Codon efficiency (if available)}
+    \item{freq}{Codon frequency}
+    \item{RSCU}{Relative Synonymous Codon Usage value}
+    \item{Col}{Internal grouping column}
+    \item{index}{Unique index for each codon/sample combination}
+    \item{Species}{Sample name}
+  }
 }
 \description{
-Calculating RSCU for multiple sequences
+Computes RSCU values for a set of DNA sequences provided as a single FASTA file
+(prepared using \code{\link{prepare_fasta}}) or as a list of sequences.
+}
+\details{
+The function calculates RSCU values for each codon in each sample. Input can be either:
+\itemize{
+  \item A FASTA file with multiple sequences, prepared using \code{\link{prepare_fasta}}
+  \item A list of DNA sequences (as returned by \code{seqinr::read.fasta})
+}
+The sample names should follow the convention "number_name" (e.g., "1_Human").
+}
+\examples{
+\donttest{
+# Using a prepared FASTA file
+data("prepared_fasta", package = "RSCUcaller")
+rscu_df <- get_RSCU(merged_sequences = prepared_fasta)
+
+# Using a file path
+# rscu_df <- get_RSCU(merged_sequences = "your_prepared_sequences.fasta")
+}
+
+}
+\references{
+Sharp, P. M., & Li, W. H. (1986). An evolutionary perspective on synonymous codon usage in unicellular organisms. Journal of Molecular Evolution, 24(1-2), 28-38.
+}
+\seealso{
+\code{\link{prepare_fasta}}, \code{\link{get_RSCU_other}}, \code{\link{get_matrix}}
 }
