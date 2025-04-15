@@ -127,7 +127,7 @@ When you have FASTA files in separate files
 | path/to/your/fasta  | 7_fasta_name  |
 | path/to/your/fasta  | 8_fasta_name  |
 
-```{r}
+```r
 path1 <- "/path/to/your/fasta"
 samples_table <- data.frame(sequence_path = c(path1,path2),
                             sample_name = c("1_fasta_name","2_fasta_name"))
@@ -148,10 +148,18 @@ When you have downloaded multiple FASTA files from NCBI into a single file
 | 7_fasta_name  | gene_bank_accession_id_7  |
 | 8_fasta_name  | gene_bank_accession_id_8  |
 
-```{r}
+```r
 samples_table <- data.frame(ID = c("1_fasta_name","2_fasta_name"),
                             GENBANK_ACCESSION = c("gene_bank_accession_id_1","gene_bank_accession_id_2"))
 prepare_fasta(samples_table = samples_table, path = "/path/to/multiple/sequence/fasta", file_out = "your_fasta.fasta")
+```
+
+```{r}
+samples_path <- system.file("extdata/sample_table_mt.csv", package = "RSCUcaller")
+samples_table <- read.csv2(samples_path,sep = ";")
+
+fasta_path <- system.file("extdata/mitogenome_sequence.txt", package = "RSCUcaller")
+RSCUcaller::prepare_fasta(samples_table = samples_table,path = fasta_path,file_out = "prepared_fasta.fasta")
 ```
 
 
@@ -162,7 +170,9 @@ The name of the prepared FASTA file needs to be specified regardless of the chos
 The main function of the package, get_RSCU(), can be used to calculate RSCU values directly from a set of previously prepared sequences.
 
 ```{r}
-get_RSCU_out <- get_RSCU(merged_sequences = "your_fasta.fasta")
+prepared_fasta <- system.file("extdata/prepared_fasta.fasta", package = "RSCUcaller")
+
+get_RSCU_out <- get_RSCU(merged_sequences = prepared_fasta)
 ```
 
 # Other genetic codes
@@ -203,7 +213,7 @@ Two functions have been created to facilitate codon analysis with other genetic 
 If you are only analyzing Vertebrate mitochondrial genomes, you can simply use the get_RSCU_other() function.
 
 ```{r}
-get_RSCU_other(merged_sequences = "prepered_fasta.fasta",codon_table_id = 2,pseudo_count = 0)
+get_RSCU_other(merged_sequences = prepared_fasta ,codon_table_id = 2,pseudo_count = 0)
 ```
 
 However, if you want to compare different genetic codes, just add a column named codon_table_id to your samples_table and use the get_RSCU_other2() function.
@@ -235,7 +245,9 @@ or
 
 
 ```{r}
-get_RSCU_other2(merged_sequences = "prepered_fasta.fasta",samples_table=samples_table,pseudo_count = 0)
+samples_table$codon_table_id <- 2
+
+get_RSCU_other2(merged_sequences = prepared_fasta,samples_table=samples_table,pseudo_count = 0)
 ```
 
 # RSCU matrix
@@ -286,7 +298,7 @@ histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get
 Pearson correlation between two species can be performed using the RSCUcaller package. The names of the Species columns in the get_RSCU_out data frame to be correlated should be specified.
 
 ```{r}
-correlation(get_RSCU_out = get_RSCU_out, Species_x = "Species_x", Species_y = "Species_y", xlab = "title of x lab", ylab = "title of y lab")
+correlation(get_RSCU_out = get_RSCU_out, Species_x = "Apopellia_endiviifolia_A1", Species_y = "Apopellia_endiviifolia_B3", xlab = "title of x lab", ylab = "title of y lab")
 ```
 
 ![Correlation](graphs/Ex_correlation.png)
@@ -320,6 +332,8 @@ Ensure that the column names match the column names in the tutorial.
 | Species8  | group3  |
 
 ```{r}
+grouping_table <- system.file("extdata/grouping_table.csv", package = "RSCUcaller")
+
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300,p.adjust.method = "bonferroni")
 ```
 ![Boxplots](graphs/aaa.png)
