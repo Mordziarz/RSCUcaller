@@ -43,7 +43,7 @@ library(stringr)
 set.seed(123)
 ```
 
-# Input data 
+# Input data
 
 Tables and graphics are saved to folders by the RSCUcaller package. To specify the desired output directory, it is recommended to use the setwd() function.
 
