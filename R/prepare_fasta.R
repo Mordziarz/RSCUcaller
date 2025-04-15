@@ -24,9 +24,6 @@
 #' format (e.g., "1_Human", "2_Chimp").
 #'
 #' @examples
-#' mit_fasta <- system.file("extdata/mitogenome_sequence.txt", package = "RSCUcaller")
-#' samples_path <- system.file("extdata/samples_table.csv", package = "RSCUcaller")
-#' samples_table <- read.csv2(samples_path,sep = ";")
 #'path1 <- system.file("extdata/OL654070.fasta", package = "RSCUcaller")
 #'path2 <- system.file("extdata/OQ280817.txt", package = "RSCUcaller")
 #'path3 <- system.file("extdata/OQ280829.txt", package = "RSCUcaller")
@@ -45,6 +42,9 @@
 #' prepare_fasta(samples_table_cp, file_out = "processed.fasta")
 #'
 #' # Mode 2: Single FASTA with GenBank accessions
+#' mit_fasta <- system.file("extdata/mitogenome_sequence.txt", package = "RSCUcaller")
+#' samples_path <- system.file("extdata/samples_table.csv", package = "RSCUcaller")
+#' samples_table <- read.csv2(samples_path,sep = ";")
 #' prepare_fasta(samples_table, 
 #'               path = "mit_fasta",
 #'               file_out = "processed.fasta")
