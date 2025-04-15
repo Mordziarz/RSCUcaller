@@ -142,14 +142,12 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
 #' such as mitochondrial or alternative nuclear codes.
 #'
 #' @examples
-#' \donttest{
 #' prepared_fasta <- system.file("extdata/prepared_fasta.fasta", package = "RSCUcaller")
 #' rscu_df <- get_RSCU_other(
 #'   merged_sequences = prepared_fasta,
 #'   codon_table_id = 2,
 #'   pseudo_count = 0.5
 #' )
-#' }
 #'
 #' @seealso \code{\link{get_RSCU}}, \code{\link{get_RSCU_other2}}, \code{\link{get_codon_table}}
 #' @importFrom dplyr filter group_by mutate
@@ -236,7 +234,7 @@ get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1
 #' @return A \code{data.frame} with columns: \code{names} (sequence names), \code{sequences} (DNA strings).
 #'
 #' @examples
-#' data("prepared_fasta", package = "RSCUcaller")
+#' prepared_fasta <- system.file("extdata/prepared_fasta.fasta", package = "RSCUcaller")
 #' seq_df <- seq_to_data_frame(prepared_fasta)
 #'
 #' @seealso \code{\link{prepare_fasta}}
