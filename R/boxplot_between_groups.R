@@ -52,6 +52,13 @@
 #' @seealso
 #' \code{\link{get_RSCU}}, \code{\link{stat_scat_box}}
 #'
+#' @importFrom dplyr filter group_by mutate summarise arrange
+#' @importFrom magrittr %>%
+#' @importFrom ggpubr ggboxplot ggbarplot stat_pvalue_manual
+#' @importFrom grDevices png dev.off
+#' @importFrom utils write.csv2
+#' @importFrom stats shapiro.test aov oneway.test kruskal.test reformulate
+#' @importFrom rstatix add_xy_position dunn_test levene_test pairwise_t_test tukey_hsd
 #' @export
 
 boxplot_between_groups <-function(get_RSCU_out,grouping_table,width,height,xlab,res,p.adjust.method = "bonferroni") {

@@ -67,6 +67,9 @@
 #' Related analysis functions:
 #' \code{\link{get_RSCU}}, \code{\link{heatmap_RSCU}}, \code{\link{PCA_RSCU}}
 #' 
+#' @importFrom dplyr mutate summarise group_by filter
+#' @importFrom magrittr %>%
+#' @importFrom ggplot2 aes geom_point geom_smooth theme_bw ggtitle xlab ylab
 #' @export
 
 neutrality_pr2 <- function(get_RSCU_out=get_RSCU_out,select="",grouping_table=grouping_table){

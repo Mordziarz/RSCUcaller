@@ -41,6 +41,9 @@
 #' \code{\link{PCA_RSCU}} for dimensionality reduction,
 #' \code{\link{heatmap_RSCU}} for visualization
 #' 
+#' @importFrom magrittr %>%
+#' @importFrom dplyr filter group_by mutate
+#' @importFrom stats setNames
 #' @export
 
 get_matrix <- function(get_RSCU_out=get_RSCU_out){

@@ -52,6 +52,9 @@
 #' Related visualization functions:
 #' \code{\link{histogram_RSCU}}, \code{\link{PCA_RSCU}}
 #' 
+#' @importFrom ComplexHeatmap Heatmap anno_text draw rowAnnotation row_dend
+#' @importFrom circlize colorRamp2
+#' @importFrom grid unit gpar
 #' @export
 
 heatmap_RSCU <- function(heatmap_color="",get_RSCU_out=get_RSCU_out,select=""){

@@ -32,6 +32,9 @@
 #' )
 #'
 #' @seealso \code{\link{get_RSCU}}, \code{\link{get_RSCU_other}}, \code{\link{get_codon_table}}
+#' @importFrom dplyr filter group_by mutate
+#' @importFrom magrittr %>%
+#' @importFrom stats lag
 #' @export
 
 
@@ -151,6 +154,10 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
 #' }
 #'
 #' @seealso \code{\link{get_RSCU}}, \code{\link{get_RSCU_other2}}, \code{\link{get_codon_table}}
+#' @importFrom dplyr filter group_by mutate
+#' @importFrom magrittr %>%
+#' @importFrom stats lag
+#' @importFrom seqinr read.fasta s2c
 #' @export
 
 get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1){
@@ -231,12 +238,12 @@ get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1
 #' @return A \code{data.frame} with columns: \code{names} (sequence names), \code{sequences} (DNA strings).
 #'
 #' @examples
-#' \donttest{
 #' data("prepared_fasta", package = "RSCUcaller")
 #' seq_df <- seq_to_data_frame(prepared_fasta)
-#' }
 #'
 #' @seealso \code{\link{prepare_fasta}}
+#' @importFrom dplyr filter
+#' @importFrom seqinr read.fasta
 #' @export
 
 seq_to_data_frame <- function(merged_sequences = ""){
@@ -312,12 +319,12 @@ seq_to_data_frame <- function(merged_sequences = ""){
 #'   \code{RSCU} (Relative Synonymous Codon Usage).
 #'
 #' @examples
-#' \donttest{
 #' seq <- "ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG"
 #' rscu_df <- calculate_rscu(seq, codon_table_id = 1, pseudo_count = 1)
-#' }
 #'
 #' @seealso \code{\link{get_codon_table}}
+#' @importFrom seqinr s2c uco
+#' @importFrom stats setNames
 #' @export
 
 calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 1) {

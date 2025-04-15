@@ -45,8 +45,9 @@
 #' - NCBI FASTA format: \url{https://blast.ncbi.nlm.nih.gov/doc/fasta.html}
 #' - Seqinr documentation: \url{https://seqinr.r-forge.r-project.org}
 #'
-#' @export
 #' @importFrom seqinr read.fasta write.fasta
+#' @export
+
 
 prepare_fasta <- function(samples_table=samples_table,path="",file_out="") {
 

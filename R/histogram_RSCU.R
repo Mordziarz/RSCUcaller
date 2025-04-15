@@ -50,6 +50,8 @@
 #' \code{\link{heatmap_RSCU}} for multivariate patterns
 #' 
 #' @export
+#' @importFrom ggplot2 aes geom_tile geom_bar theme_minimal coord_flip ggtitle theme element_text element_blank
+#' @importFrom patchwork plot_layout
 #' @importFrom forcats fct_rev
 
 histogram_RSCU <- function(get_RSCU_out=get_RSCU_out,title=""){

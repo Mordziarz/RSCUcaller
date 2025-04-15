@@ -50,6 +50,7 @@
 #' \code{\link{get_matrix}} for input data preparation,
 #' \code{\link{heatmap_RSCU}} for alternative visualization
 #'
+#' @importFrom ggplot2 aes geom_point theme_bw element_blank ggtitle xlab ylab
 #' @export
 
 PCA_RSCU <- function(get_matrix_out=get_matrix_out,grouping_table=grouping_table){

@@ -40,6 +40,8 @@
 #'
 #' @seealso \code{\link{prepare_fasta}}, \code{\link{get_RSCU_other}}, \code{\link{get_matrix}}
 #'
+#' @importFrom dplyr filter group_by mutate
+#' @importFrom magrittr %>%
 #' @export
 
 get_RSCU <- function(merged_sequences = ""){

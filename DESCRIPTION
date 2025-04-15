@@ -15,6 +15,7 @@ biocViews: Software, BiologicalQuestion, GenomicVariation
 Depends: 
     R (>= 3.5.0)
 Imports:
+    magrittr (>= 2.0.3),
     ggplot2 (>= 3.5.1),
     dplyr (>= 1.1.4),
     seqinr (>= 4.2-36),

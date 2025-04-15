@@ -53,6 +53,8 @@
 #' \code{\link{get_RSCU}} for generating input data,
 #' \code{\link{heatmap_RSCU}} for multivariate visualization
 #'
+#' @importFrom ggplot2 aes geom_point geom_smooth theme_bw xlab ylab ggtitle
+#' @importFrom stats cor.test lm
 #' @export
 
 correlation <- function(get_RSCU_out,Species_x,Species_y,xlab,ylab) {
