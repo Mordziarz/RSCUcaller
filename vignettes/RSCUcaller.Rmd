@@ -30,6 +30,46 @@ if (!requireNamespace("BiocManager", quietly=TRUE))
     install.packages("BiocManager")
 BiocManager::install("RSCUcaller")
 ```
+
+Install missing CRAN packages
+
+```r
+install.packages(setdiff(c("stats", "dplyr", "ggplot2", 
+                           "ggpubr", "seqinr","rstatix",
+                           "patchwork", "forcats", "phylogram",
+                           "circlize", "smplot2", "stringr"), 
+                         installed.packages()[,"Package"]))
+```
+
+Load CRAN packages
+
+```r
+lapply(c("stats", "dplyr", "ggplot2", 
+         "ggpubr", "seqinr","rstatix",
+         "patchwork", "forcats", "phylogram",
+         "circlize", "smplot2", "stringr"), library, character.only = TRUE)
+```
+
+Install BiocManager if not installed
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+```
+Install missing Bioconductor packages
+
+```r
+BiocManager::install(setdiff(c("ComplexHeatmap","ggtree"), 
+                             installed.packages()[,"Package"]))
+```
+
+Load Bioconductor packages
+
+```r
+lapply(c("ComplexHeatmap","ggtree"), 
+       library, character.only = TRUE)
+```
+
+
 To use all features of the program, you will need several libraries.
 
 ```r
@@ -54,7 +94,7 @@ library(stringr)
 set.seed(123)
 ```
 
-# Input data 
+# Input data
 
 Tables and graphics are saved to folders by the RSCUcaller package. To specify the desired output directory, it is recommended to use the setwd() function.
 
@@ -160,13 +200,13 @@ get_codon_table(codon_table_id = 1)
 
 Two functions have been created to facilitate codon analysis with other genetic codes.
 
-If you are only analyzing Vertebrate mitochondrial genomes, you can simply use the get_RSCU_other function.
+If you are only analyzing Vertebrate mitochondrial genomes, you can simply use the get_RSCU_other() function.
 
 ```r
 get_RSCU_other(merged_sequences = "prepered_fasta.fasta",codon_table_id = 2,pseudo_count = 0)
 ```
 
-However, if you want to compare different genetic codes, just add a column named codon_table_id to your samples_table and use the get_RSCU_other2 function.
+However, if you want to compare different genetic codes, just add a column named codon_table_id to your samples_table and use the get_RSCU_other2() function.
 
 
 | sequence_path  | sample_name | codon_table_id |
