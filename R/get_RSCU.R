@@ -28,14 +28,12 @@
 #' The sample names should follow the convention "number_name" (e.g., "1_Human").
 #'
 #' @examples
-#' \donttest{
 #' # Using a prepared FASTA file
 #' data("prepared_fasta", package = "RSCUcaller")
 #' rscu_df <- get_RSCU(merged_sequences = prepared_fasta)
 #'
 #' # Using a file path
 #' # rscu_df <- get_RSCU(merged_sequences = "your_prepared_sequences.fasta")
-#' }
 #'
 #' @references
 #' Sharp, P. M., & Li, W. H. (1986). An evolutionary perspective on synonymous codon usage in unicellular organisms. Journal of Molecular Evolution, 24(1-2), 28-38.

@@ -39,7 +39,6 @@
 #' - Deviation from (0.5,0.5) indicates compositional constraints
 #'
 #' @examples
-#' \donttest{
 #' data("prepared_fasta", package = "RSCUcaller")
 #' rscu_data <- get_RSCU(prepared_fasta)
 #' grouping_table <- data.frame(
@@ -60,7 +59,6 @@
 #'   select = "neutrality_plot",
 #'   grouping_table = grouping_table
 #' )
-#' }
 #'
 #' @references
 #' Sueoka, N. (1999). Translation-coupled violation of Parity Rule 2 in human genes is not the cause of heterogeneity of the DNA G+C content of third codon position. Gene, 238(1), 53-58.

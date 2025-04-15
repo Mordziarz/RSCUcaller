@@ -19,7 +19,6 @@
 #' the genetic code for each sample using the \code{codon_table_id} column.
 #'
 #' @examples
-#' \donttest{
 #' data("prepared_fasta", package = "RSCUcaller")
 #' samples_table <- data.frame(
 #'   ID = c("1_SampleA", "2_SampleB"),
@@ -31,7 +30,6 @@
 #'   samples_table = samples_table,
 #'   pseudo_count = 1
 #' )
-#' }
 #'
 #' @seealso \code{\link{get_RSCU}}, \code{\link{get_RSCU_other}}, \code{\link{get_codon_table}}
 #' @export

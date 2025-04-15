@@ -27,7 +27,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' data("prepared_fasta", package = "RSCUcaller")
 #' rscu_data <- get_RSCU(prepared_fasta)
 #' 
@@ -44,7 +43,6 @@
 #' # Access results
 #' print(cor_result$res)
 #' print(cor_result$plot)
-#' }
 #'
 #' @references
 #' Pearson, K. (1895). "Notes on regression and inheritance in the case of two parents". 

@@ -33,7 +33,6 @@
 #' The function automatically creates the required output directories if they do not exist.
 #'
 #' @examples
-#' \donttest{
 #' data("prepared_fasta", package = "RSCUcaller")
 #' rscu_data <- get_RSCU(prepared_fasta)
 #' grouping_table <- data.frame(
@@ -49,7 +48,6 @@
 #'   res = 300,
 #'   p.adjust.method = "bonferroni"
 #' )
-#' }
 #'
 #' @seealso
 #' \code{\link{get_RSCU}}, \code{\link{stat_scat_box}}

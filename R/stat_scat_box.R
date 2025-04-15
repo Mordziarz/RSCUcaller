@@ -22,7 +22,6 @@
 #'   - A CSV file \code{Post_hoc_table_aminoacids.csv} is saved in the working directory.
 #'
 #' @examples
-#' \donttest{
 #' data("prepared_fasta", package = "RSCUcaller")
 #' rscu_data <- get_RSCU(prepared_fasta)
 #' stat_scat_box(
@@ -32,7 +31,6 @@
 #'   res = 300,
 #'   p.adjust.method = "bonferroni"
 #' )
-#' }
 #'
 #' @seealso
 #' \code{\link{get_RSCU}}, \code{\link{boxplot_between_groups}}
