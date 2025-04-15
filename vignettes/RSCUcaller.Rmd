@@ -17,7 +17,7 @@ The "test_data" folder contains sample data in the form of tables, FASTA files, 
 
 # Installation
 
-```r
+```{r}
 install.packages("devtools")
 library(devtools)
 devtools::install_github('Mordziarz/RSCUcaller')
@@ -25,7 +25,7 @@ library(RSCUcaller)
 ```
 
 Install RSCUcaller from Bioconductor:
-```r
+```{r}
 if (!requireNamespace("BiocManager", quietly=TRUE))
     install.packages("BiocManager")
 BiocManager::install("RSCUcaller")
@@ -33,7 +33,7 @@ BiocManager::install("RSCUcaller")
 
 Install missing CRAN packages
 
-```r
+```{r}
 install.packages(setdiff(c("stats", "dplyr", "ggplot2", 
                            "ggpubr", "seqinr","rstatix",
                            "patchwork", "forcats", "phylogram",
@@ -43,7 +43,7 @@ install.packages(setdiff(c("stats", "dplyr", "ggplot2",
 
 Load CRAN packages
 
-```r
+```{r}
 lapply(c("stats", "dplyr", "ggplot2", 
          "ggpubr", "seqinr","rstatix",
          "patchwork", "forcats", "phylogram",
@@ -52,19 +52,19 @@ lapply(c("stats", "dplyr", "ggplot2",
 
 Install BiocManager if not installed
 
-```r
+```{r}
 if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 ```
 Install missing Bioconductor packages
 
-```r
+```{r}
 BiocManager::install(setdiff(c("ComplexHeatmap","ggtree"), 
                              installed.packages()[,"Package"]))
 ```
 
 Load Bioconductor packages
 
-```r
+```{r}
 lapply(c("ComplexHeatmap","ggtree"), 
        library, character.only = TRUE)
 ```
@@ -72,7 +72,7 @@ lapply(c("ComplexHeatmap","ggtree"),
 
 To use all features of the program, you will need several libraries.
 
-```r
+```{r}
 library(ggplot2)
 library(dplyr)
 library(seqinr)
@@ -90,7 +90,7 @@ library(stringr)
 ```
 # set.seed() for reproducible results
 
-```r
+```{r}
 set.seed(123)
 ```
 
@@ -98,7 +98,7 @@ set.seed(123)
 
 Tables and graphics are saved to folders by the RSCUcaller package. To specify the desired output directory, it is recommended to use the setwd() function.
 
-```r
+```{r}
 setwd("path/to/your/directory")
 ```
 
@@ -127,7 +127,7 @@ When you have FASTA files in separate files
 | path/to/your/fasta  | 7_fasta_name  |
 | path/to/your/fasta  | 8_fasta_name  |
 
-```r
+```{r}
 path1 <- "/path/to/your/fasta"
 samples_table <- data.frame(sequence_path = c(path1,path2),
                             sample_name = c("1_fasta_name","2_fasta_name"))
@@ -148,7 +148,7 @@ When you have downloaded multiple FASTA files from NCBI into a single file
 | 7_fasta_name  | gene_bank_accession_id_7  |
 | 8_fasta_name  | gene_bank_accession_id_8  |
 
-```r
+```{r}
 samples_table <- data.frame(ID = c("1_fasta_name","2_fasta_name"),
                             GENBANK_ACCESSION = c("gene_bank_accession_id_1","gene_bank_accession_id_2"))
 prepare_fasta(samples_table = samples_table, path = "/path/to/multiple/sequence/fasta", file_out = "your_fasta.fasta")
@@ -161,7 +161,7 @@ The name of the prepared FASTA file needs to be specified regardless of the chos
 
 The main function of the package, get_RSCU(), can be used to calculate RSCU values directly from a set of previously prepared sequences.
 
-```r
+```{r}
 get_RSCU_out <- get_RSCU(merged_sequences = "your_fasta.fasta")
 ```
 
@@ -194,7 +194,7 @@ The program implements a function that performs RSCU analysis for alternative ge
 
 The user can check which codons encode a specific amino acid in a given codon_table_id by using the get_codon_table() function.
 
-```r
+```{r}
 get_codon_table(codon_table_id = 1)
 ```
 
@@ -202,7 +202,7 @@ Two functions have been created to facilitate codon analysis with other genetic 
 
 If you are only analyzing Vertebrate mitochondrial genomes, you can simply use the get_RSCU_other() function.
 
-```r
+```{r}
 get_RSCU_other(merged_sequences = "prepered_fasta.fasta",codon_table_id = 2,pseudo_count = 0)
 ```
 
@@ -234,7 +234,7 @@ or
 | 8_fasta_name  | gene_bank_accession_id_8  | 2 |
 
 
-```r
+```{r}
 get_RSCU_other2(merged_sequences = "prepered_fasta.fasta",samples_table=samples_table,pseudo_count = 0)
 ```
 
@@ -242,7 +242,7 @@ get_RSCU_other2(merged_sequences = "prepered_fasta.fasta",samples_table=samples_
 
 The get_matrix() function allows the user to create a matrix that the user can use in any way they like. Simply use the result of the get_RSCU() function. The user will be able to use the matrices from this function, for example, in generating PCA.
 
-```r
+```{r}
 get_matrix(get_RSCU_out = get_RSCU_out)
 ```
 
@@ -250,7 +250,7 @@ get_matrix(get_RSCU_out = get_RSCU_out)
 
 A heatmap and a dendrogram can be drawn using the heatmap_RSCU() function. The heatmap is generated from the output of the get_RSCU() function. To create the heatmap, specify "heatmap" in the select argument and choose a color scheme from "red_green", "green_red", "blue_green", "green_blue", "blue_red", or "red_blue".
 
-```r
+```{r}
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "heatmap", heatmap_color = "red_blue")
 ```
 
@@ -258,7 +258,7 @@ heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "heatmap", heatmap_color = "r
 
 A dendrogram can be obtained by providing the output of the get_RSCU() function and specifying "dendrogram" in the select argument. The result can be further edited using packages like ggtree. The dendrogram will also be saved as a file in your working directory named dendrogram_from_heatmap.newick by the system.
 
-```r
+```{r}
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "dendogram")
 ```
 ![Dendogram](graphs/Ex_tree.png)
@@ -267,7 +267,7 @@ heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "dendogram")
 
 Histograms can be created from the output of the get_RSCU() function using our package.
 
-```r
+```{r}
 histogram_RSCU(get_RSCU_out = get_RSCU_out, title = "graph title")
 ```
 
@@ -275,7 +275,7 @@ histogram_RSCU(get_RSCU_out = get_RSCU_out, title = "graph title")
 
 Double histograms are plotted using the histogram_RSCU_double() function. This function requires two input parameters: get_RSCU_out_left and get_RSCU_out_right. Additionally, two optional title parameters, title_left and title_right, can be provided.
 
-```r
+```{r}
 histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get_RSCU_out, title_left = "left title", title_right = "right title")
 ```
 
@@ -285,7 +285,7 @@ histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get
 
 Pearson correlation between two species can be performed using the RSCUcaller package. The names of the Species columns in the get_RSCU_out data frame to be correlated should be specified.
 
-```r
+```{r}
 correlation(get_RSCU_out = get_RSCU_out, Species_x = "Species_x", Species_y = "Species_y", xlab = "title of x lab", ylab = "title of y lab")
 ```
 
@@ -319,14 +319,14 @@ Ensure that the column names match the column names in the tutorial.
 | Species7  | group2  |
 | Species8  | group3  |
 
-```r
+```{r}
 boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300,p.adjust.method = "bonferroni")
 ```
 ![Boxplots](graphs/aaa.png)
 
 # PR2 plot
 
-```r
+```{r}
 neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot",grouping_table = grouping_table)
 ```
 
@@ -334,7 +334,7 @@ neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot",grouping_table = 
 
 # Neutrality plot
 
-```r
+```{r}
 neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_table = grouping_table)
 ```
 
@@ -342,7 +342,7 @@ neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_t
 
 # PCA
 
-```r
+```{r}
 PCA_RSCU(get_matrix_out = get_matrix_out,grouping_table = grouping_table)
 ```
 
@@ -352,7 +352,7 @@ PCA_RSCU(get_matrix_out = get_matrix_out,grouping_table = grouping_table)
 
 Statistical analysis and visualizations can be generated for your data using the stat_scat_box() function. This function utilizes the Kruskal-Wallis test, Welch ANOVA, and ANOVA to assess significant differences in RSCU values between groups, and subsequently the Dunn's post-hoc test, Pairwise t-test, and TukeyHSD for pairwise comparisons. A table named Post_hoc_table_aminoacids.csv and three folders, boxplots, barplots and scatter_plots, will also be created in your working directory.
 
-```r
+```{r}
 stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300,p.adjust.method = "bonferroni")
 ```
 ![Boxplots](graphs/Ala.png)

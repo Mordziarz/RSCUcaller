@@ -1,13 +1,41 @@
-#' Calculating Relative Synonymous Codon Usage (RSCU) based on table
+#' Calculate RSCU for Multiple Sequences with Custom Genetic Codes
 #'
-#' This function calculates RSCU values for codons in a given nucleotide sequence.
+#' Computes Relative Synonymous Codon Usage (RSCU) values for a set of DNA sequences,
+#' allowing each sample to use a different genetic code (codon table).
 #'
-#' @param merged_sequences A path to sequences or a list of sequences.
-#' @param samples_table table with sequence descriptions and codon_table_id - an integer specifying the codon table (1-6,9-16,21-26).
-#' @param pseudo_count A value added to codon counts to avoid division by zero.
+#' @param merged_sequences Either a character string specifying the path to a FASTA file
+#'   containing prepared sequences (see \code{\link{prepare_fasta}}), or a list of DNA sequences.
+#' @param samples_table A data frame describing the samples. Must contain either columns
+#'   \code{sample_name} or \code{ID} (matching sequence names), and a \code{codon_table_id}
+#'   column specifying the genetic code for each sample (see \code{\link{get_codon_table}}).
+#' @param pseudo_count A numeric value added to codon counts to avoid division by zero (default: 1).
 #'
-#' @return A data frame with columns: codon, amino acid, eff, RSCU.
-#' 
+#' @return A \code{data.frame} with columns: \code{AA} (amino acid), \code{codon}, \code{eff} (codon count),
+#'   \code{RSCU} (Relative Synonymous Codon Usage), and sample/grouping columns.
+#'
+#' @details
+#' This function enables RSCU calculation for datasets where each sample may use a different
+#' genetic code (e.g., mitochondrial vs. nuclear). The \code{samples_table} must specify
+#' the genetic code for each sample using the \code{codon_table_id} column.
+#'
+#' @examples
+#' \donttest{
+#' data("prepared_fasta", package = "RSCUcaller")
+#' samples_table <- data.frame(
+#'   ID = c("1_SampleA", "2_SampleB"),
+#'   GENBANK_ACCESSION = c("NC_000001", "NC_000002"),
+#'   codon_table_id = c(1, 2)
+#' )
+#' rscu_df <- get_RSCU_other2(
+#'   merged_sequences = prepared_fasta,
+#'   samples_table = samples_table,
+#'   pseudo_count = 1
+#' )
+#' }
+#'
+#' @seealso \code{\link{get_RSCU}}, \code{\link{get_RSCU_other}}, \code{\link{get_codon_table}}
+#' @export
+
 
 get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=samples_table){
   
@@ -96,16 +124,37 @@ get_RSCU_other2 <- function(merged_sequences = "",pseudo_count=1,samples_table=s
   }
 }
 
-#' Calculating Relative Synonymous Codon Usage (RSCU)
+#' Calculate RSCU for Multiple Sequences with a Custom Genetic Code
 #'
-#' This function calculates RSCU values for codons in a given nucleotide sequence.
+#' Computes Relative Synonymous Codon Usage (RSCU) values for a set of DNA sequences
+#' using a specified genetic code (codon table).
 #'
-#' @param merged_sequences A path to sequences or a list of sequences.
-#' @param codon_table_id An integer specifying the codon table (1-6,9-16,21-26).
-#' @param pseudo_count A value added to codon counts to avoid division by zero.
+#' @param merged_sequences Either a character string specifying the path to a FASTA file
+#'   containing prepared sequences (see \code{\link{prepare_fasta}}), or a list of DNA sequences.
+#' @param codon_table_id An integer specifying the codon table to use (see \code{\link{get_codon_table}}).
+#'   Common values: 1 = Standard, 2 = Vertebrate Mitochondrial, etc.
+#' @param pseudo_count A numeric value added to codon counts to avoid division by zero (default: 1).
 #'
-#' @return A data frame with columns: codon, amino acid, eff, RSCU.
-#' 
+#' @return A \code{data.frame} with columns: \code{AA} (amino acid), \code{codon}, \code{eff} (codon count),
+#'   \code{RSCU} (Relative Synonymous Codon Usage), and sample/grouping columns.
+#'
+#' @details
+#' This function is useful for RSCU analysis of genomes using non-standard genetic codes,
+#' such as mitochondrial or alternative nuclear codes.
+#'
+#' @examples
+#' \donttest{
+#' data("prepared_fasta", package = "RSCUcaller")
+#' rscu_df <- get_RSCU_other(
+#'   merged_sequences = prepared_fasta,
+#'   codon_table_id = 2,
+#'   pseudo_count = 0.5
+#' )
+#' }
+#'
+#' @seealso \code{\link{get_RSCU}}, \code{\link{get_RSCU_other2}}, \code{\link{get_codon_table}}
+#' @export
+
 get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1){
   
   if (base::missing(merged_sequences)) {
@@ -173,14 +222,25 @@ get_RSCU_other <- function(merged_sequences = "",codon_table_id=1,pseudo_count=1
 }
 
 
-#' Convert FASTA sequence to a data frame
+#' Convert FASTA Sequences to a Data Frame
 #'
-#' This function converts a FASTA sequence into a data frame.
+#' Converts a set of DNA sequences (from a FASTA file or list) into a data frame
+#' with sequence names and sequence strings.
 #'
-#' @param merged_sequences path to the file with prepared sequences via the prepare_fasta() function
+#' @param merged_sequences Either a character string specifying the path to a FASTA file
+#'   (prepared using \code{\link{prepare_fasta}}), or a list of DNA sequences.
 #'
-#' @return A data frame with columns: names, sequence
-#' 
+#' @return A \code{data.frame} with columns: \code{names} (sequence names), \code{sequences} (DNA strings).
+#'
+#' @examples
+#' \donttest{
+#' data("prepared_fasta", package = "RSCUcaller")
+#' seq_df <- seq_to_data_frame(prepared_fasta)
+#' }
+#'
+#' @seealso \code{\link{prepare_fasta}}
+#' @export
+
 seq_to_data_frame <- function(merged_sequences = ""){
   
   if (base::missing(merged_sequences)) {
@@ -241,15 +301,26 @@ seq_to_data_frame <- function(merged_sequences = ""){
   }
 }
 
-#' Calculating Relative Synonymous Codon Usage (RSCU)
+#' Calculate RSCU for a Single Sequence
 #'
-#' This function calculates RSCU values for codons in a given nucleotide sequence.
+#' Calculates Relative Synonymous Codon Usage (RSCU) values for a single DNA sequence
+#' using a specified genetic code (codon table).
 #'
-#' @param nucleotide_string A character string representing the nucleotide sequence.
-#' @param codon_table_id An integer specifying the codon table (1-6,9-16,21-26).
-#' @param pseudo_count A value added to codon counts to avoid division by zero.
+#' @param nucleotide_input A character string representing the nucleotide sequence.
+#' @param codon_table_id An integer specifying the codon table to use (see \code{\link{get_codon_table}}).
+#' @param pseudo_count A numeric value added to codon counts to avoid division by zero (default: 1).
 #'
-#' @return A data frame with columns: codon, amino acid, eff, RSCU.
+#' @return A \code{data.frame} with columns: \code{AA} (amino acid), \code{codon}, \code{eff} (codon count),
+#'   \code{RSCU} (Relative Synonymous Codon Usage).
+#'
+#' @examples
+#' \donttest{
+#' seq <- "ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG"
+#' rscu_df <- calculate_rscu(seq, codon_table_id = 1, pseudo_count = 1)
+#' }
+#'
+#' @seealso \code{\link{get_codon_table}}
+#' @export
 
 calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 1) {
   
@@ -295,14 +366,22 @@ calculate_rscu <- function(nucleotide_input, codon_table_id = 1, pseudo_count = 
 
 
 
-#' Retrieving the codon table
+#' Retrieve a Codon Table for a Genetic Code
 #'
-#' This function returns the codon table for a specified genetic code.
+#' Returns the codon-to-amino acid mapping for a specified genetic code (codon table).
 #'
-#' @param codon_table_id An integer specifying the codon table.
+#' @param codon_table_id An integer specifying the codon table. See vignette or NCBI documentation
+#'   for available codes (e.g., 1 = Standard, 2 = Vertebrate Mitochondrial, etc.).
 #'
-#' @return A list with the element genetic_code - a vector of amino acids corresponding to codons.
+#' @return A list with one element: \code{genetic_code}, a named character vector mapping codons to amino acids.
 #'
+#' @examples
+#' get_codon_table(1) # Standard genetic code
+#' get_codon_table(2) # Vertebrate mitochondrial code
+#'
+#' @seealso \code{\link{get_RSCU}}, \code{\link{get_RSCU_other}}, \code{\link{get_RSCU_other2}}
+#' @export
+
 get_codon_table <- function(codon_table_id) {
   
   #Standard
