@@ -21,7 +21,7 @@ prepare_fasta <- function(samples_table=samples_table,path="",file_out="") {
 
   if (base::all(colnames(samples_table)==c("sequence_path","sample_name"))){
     for (i in 1:nrow(samples_table)) {
-      sequence <- seqinr::read.fasta(file = samples_table$sequence_path[i],set.attributes = T, seqtype = "DNA",as.string = TRUE)
+      sequence <- seqinr::read.fasta(file = samples_table$sequence_path[i],set.attributes = TRUE, seqtype = "DNA",as.string = TRUE)
       for (j in 1:length(sequence)) {
         sequences_list[[i]] <- c(sequences_list[[i]], base::paste0(sequence[[j]]))
       }
@@ -30,7 +30,7 @@ prepare_fasta <- function(samples_table=samples_table,path="",file_out="") {
   }
 
   if (base::grepl(".fasta$|.txt$", path, ignore.case = TRUE)){
-    sequence <- seqinr::read.fasta(file = path, set.attributes = T, seqtype = "DNA",as.string = TRUE)
+    sequence <- seqinr::read.fasta(file = path, set.attributes = TRUE, seqtype = "DNA",as.string = TRUE)
     for (i in 1:nrow(samples_table)) {
       positions <- base::which(grepl(samples_table$GENBANK_ACCESSION[i], 
                                      base::names(sequence), 

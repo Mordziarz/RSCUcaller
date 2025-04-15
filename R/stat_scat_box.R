@@ -170,6 +170,6 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
          call. = FALSE)
   )
   base::message(base::paste0("Done! Check scatter_plots, barplots & boxplots dirs !!!"))
-  write.csv2(statistical_table,"Post_hoc_table_aminoacids.csv",row.names = F)
+  write.csv2(statistical_table,"Post_hoc_table_aminoacids.csv",row.names = FALSE)
   return(statistical_table)
 }

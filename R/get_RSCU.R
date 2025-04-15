@@ -40,7 +40,7 @@ get_RSCU <- function(merged_sequences = ""){
   else {
     if(grepl(".fasta$|.txt$", merged_sequences, ignore.case = TRUE)){
 
-      merged_seq <- seqinr::read.fasta(file = merged_sequences ,set.attributes = T, seqtype = "DNA",as.string = FALSE)
+      merged_seq <- seqinr::read.fasta(file = merged_sequences ,set.attributes = TRUE, seqtype = "DNA",as.string = FALSE)
 
       Rscu_all <- base::data.frame(row.names = 1, AA = NA, codon = NA, eff = NA, freq = NA, RSCU = NA, Col = NA, index = NA, Species = NA)
       t <- base::gsub("^\\d+_", "",names(merged_seq))

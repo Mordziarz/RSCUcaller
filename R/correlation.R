@@ -42,7 +42,7 @@ correlation <- function(get_RSCU_out,Species_x,Species_y,xlab,ylab) {
                         alpha=0.5)+
     ggplot2::geom_smooth(method=lm,
                          color='red4')+
-    smplot2::sm_statCorr(show_text = F,
+    smplot2::sm_statCorr(show_text = FALSE,
                          col="red4")+
     ggplot2::theme_bw()+
     ggplot2::xlab(xlab)+
