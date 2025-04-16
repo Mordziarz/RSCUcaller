@@ -75,7 +75,7 @@ lapply(c("ComplexHeatmap","ggtree"),
 
 To use all features of the program, you will need several libraries.
 
-```{r}
+```{r, message= FALSE, warning=FALSE}
 library(RSCUcaller)
 library(ggplot2)
 library(dplyr)
@@ -270,14 +270,13 @@ A heatmap and a dendrogram can be drawn using the heatmap_RSCU() function. The h
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "heatmap", heatmap_color = "red_blue")
 ```
 
-![Heatmap](graphs/Ex_heatmap.png)
 
 A dendrogram can be obtained by providing the output of the get_RSCU() function and specifying "dendrogram" in the select argument. The result can be further edited using packages like ggtree. The dendrogram will also be saved as a file in your working directory named dendrogram_from_heatmap.newick by the system.
 
 ```{r}
 heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "dendogram")
 ```
-![Dendogram](graphs/Ex_tree.png)
+
 
 # Histograms
 
@@ -287,7 +286,6 @@ Histograms can be created from the output of the get_RSCU() function using our p
 histogram_RSCU(get_RSCU_out = get_RSCU_out, title = "graph title")
 ```
 
-![Histogram](graphs/Ex_histogram.png)
 
 Double histograms are plotted using the histogram_RSCU_double() function. This function requires two input parameters: get_RSCU_out_left and get_RSCU_out_right. Additionally, two optional title parameters, title_left and title_right, can be provided.
 
@@ -295,7 +293,6 @@ Double histograms are plotted using the histogram_RSCU_double() function. This f
 histogram_RSCU_double(get_RSCU_out_left = get_RSCU_out, get_RSCU_out_right = get_RSCU_out, title_left = "left title", title_right = "right title")
 ```
 
-![Histogram double](graphs/Ex_double_histogram.png)
 
 # Correlation
 
@@ -305,7 +302,6 @@ Pearson correlation between two species can be performed using the RSCUcaller pa
 correlation(get_RSCU_out = get_RSCU_out, Species_x = "Apopellia_endiviifolia_A1", Species_y = "Apopellia_endiviifolia_B3", xlab = "title of x lab", ylab = "title of y lab")
 ```
 
-![Correlation](graphs/Ex_correlation.png)
 
 # Statistics between groups of individual codons
 
@@ -339,9 +335,10 @@ Ensure that the column names match the column names in the tutorial.
 grouping_table <- system.file("extdata/grouping_table.csv", package = "RSCUcaller")
 grouping_table <- read.csv2(grouping_table,sep = ";")
 
-boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300,p.adjust.method = "bonferroni")
+boxplot_between_groups_out <- boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_table, width = 6, height = 6, xlab = "title of x lab", res = 300,p.adjust.method = "bonferroni")
+
+head(boxplot_between_groups_out)
 ```
-![Boxplots](graphs/aaa.png)
 
 # PR2 plot
 
@@ -349,7 +346,6 @@ boxplot_between_groups(get_RSCU_out = get_RSCU_out, grouping_table = grouping_ta
 neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot",grouping_table = grouping_table)
 ```
 
-![PR2_plot](graphs/Ex_PR2.png)
 
 # Neutrality plot
 
@@ -357,7 +353,6 @@ neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "PR2_plot",grouping_table = 
 neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_table = grouping_table)
 ```
 
-![neutrality_plot](graphs/Ex_neutrality.png)
 
 # PCA
 
@@ -365,16 +360,16 @@ neutrality_pr2(get_RSCU_out = get_RSCU_out,select = "neutrality_plot",grouping_t
 PCA_RSCU(get_matrix_out = get_matrix_out,grouping_table = grouping_table)
 ```
 
-![PCA](graphs/Ex_PCA.png)
 
 # Statistics between amino acids
 
 Statistical analysis and visualizations can be generated for your data using the stat_scat_box() function. This function utilizes the Kruskal-Wallis test, Welch ANOVA, and ANOVA to assess significant differences in RSCU values between groups, and subsequently the Dunn's post-hoc test, Pairwise t-test, and TukeyHSD for pairwise comparisons. A table named Post_hoc_table_aminoacids.csv and three folders, boxplots, barplots and scatter_plots, will also be created in your working directory.
 
 ```{r}
-stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300,p.adjust.method = "bonferroni")
+stat_scat_box_out <- stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300,p.adjust.method = "bonferroni")
+
+head(stat_scat_box_out)
 ```
-![Boxplots](graphs/Ala.png)
 
 # Citation
 
