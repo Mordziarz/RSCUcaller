@@ -34,7 +34,7 @@ setwd("path/to/your/workdir")
 ###### read sample table ########
 #################################
 
-samples_table <- read.csv2("sample_table_mt.csv",sep = ";")
+samples_table <- read.csv2("samples_table.csv",sep = ";")
 
 ###################################
 ###### preprocessing fasta ########
