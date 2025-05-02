@@ -67,7 +67,7 @@ boxplot_between_groups(
   xlab = "Group",
   res = 300,
   p.adjust.method = "bonferroni"
-))}
+)})
 
 }
 \seealso{
