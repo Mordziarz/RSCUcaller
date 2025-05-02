@@ -43,7 +43,7 @@ to group samples by similar codon usage patterns. The dendrogram provides a phyl
 representation of sample relationships. Both visualizations use the same clustering algorithm.
 }
 \examples{
-data("prepared_fasta", package = "RSCUcaller")
+withr::with_tempdir({data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
 
 # Generate heatmap
@@ -55,7 +55,7 @@ heatmap_RSCU(get_RSCU_out = rscu_data,
 heatmap_RSCU(get_RSCU_out = rscu_data,
              select = "dendrogram")
 
-}
+}})
 \references{
 Gu, Z. (2016) Complex heatmaps reveal patterns and correlations in multidimensional 
 genomic data. Bioinformatics, 32(18), 2847-2849.

@@ -44,7 +44,7 @@
 #'   xlab = "Group",
 #'   res = 300,
 #'   p.adjust.method = "bonferroni"
-#' ))}
+#' )})
 #'
 #' @seealso
 #' \code{\link{get_RSCU}}, \code{\link{stat_scat_box}}

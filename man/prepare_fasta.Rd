@@ -50,15 +50,15 @@ samples_table_cp <- data.frame(sequence_path = c(path1,
 
 
 # Mode 1: Multiple FASTA files
-prepare_fasta(samples_table_cp, file_out = "processed.fasta")
+withr::with_tempdir({prepare_fasta(samples_table_cp, file_out = "processed.fasta")})
 
 # Mode 2: Single FASTA with GenBank accessions
 mit_fasta <- system.file("extdata/mitogenome_sequence.txt", package = "RSCUcaller")
 samples_path <- system.file("extdata/samples_table.csv", package = "RSCUcaller")
 samples_table <- read.csv2(samples_path,sep = ";")
-prepare_fasta(samples_table, 
+withr::with_tempdir({prepare_fasta(samples_table, 
               path = mit_fasta,
-              file_out = "processed.fasta")
+              file_out = "processed.fasta")})
 
 }
 \references{
