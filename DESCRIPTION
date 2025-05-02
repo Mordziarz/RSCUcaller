@@ -34,7 +34,8 @@ Suggests:
     BiocStyle,
     testthat,
     rmarkdown,
-    knitr
+    knitr,
+    withr
 VignetteBuilder: knitr
 URL: https://github.com/Mordziarz/RSCUcaller
 BugReports: https://github.com/Mordziarz/RSCUcaller/issues
