@@ -22,7 +22,7 @@
 #'   - A CSV file \code{Post_hoc_table_aminoacids.csv} is saved in the working directory.
 #'
 #' @examples
-#' data("prepared_fasta", package = "RSCUcaller")
+#' withr::with_tempdir({data("prepared_fasta", package = "RSCUcaller")
 #' rscu_data <- get_RSCU(prepared_fasta)
 #' stat_scat_box(
 #'   get_RSCU_out = rscu_data,
@@ -30,7 +30,7 @@
 #'   height = 6,
 #'   res = 300,
 #'   p.adjust.method = "bonferroni"
-#' )
+#' )})
 #'
 #' @seealso
 #' \code{\link{get_RSCU}}, \code{\link{boxplot_between_groups}}
