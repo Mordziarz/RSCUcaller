@@ -1,0 +1,68 @@
+This document describes the methods used to generate the sequence data stored in the inst/extdata directory, including both manual and programmatic approaches.
+
+Summary
+The sequence data was retrieved from NCBI GenBank using batch retrieval methods. Two sets of sequences were downloaded: a smaller set of 4 accession numbers and a larger set of 23 accession numbers. All sequences were downloaded in FASTA nucleotide format, focusing on coding sequences (CDS).
+
+Batch 1: Small Set of Sequences
+
+1. Accessed the NCBI Batch Entrez system at https://www.ncbi.nlm.nih.gov/sites/batchentrez
+
+2. Created a text file containing the following accession numbers:
+
+OQ280817
+OL654070
+OQ280824
+OQ280829
+
+3. Uploaded the file to the Batch Entrez system
+
+4. Clicked "Retrieve" followed by "Retrieve records for 4 UID(s)"
+
+5. Selected each sequence individually
+
+6. Clicked "Send to" → "Coding Sequences"
+
+7. Selected Format "FASTA Nucleotide"
+
+8. Clicked "Create File" to download the coding sequences
+
+Batch 2: Larger Set of Sequences
+
+1. Created a text file containing the following accession numbers:
+
+OQ236459
+OQ236457
+OQ236460
+OQ236458
+OQ236455
+OQ236456
+OQ236453
+OQ236454
+OQ236452
+OQ236451
+OQ236464
+OQ236465
+OQ236475
+OQ236473
+OQ236474
+OQ236469
+OQ236463
+OQ236468
+OQ236467
+OQ236466
+OQ236472
+OQ236470
+OQ236471
+
+2. Uploaded the file to the NCBI Batch Entrez system
+
+3. Clicked "Retrieve" followed by "Retrieve records for 23 UID(s)"
+
+4. Selected all sequences using the selection checkbox
+
+5. Clicked "Send to" → "Coding Sequences"
+
+6. Selected Format "FASTA Nucleotide"
+
+7. Clicked "Create File" to download the coding sequences
+
