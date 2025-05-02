@@ -2,6 +2,7 @@ context("Testing visualization functions")
 
 test_that("heatmap_RSCU creates correct plots", {
 
+  withr::with_tempdir({
   data("prepared_fasta", package = "RSCUcaller")
   
   rscu_results <- get_RSCU(merged_sequences = prepared_fasta)
@@ -12,7 +13,7 @@ test_that("heatmap_RSCU creates correct plots", {
   expect_error(result_dendogram <- heatmap_RSCU(get_RSCU_out = rscu_results, 
                                                 select = "dendogram"), NA)
   expect_s3_class(result_dendogram, "gg")
-})
+})})
 
 test_that("histogram_RSCU creates correct histograms", {
   
