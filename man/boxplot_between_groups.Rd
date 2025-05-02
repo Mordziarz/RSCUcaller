@@ -56,6 +56,7 @@ For each codon, the function:
 The function automatically creates the required output directories if they do not exist.
 }
 \examples{
+withr::with_tempdir({
 data("prepared_fasta", package = "RSCUcaller")
 rscu_data <- get_RSCU(prepared_fasta)
 data("grouping_table", package = "RSCUcaller")
@@ -69,6 +70,7 @@ boxplot_between_groups(
   p.adjust.method = "bonferroni"
 )
 
+})
 }
 \seealso{
 \code{\link{get_RSCU}}, \code{\link{stat_scat_box}}
