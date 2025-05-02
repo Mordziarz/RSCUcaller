@@ -1,3 +1,6 @@
+Synonymous codon usage bias, a significant factor in gene expression and genome evolution, was extensively studied in genomics and molecular biology. Although the genetic code is universal, significant variations in synonymous codon usage have been observed among and within organisms. This bias was linked to various factors, including gene expression levels, tRNA abundance, protein structure, and environmental adaptation. Relative Synonymous Codon Usage (RSCU), a normalized measure, was used to quantify this bias. By analyzing RSCU values, researchers uncovered patterns and trends related to the underlying mechanisms driving codon usage bias.
+RSCUcaller enabled comparative RSCU analysis between coding sequences of different organisms or individuals of the same species. It facilitated visualization and statistical analysis among codons and user-defined groups.
+
 # RSCUcaller
 
 RSCU (relative synonymous codon usage) values of multiple DNA sequences can be analyzed using the RSCUcaller package. The package offers functions to retrieve RSCU information, plot the values, and calculate statistical significance.
