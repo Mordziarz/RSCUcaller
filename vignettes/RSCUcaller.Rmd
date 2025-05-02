@@ -164,6 +164,9 @@ prepare_fasta(samples_table = samples_table, path = "/path/to/multiple/sequence/
 ```
 
 ```{r}
+temp_dir <- tempdir()
+setwd(temp_dir)
+
 samples_path <- system.file("extdata/samples_table.csv", package = "RSCUcaller")
 samples_table <- read.csv2(samples_path,sep = ";")
 
