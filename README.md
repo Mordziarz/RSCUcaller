@@ -1,6 +1,6 @@
 # Introduction
 
-The RSCUcaller package was designed for specialized analysis and comparison of RSCU values across coding sequences from different organisms or individuals of the same species. It enables not only RSCU calculation and visualization but also advanced statistical analyses, including inter-codon group comparisons, Pearson correlation analyses, neutrality plots, PR2 bias analysis, PCA, and hierarchical clustering based on RSCU values. This makes the tool particularly valuable for researchers studying evolutionary mechanisms and comparative genomics.
+The RSCUcaller package was designed for specialized analysis and comparison of RSCU (relative synonymous codon usage) values across coding sequences from different organisms or individuals of the same species. It enables not only RSCU calculation and visualization but also advanced statistical analyses, including inter-codon group comparisons, Pearson correlation analyses, neutrality plots, PR2 bias analysis, PCA, and hierarchical clustering based on RSCU values. This makes the tool particularly valuable for researchers studying evolutionary mechanisms and comparative genomics.
 
 The motivation for including RSCUcaller in the Bioconductor ecosystem lies in its ability to complement existing tools with RSCU-specific functionalities, emphasizing cross-species comparisons and enhanced visualization capabilities.
 
