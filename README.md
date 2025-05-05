@@ -1,5 +1,14 @@
-Synonymous codon usage bias, a significant factor in gene expression and genome evolution, was extensively studied in genomics and molecular biology. Although the genetic code is universal, significant variations in synonymous codon usage have been observed among and within organisms. This bias was linked to various factors, including gene expression levels, tRNA abundance, protein structure, and environmental adaptation. Relative Synonymous Codon Usage (RSCU), a normalized measure, was used to quantify this bias. By analyzing RSCU values, researchers uncovered patterns and trends related to the underlying mechanisms driving codon usage bias.
-RSCUcaller enabled comparative RSCU analysis between coding sequences of different organisms or individuals of the same species. It facilitated visualization and statistical analysis among codons and user-defined groups.
+# Introduction
+
+The RSCUcaller package was designed for specialized analysis and comparison of RSCU values across coding sequences from different organisms or individuals of the same species. It enables not only RSCU calculation and visualization but also advanced statistical analyses, including inter-codon group comparisons, Pearson correlation analyses, neutrality plots, PR2 bias analysis, PCA, and hierarchical clustering based on RSCU values. This makes the tool particularly valuable for researchers studying evolutionary mechanisms and comparative genomics.
+
+The motivation for including RSCUcaller in the Bioconductor ecosystem lies in its ability to complement existing tools with RSCU-specific functionalities, emphasizing cross-species comparisons and enhanced visualization capabilities.
+
+Notably, other Bioconductor packages like coRdon and sscu address codon usage analysis differently. coRdon focuses on broader analyses, including codon usage-based gene expression prediction, gene set enrichment analysis for annotated sequences, and integration with KEGG/COG databases, making it ideal for metagenomic studies. sscu specializes in assessing selective codon usage in bacterial genomes using methods like the SSCU index and Akashi's test.
+
+RSCUcaller distinguishes itself through its specialized RSCU analysis framework, offering unique statistical and visualization tools unavailable in other packages. While coRdon excels in functional gene expression studies, RSCUcaller is optimized for comparative RSCU analyses, making it indispensable for evolutionary genomics research. The choice between these tools depends on research goals: RSCUcaller is ideal for focused RSCU investigations, whereas coRdon provides broader functional insights.
+
+In summary, RSCUcaller addresses the scientific community's need for advanced comparative RSCU analysis, expanding Bioconductor's capabilities in genome evolution and gene expression regulation studies.
 
 # RSCUcaller
 
