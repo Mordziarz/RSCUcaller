@@ -13,7 +13,7 @@ devtools::install_github('Mordziarz/RSCUcaller')
 library(RSCUcaller)
 ```
 
-Install RSCUcaller from Bioconductor:
+Install RSCUcaller from Bioconductor (awaiting review by Bioconductor):
 ```r
 if (!requireNamespace("BiocManager", quietly=TRUE))
     install.packages("BiocManager")
