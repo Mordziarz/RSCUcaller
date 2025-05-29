@@ -348,7 +348,7 @@ stat_scat_box(get_RSCU_out = get_RSCU_out, width = 6, height = 6, res = 300,p.ad
 
 # Citation
 
-Paper in preparation
+When utilizing RSCUcaller, kindly cite: Maździarz, M., Zając, S., Paukszto, Ł. et al. RSCUcaller: an R package for analyzing differences in relative synonymous codon usage (RSCU). BMC Bioinformatics 26, 141 (2025). https://doi.org/10.1186/s12859-025-06166-5
 
 # Support
 Any issues connected with the RSCUcaller should be addressed to Mateusz Mazdziarz (mateusz.mazdziarz@uwm.edu.pl).
