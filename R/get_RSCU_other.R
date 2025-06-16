@@ -416,7 +416,7 @@ get_codon_table <- function(codon_table_id) {
     genetic_code[c("tga", "ata")] <- c("Trp", "Met")
   }
   else if (codon_table_id == 5) {  # Invertebrate Mitochondrial
-    genetic_code[c("aga", "agg", "tga")] <- c("Ser", "Ser", "Trp")
+    genetic_code[c("aga", "agg","ata","tga")] <- c("Ser", "Ser", "Met", "Trp")
   }
   else if (codon_table_id == 6) {  # Ciliate Nuclear; Dasycladacean Nuclear; Hexamita Nuclear
     genetic_code[c("taa", "tag")] <- "Gln"
