@@ -61,11 +61,11 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
   if (!(p.adjust.method %in% c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr"))) {
     stop('Invalid p.adjust.method  argument. Please choose from "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr" valid options.')
   }
-
+  
   if (base::file.exists("scatter_plots") & base::file.exists("boxplots") & base::file.exists("barplots")) {
     
     make_tukey_test <- function (data,variable,grouping_variable){
-      data %>% 
+      data %>%
         rstatix::tukey_hsd(reformulate(grouping_variable, variable)) %>%
         rstatix::add_xy_position(x = grouping_variable)
     }
@@ -79,72 +79,85 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
     for (i in 1:base::length(aminoacids)) {
       table_1 <- get_RSCU_out[get_RSCU_out$AA %in% aminoacids[i],]
       table_1 <- table_1[,c("RSCU", "codon")]
-
+      
       test_used <- "Kruskal-Wallis"
       stat_p <- NA
       post_hoc <- NULL
-      shapiro_test <- try(stats::shapiro.test(table_1$RSCU), 
-                          silent = TRUE)
-      if (!inherits(shapiro_test, "try-error") && shapiro_test$p.value >= 
-          0.05) {
-        levene_test <- rstatix::levene_test(RSCU ~ as.factor(codon), 
+      
+      normality_check_passed <- TRUE
+      for (codon_val in unique(table_1$codon)) {
+        codon_data <- table_1$RSCU[table_1$codon == codon_val]
+        if (length(codon_data) > 3) {
+          shapiro_test <- try(stats::shapiro.test(codon_data), silent = TRUE)
+          if (inherits(shapiro_test, "try-error") || shapiro_test$p.value < 0.05) {
+            normality_check_passed <- FALSE
+            break
+          }
+        } else {
+          normality_check_passed <- FALSE
+          break
+        }
+      }
+      
+      if (normality_check_passed) {
+        levene_test <- rstatix::levene_test(RSCU ~ as.factor(codon),
                                             data = table_1)
         levene_p <- levene_test$p
         if (!is.na(levene_p) && levene_p >= 0.05) {
           aov_result <- stats::aov(RSCU ~ codon, data = table_1)
           stat_p <- base::summary(aov_result)[[1]]$`Pr(>F)`[1]
           test_used <- "ANOVA"
-          post_hoc <- base::as.data.frame(make_tukey_test(data = table_1, 
+          post_hoc <- base::as.data.frame(make_tukey_test(data = table_1,
                                                           variable = "RSCU ", grouping_variable = "codon"))
-          post_hoc <- dplyr::arrange(.data = post_hoc, 
+          post_hoc <- dplyr::arrange(.data = post_hoc,
                                      p.adj)
           post_hoc$test <- "ANOVA/TukeyHSD"
           post_hoc_x_y <- post_hoc
         }
         else {
-          welch_result <- stats::oneway.test(RSCU ~ 
+          welch_result <- stats::oneway.test(RSCU ~
                                                codon, data = table_1, var.equal = FALSE)
           stat_p <- welch_result$p.value
           test_used <- "Welch ANOVA"
-          post_hoc <- as.data.frame(rstatix::pairwise_t_test(RSCU ~ 
+          post_hoc <- as.data.frame(rstatix::pairwise_t_test(RSCU ~
                                                                codon, data = table_1, p.adjust.method = p.adjust.method))
-          post_hoc <- dplyr::arrange(.data = post_hoc, 
+          post_hoc <- dplyr::arrange(.data = post_hoc,
                                      p.adj)
-          post_hoc_x_y <- rstatix::add_xy_position(post_hoc, 
+          post_hoc_x_y <- rstatix::add_xy_position(post_hoc,
                                                    x = post_hoc[2])
           post_hoc_x_y$test <- "Welch_ANOVA/Pairwise_t_test"
-          levene_warning_codons <- c(levene_warning_codons, 
+          levene_warning_codons <- c(levene_warning_codons,
                                      aminoacids[i])
         }
       }
       else {
-        normality_warning_codons <- c(normality_warning_codons, 
+        normality_warning_codons <- c(normality_warning_codons,
                                       aminoacids[i])
       }
-      if (test_used == "Kruskal-Wallis") {
+      if (!normality_check_passed) {
         stat <- stats::kruskal.test(RSCU ~ codon, data = table_1)
         stat_p <- stat$p.value
-        post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~ 
+        post_hoc <- base::as.data.frame(rstatix::dunn_test(RSCU ~
                                                              codon, data = table_1, p.adjust.method = p.adjust.method))
-        post_hoc <- dplyr::arrange(.data = post_hoc, 
+        post_hoc <- dplyr::arrange(.data = post_hoc,
                                    p.adj)
-        post_hoc_x_y <- rstatix::add_xy_position(post_hoc, 
+        post_hoc_x_y <- rstatix::add_xy_position(post_hoc,
                                                  x = post_hoc[2])
         post_hoc_x_y$test <- "Kruskal-Wallis/Dunn"
       }
-      post_hoc_stats <- post_hoc_x_y[, c("group1", "group2", 
+      post_hoc_stats <- post_hoc_x_y[, c("group1", "group2",
                                          "p.adj", "p.adj.signif", "test")]
-      statistical_table <- base::rbind(statistical_table, 
+      statistical_table <- base::rbind(statistical_table,
                                        post_hoc_stats)
-      statistical_table <- statistical_table[!base::is.na(statistical_table$group1), 
+      statistical_table <- statistical_table[!base::is.na(statistical_table$group1),
       ]
-      post_hoc_x_y <- post_hoc_x_y[, c("group1", "group2", 
-                                       "p.adj", "p.adj.signif", "y.position", "groups", 
+      post_hoc_x_y <- post_hoc_x_y[, c("group1", "group2",
+                                       "p.adj", "p.adj.signif", "y.position", "groups",
                                        "xmin", "xmax", "test")]
-      plot_title <- paste0(aminoacids[i], ", ", test_used, 
+      plot_title <- paste0(aminoacids[i], ", ", test_used,
                            ", p=", format(stat_p, digits = 3))
       
-      cat("The differences between codons in the amino acid",aminoacids[i],"had a pvalue of:",stat$p.value,"\n")
+      cat("The differences between codons in the amino acid",aminoacids[i],"had a pvalue of:",stat_p,"\n") # Zmieniono stat$p.value na stat_p
       
       png(paste0("scatter_plots/",aminoacids[i],".png"), width=width, height=height, units = "in", res=res)
       p <- ggpubr::ggscatter(table_1,
@@ -175,29 +188,18 @@ stat_scat_box <-function(get_RSCU_out,width,height,res,p.adjust.method = "bonfer
       dev.off()
       table_1 <- table_1 %>% dplyr::group_by(codon) %>% dplyr::summarize(`RSCU` = mean(RSCU))
       png(paste0("barplots/", aminoacids[i], ".png"), width = width, height = height, units = "in", res = res)
-      p <- ggpubr::ggbarplot(table_1, 
-                             x = "codon", 
-                             y = "RSCU", 
-                             fill = "codon", 
-                             color = "codon", 
-                             palette = c("dodgerblue3", "maroon2", "forestgreen", "darkorange1", "blueviolet", "firebrick2")) + 
-        ggpubr::stat_pvalue_manual(post_hoc_x_y,label = "p.adj.signif", hide.ns = TRUE) + 
-        ggplot2::theme(legend.position = "none") + 
-        ggplot2::scale_x_discrete() + 
+      p <- ggpubr::ggbarplot(table_1,
+                             x = "codon",
+                             y = "RSCU",
+                             fill = "codon",
+                             color = "codon",
+                             palette = c("dodgerblue3", "maroon2", "forestgreen", "darkorange1", "blueviolet", "firebrick2")) +
+        ggpubr::stat_pvalue_manual(post_hoc_x_y,label = "p.adj.signif", hide.ns = TRUE) +
+        ggplot2::theme(legend.position = "none") +
+        ggplot2::scale_x_discrete() +
         ggplot2::ggtitle(base::paste0(plot_title)) + ggplot2::ylab("mean(RSCU)")
       base::print(p)
       dev.off()
-    }
-    if (length(levene_warning_codons) > 0) {
-      message("\n Significant variance heterogeneity detected in:\n",
-              paste(levene_warning_codons, collapse = ", "), 
-              "\nUsed Welch ANOVA for these cases.")
-    }
-    
-    if (length(normality_warning_codons) > 0) {
-      message("\n Non-normal distributions detected in:\n",
-              paste(normality_warning_codons, collapse = ", "), 
-              "\nUsed Kruskal-Wallis test for these cases.")
     }
   }
   else (
