@@ -50,7 +50,7 @@
 #' @importFrom patchwork plot_layout
 #' @importFrom forcats fct_rev
 
-signle_histogram <- function(get_RSCU_out, title = "") {
+single_histogram <- function(get_RSCU_out, title = "") {
   if (missing(get_RSCU_out)) {
     stop("The get_RSCU_out predictions are required. Please provide a valid argument.", call. = FALSE)
   }
