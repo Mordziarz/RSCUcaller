@@ -253,6 +253,13 @@ heatmap_RSCU(get_RSCU_out = get_RSCU_out, select = "dendogram")
 Histograms can be created from the output of the get_RSCU() function using our package.
 
 ```r
+signle_histogram(get_RSCU_out = get_RSCU_out, title = "graph title")
+```
+
+![Histogram2](inst/graphs/Ex_histogram2.png)
+
+
+```r
 histogram_RSCU(get_RSCU_out = get_RSCU_out, title = "graph title")
 ```
 
