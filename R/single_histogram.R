@@ -1,4 +1,4 @@
-#' Visualize Relative Synonymous Codon Usage (RSCU) Distribution
+#' Visualize Relative Synonymous Codon Usage (RSCU) Distribution (1 genome)
 #' 
 #' Generates a comprehensive histogram displaying codon usage patterns,
 #' integrating amino acid and codon annotations with color-coded grouping information.
