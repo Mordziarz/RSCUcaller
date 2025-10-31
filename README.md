@@ -6,13 +6,6 @@ The "inst/extdata" folder contains sample data in the form of tables and FASTA f
 
 # Installation
 
-```r
-install.packages("devtools")
-library(devtools)
-devtools::install_github('Mordziarz/RSCUcaller')
-library(RSCUcaller)
-```
-
 Install missing CRAN packages
 
 ```r
@@ -70,6 +63,16 @@ library(ggtree)
 library(stats)
 library(stringr)
 ```
+
+Install RSCUcaller
+
+```r
+install.packages("devtools")
+library(devtools)
+devtools::install_github('Mordziarz/RSCUcaller')
+library(RSCUcaller)
+```
+
 # set.seed() for reproducible results
 
 ```r
