@@ -1,7 +1,7 @@
 Package: RSCUcaller
 Type: Package
 Title: Program in R for calculating RSCU.
-Version: 0.99.0
+Version: 1.0
 Authors@R: 
     c(person(given = "Mateusz",
              family = "Mazdziarz",
