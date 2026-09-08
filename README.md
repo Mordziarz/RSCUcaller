@@ -371,3 +371,6 @@ https://doi.org/10.1038/s41598-023-35269-3
 # Future challenges
 - Program reading of nucleotides other than ATCG
 - Ability to perform RSCU analysis on RNA by adding expression as an additional dimension
+
+# Funding / Acknowledgments:
+This work was supported by the National Science Centre (NCN), Poland, under the PRELUDIUM 23 project grant no. 2024/53/N/NZ8/02829, entitled "Are Amphibious Plants More Threatened by Climate Change? - A Comparative Analysis of Epitranscriptomic Adaptation to UV-B Exposure in Terrestrial and Amphibious Riccia Species (Marchantiopsida)".
